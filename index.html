@@ -25,13 +25,13 @@
       <article>
         <section class="texto">
           <p class="lead">
-            Red de análisis de la relación entre demografía, estudio creador y género de anime en el periodo 2020–2026. 
+            Red de análisis de la relación entre demografía, estudio creador y género de anime en el periodo 2022–2026. 
           </p>
           <p>
             A través de un script de python, se consultaron dos APIs públicas y se cruzaron sus resultados: 
-            AniList vía GraphQL (paginado, top 100 por popularidad global, incluyendo géneros y estudio principal), y Jikan/MAL vía REST (/top/anime?filter=bypopularity, con score, rank, members y favorites). 
+            AniList vía GraphQL (paginado, top 70 por popularidad global, incluyendo géneros y estudio principal), y Jikan/MAL vía REST (/top/anime?filter=bypopularity, con score, rank, members y favorites). 
             El cruce se hizo con SequenceMatcher, que empareja títulos aunque haya diferencias de escritura entre ambas fuentes (p. ej. "Shingeki no Kyojin" vs "Attack on Titan"), con un umbral de similitud de 0.75 ajustable. El output es un CSV con ranking, géneros, estudio, año, scores de ambas fuentes e IDs originales para trazabilidad. Una advertencia importante: ninguna de las dos APIs ofrece datos de consumo específicos por región, ya que esa información no existe como dato público; lo que sí se obtiene son métricas reales y citables de las dos comunidades de seguimiento de anime más grandes del mundo.
-            El corpus final comprende 100 series de televisión seleccionadas por relevancia crítica y popularidad dentro de cada temporada.
+            El corpus final comprende 70 series de televisión seleccionadas por relevancia crítica y popularidad dentro de cada temporada.
           </p>
           <iframe 
   src="https://graphcommons.com/graphs/21a72686-7e9a-429f-b25a-c1322c9119b0" 
@@ -91,7 +91,7 @@
         <section class="texto">
           <p>
           
-Fantasy y Action van a tener las nubes de anime más densas — son los géneros dominantes en el dataset (2020–2026). Adventure y Romance les siguen.
+Fantasy y Action van a tener las nubes de anime más densas — son los géneros dominantes en el dataset (2022–2026). Adventure y Romance les siguen.
 Estudios hub
 MAPPA, CloverWorks, A-1 Pictures y TMS Entertainment van a aparecer como nodos grandes con muchas conexiones. MAPPA en particular conecta títulos de géneros muy distintos (Action, Drama, Gourmet), lo que lo hace un puente entre clusters.
 Demografía
