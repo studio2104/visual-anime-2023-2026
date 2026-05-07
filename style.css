@@ -92,6 +92,10 @@ article {
   padding: 5rem 0;
 }
 
+.texto-intro {
+  max-width: 100%;
+}
+
 .texto p {
   font-size: 1.08rem;
   line-height: 1.8;
@@ -287,12 +291,4 @@ figcaption {
   .texto {
     max-width: 100%;
   }
-}
-.figura-bubble {
-  overflow-x: auto;
-}
-
-.modulo-bubble h2 {
-  font-size: clamp(1.4rem, 2.5vw, 2.2rem);
-  line-height: 1.2;
 }
