@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Interés en anime por país — LATAM 2022–2026</title>
+  <style>
+    :root {
+      --fondo: #fbfaf7;
+      --texto: #1d1f20;
+      --muted: #68645d;
+      --linea: #d9d2c4;
+      --panel: #ffffff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--fondo);
+      color: var(--texto);
+      font-family: "American Typewriter", "Courier New", Courier, monospace;
+      font-size: 13px;
+      padding: 1rem;
+    }
+    .controls {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+    input, select {
+      font-family: inherit;
+      font-size: 12px;
+      padding: 6px 10px;
+      border: 1px solid var(--linea);
+      border-radius: 6px;
+      background: var(--panel);
+      color: var(--texto);
+      outline: none;
+    }
+    input { flex: 1; min-width: 160px; }
+    input:focus, select:focus { border-color: var(--muted); }
+    .tbl-scroll {
+      overflow-x: auto;
+      border: 0.5px solid var(--linea);
+      border-radius: 8px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+    th {
+      padding: 10px 12px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 1px solid var(--linea);
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+      background: var(--panel);
+    }
+    th:first-child { text-align: left; }
+    th.sorted-asc::after  { content: " ↑"; }
+    th.sorted-desc::after { content: " ↓"; }
+    td {
+      padding: 8px 12px;
+      border-bottom: 0.5px solid var(--linea);
+      text-align: center;
+      color: var(--texto);
+      vertical-align: middle;
+    }
+    td:first-child { text-align: left; font-size: 12px; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(0,0,0,0.02); }
+    .bar {
+      display: inline-block;
+      height: 12px;
+      border-radius: 2px;
+      vertical-align: middle;
+      margin-right: 4px;
+    }
+    .val { vertical-align: middle; font-weight: 700; }
+    .dash { color: var(--linea); }
+    .col-anime { width: 30%; }
+    .col-country { width: 14%; }
+    .footer {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 0.75rem;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="controls">
+    <input type="text" id="search" placeholder="Buscar anime...">
+    <select id="filter-country">
+      <option value="all">Todos los países</option>
+      <option value="MX">México</option>
+      <option value="AR">Argentina</option>
+      <option value="BR">Brasil</option>
+      <option value="CO">Colombia</option>
+      <option value="CL">Chile</option>
+    </select>
+    <select id="filter-mode">
+      <option value="all">Todos</option>
+      <option value="present">Con al menos un score</option>
+    </select>
+  </div>
+
+  <div class="tbl-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th class="col-anime" data-col="anime">Anime</th>
+          <th class="col-country" data-col="MX">México</th>
+          <th class="col-country" data-col="AR">Argentina</th>
+          <th class="col-country" data-col="BR">Brasil</th>
+          <th class="col-country" data-col="CO">Colombia</th>
+          <th class="col-country" data-col="CL">Chile</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+  <p class="footer" id="row-count"></p>
+
+  <script>
+    const DATA = [
+      {anime:"Blue Lock",                     MX:26, AR:27,  BR:20,  CO:null, CL:null},
+      {anime:"Kusuriya no Hitorigoto",         MX:18, AR:null,BR:null,CO:12,  CL:12},
+      {anime:"Summer Time Render",             MX:14, AR:1,   BR:15,  CO:2,   CL:2},
+      {anime:"Kaijuu 8-gou",                  MX:12, AR:null,BR:5,   CO:9,   CL:null},
+      {anime:"Gachiakuta",                     MX:11, AR:12,  BR:9,   CO:10,  CL:11},
+      {anime:"Lycoris Recoil",                MX:9,  AR:null,BR:null,CO:null,CL:null},
+      {anime:"Dungeon Meshi",                  MX:7,  AR:1,   BR:13,  CO:null,CL:2},
+      {anime:"Kage no Jitsuryokusha ni Naritakute", MX:3, AR:null, BR:4, CO:null, CL:null},
+      {anime:"BLEACH: Sennen Kessen-hen",      MX:2,  AR:null,BR:null,CO:null,CL:null},
+      {anime:"VINLAND SAGA SEASON 2",          MX:2,  AR:null,BR:null,CO:null,CL:null},
+      {anime:"SPY×FAMILY",                    MX:1,  AR:null,BR:15,  CO:null,CL:null},
+      {anime:"Kusuriya no Hitorigoto 2nd Season", MX:1, AR:null, BR:3, CO:null, CL:null},
+      {anime:"Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e", MX:1, AR:null, BR:1, CO:null, CL:null},
+      {anime:"Dr. STONE: NEW WORLD",           MX:1,  AR:null,BR:null,CO:null,CL:null},
+      {anime:"Dandadan",                       MX:null,AR:27, BR:null,CO:41,  CL:21},
+      {anime:"WIND BREAKER",                   MX:null,AR:23, BR:null,CO:null,CL:null},
+      {anime:"Bocchi the Rock!",               MX:null,AR:21, BR:null,CO:null,CL:16},
+      {anime:"Yofukashi no Uta",               MX:null,AR:14, BR:null,CO:7,   CL:9},
+      {anime:"Sono Bisque Doll wa Koi wo Suru",MX:null,AR:8,  BR:null,CO:null,CL:5},
+      {anime:"MASHLE",                         MX:null,AR:3,  BR:null,CO:4,   CL:10},
+      {anime:"Kimetsu no Yaiba: Hashira Geiko-hen", MX:null, AR:1, BR:1, CO:null, CL:null},
+      {anime:"Sousou no Frieren",              MX:null,AR:null,BR:20, CO:null,CL:null},
+      {anime:"[Oshi no Ko]",                   MX:null,AR:null,BR:7,  CO:12,  CL:10},
+      {anime:"Boku no Hero Academia 6",        MX:null,AR:null,BR:6,  CO:null,CL:null},
+      {anime:"Kimetsu no Yaiba: Katanakaji no Sato-hen", MX:null, AR:null, BR:3, CO:null, CL:null},
+      {anime:"Jujutsu Kaisen: Shimetsu Kaiyu-hen", MX:null, AR:null, BR:1, CO:null, CL:null},
+      {anime:"Mushoku Tensei II",              MX:null,AR:null,BR:null,CO:1,   CL:null},
+      {anime:"Youkoso Jitsuryoku Shijou Shugi 3rd Season", MX:null, AR:null, BR:null, CO:1, CL:null},
+      {anime:"Zom 100",                        MX:null,AR:null,BR:null,CO:1,   CL:null},
+      {anime:"Jujutsu Kaisen 2nd Season",      MX:null,AR:null,BR:null,CO:null,CL:8},
+      {anime:"Kawaii dake ja Nai Shikimori-san",MX:null,AR:null,BR:null,CO:null,CL:2},
+      {anime:"SPY×FAMILY Season 2",            MX:null,AR:null,BR:null,CO:null,CL:2},
+      {anime:"Yamada-kun to Lv999 no Koi wo Suru", MX:null, AR:null, BR:null, CO:null, CL:2},
+    ];
+
+    const COLS = ["MX","AR","BR","CO","CL"];
+    const COLORS = {MX:"#E63946", AR:"#457B9D", BR:"#2A9D8F", CO:"#E9C46A", CL:"#F4A261"};
+    const MAX = Math.max(...DATA.flatMap(d => COLS.map(c => d[c] || 0)));
+
+    let sortCol = null, sortDir = 1, filterCountry = "all", filterMode = "all", searchVal = "";
+
+    function cell(val, col) {
+      if (val === null) return '<span class="dash">—</span>';
+      const w = Math.round((val / MAX) * 48);
+      return `<span class="bar" style="width:${w}px;background:${COLORS[col]};opacity:0.7"></span><span class="val">${val}</span>`;
+    }
+
+    function render() {
+      let rows = DATA.filter(d => {
+        if (searchVal && !d.anime.toLowerCase().includes(searchVal.toLowerCase())) return false;
+        if (filterCountry !== "all" && d[filterCountry] === null) return false;
+        if (filterMode === "present" && COLS.every(c => d[c] === null)) return false;
+        return true;
+      });
+
+      if (sortCol) {
+        rows = [...rows].sort((a, b) => {
+          if (sortCol === "anime") return sortDir * a.anime.localeCompare(b.anime);
+          return sortDir * ((b[sortCol] ?? -1) - (a[sortCol] ?? -1));
+        });
+      }
+
+      document.getElementById("tbody").innerHTML = rows.map(d =>
+        `<tr><td>${d.anime}</td>${COLS.map(c => `<td>${cell(d[c], c)}</td>`).join("")}</tr>`
+      ).join("");
+
+      document.getElementById("row-count").textContent =
+        `${rows.length} de ${DATA.length} series · Scores Google Trends (0–100) · — = sin datos`;
+    }
+
+    document.querySelectorAll("th[data-col]").forEach(th => {
+      th.addEventListener("click", () => {
+        const col = th.dataset.col;
+        if (sortCol === col) sortDir *= -1;
+        else { sortCol = col; sortDir = 1; }
+        document.querySelectorAll("th[data-col]").forEach(t => t.classList.remove("sorted-asc","sorted-desc"));
+        th.classList.add(sortDir === 1 ? "sorted-asc" : "sorted-desc");
+        render();
+      });
+    });
+
+    document.getElementById("search").addEventListener("input", e => { searchVal = e.target.value; render(); });
+    document.getElementById("filter-country").addEventListener("change", e => { filterCountry = e.target.value; render(); });
+    document.getElementById("filter-mode").addEventListener("change", e => { filterMode = e.target.value; render(); });
+
+    render();
+  </script>
+</body>
+</html>
