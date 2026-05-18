@@ -74,6 +74,20 @@
       .tipo-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
       .tipo-desc { font-size: 13px; color: var(--muted); }
       .cant-num { font-size: 18px; font-weight: 500; }
+      .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; margin-top: 1.5rem; }
+      .tab-nav { display: flex; flex-direction: column; gap: 4px; margin-bottom: 1.25rem; }
+      .tab-btn { display: flex; align-items: center; gap: 10px; background: none; border: none; cursor: pointer; padding: 0.6rem 0.75rem; border-radius: 8px; text-align: left; width: 100%; transition: background 0.15s; }
+      .tab-btn:hover { background: var(--panel); }
+      .tab-btn.activo { background: var(--panel); }
+      .tab-btn.activo .tab-indicador { opacity: 1; }
+      .tab-indicador { width: 3px; height: 32px; border-radius: 2px; background: var(--texto); opacity: 0.15; flex-shrink: 0; transition: opacity 0.2s; }
+      .tab-label-wrap { display: flex; flex-direction: column; gap: 2px; }
+      .tab-etiqueta { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+      .tab-titulo { font-size: 14px; font-weight: 500; color: var(--texto); text-align: left; }
+      .tab-contenido { display: none; }
+      .tab-contenido.visible { display: block; animation: tabFadeIn 0.25s ease; }
+      @keyframes tabFadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+      .bloque-texto { font-size: 19px; line-height: 1.6; color: var(--texto); margin: 0; }
     </style>
   </head>
   <body>
@@ -98,33 +112,58 @@
       <article>
 
         <section class="texto texto-intro">
-          <p class="lead">
-          <h2>Introducción</h2>  
-          </p>
-          <p>
-            El corpus de este proyecto se construyó cruzando dos fuentes complementarias:
-            <span class="term" data-key="anilist">AniList</span> —consultada vía
-            <span class="term" data-key="graphql">GraphQL</span>— y
-            <span class="term" data-key="mal">MyAnimeList</span>, accedida a través de la
-            <span class="term" data-key="jikan">API Jikan</span>.
-            De cada plataforma se extrajeron las 70 series más populares a nivel global, incluyendo géneros, estudio de animación y métricas de audiencia.
-            Para emparejar títulos entre ambas bases —que a veces usan nombres distintos para la misma serie, como "Shingeki no Kyojin" y "Attack on Titan"— se empleó un
-            <span class="term" data-key="similitud">algoritmo de similitud textual</span>
-            con un umbral ajustable. El resultado es un conjunto de datos unificado con ranking, géneros, estudio, año, puntuaciones de ambas fuentes e identificadores originales para trazabilidad. Vale aclarar una limitante importante: ninguna de estas plataformas ofrece
-            <span class="term" data-key="consumo">datos de consumo por país</span>;
-            lo que registran son las dos comunidades de seguimiento de anime más grandes del mundo, y eso es lo que este análisis refleja.
-          </p>
+          <h2>Introducción</h2>
+
+          <div class="intro-grid">
+            <div>
+              <nav class="tab-nav" role="tablist">
+                <button class="tab-btn activo" role="tab" data-tab="fuentes">
+                  <span class="tab-indicador"></span>
+                  <span class="tab-label-wrap">
+                    <span class="tab-etiqueta">01 · Fuentes de datos</span>
+                    <span class="tab-titulo">¿De dónde vienen los datos?</span>
+                  </span>
+                </button>
+                <button class="tab-btn" role="tab" data-tab="metodo">
+                  <span class="tab-indicador"></span>
+                  <span class="tab-label-wrap">
+                    <span class="tab-etiqueta">02 · Método de cruce</span>
+                    <span class="tab-titulo">¿Cómo se emparejaron los títulos?</span>
+                  </span>
+                </button>
+                <button class="tab-btn" role="tab" data-tab="limitante">
+                  <span class="tab-indicador"></span>
+                  <span class="tab-label-wrap">
+                    <span class="tab-etiqueta">03 · Limitante clave</span>
+                    <span class="tab-titulo">¿Qué no puede decir este análisis?</span>
+                  </span>
+                </button>
+              </nav>
+
+              <div id="tab-fuentes" class="tab-contenido visible">
+                <p class="bloque-texto">Se cruzaron dos plataformas: <span class="term" data-key="anilist">AniList</span> vía <span class="term" data-key="graphql">GraphQL</span> y <span class="term" data-key="mal">MyAnimeList</span> vía <span class="term" data-key="jikan">API Jikan</span>. De cada una, las 70 series más populares a nivel global.</p>
+              </div>
+              <div id="tab-metodo" class="tab-contenido">
+                <p class="bloque-texto">Los títulos se emparejaron con un <span class="term" data-key="similitud">algoritmo de similitud textual</span>. Útil cuando una misma serie tiene nombres distintos en cada base, como "Shingeki no Kyojin" y "Attack on Titan".</p>
+              </div>
+              <div id="tab-limitante" class="tab-contenido">
+                <p class="bloque-texto">Ninguna plataforma publica <span class="term" data-key="consumo">datos de consumo por país</span>. Este análisis refleja el interés de las dos comunidades de seguimiento de anime más grandes del mundo, no cifras oficiales de audiencia regional.</p>
+              </div>
+            </div>
+
+            <iframe
+              src="https://graphcommons.com/graphs/35a53294-5f09-40ff-be3c-08b1b3df6fc3"
+              width="100%"
+              height="480"
+              frameborder="0"
+              style="border-radius: 10px; border: 0.5px solid var(--linea);">
+            </iframe>
+          </div>
 
           <div id="tooltip-intro">
             <p class="tt-title" id="tt-title-intro"></p>
             <p class="tt-body" id="tt-body-intro"></p>
           </div>
-          <iframe 
-            src="https://graphcommons.com/graphs/35a53294-5f09-40ff-be3c-08b1b3df6fc3" 
-            width="170%" 
-            height="1080" 
-            frameborder="0">
-          </iframe>
           <div class="red-seccion">
             <p class="red-titulo">Estructura de la red</p>
             <p class="red-bajada">La red está compuesta por <strong><span id="p-nodos">0</span> nodos</strong> y <strong><span id="p-edges">0</span> edges</strong> distribuidos en tres tipos de entidades.</p>
@@ -175,6 +214,18 @@
             </table>
           </div>
         </section>
+
+        <section class="modulo modulo-doble">
+  <div>
+    <p class="etiqueta">Hallazgo 1</p>
+    <h2>Patrones por país</h2>
+    <p>Concentración por país latinoamericano</p>
+  </div>
+  <figure>
+    <img src="Strip1.png" alt="Strip chart de patrones por país" class="viz-thumb">
+    <figcaption>Fuente: AniList, Jikan y Google Trends al 6 de mayo 2026.</figcaption>
+  </figure>
+</section>
 
 <section class="modulo">
   <h2>¿Qué tan populares son estas series en Latinoamérica?</h2>
@@ -351,6 +402,17 @@
       }
 
       document.addEventListener('DOMContentLoaded', initRedObserver);
+    </script>
+
+    <script>
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('activo'));
+          document.querySelectorAll('.tab-contenido').forEach(c => c.classList.remove('visible'));
+          btn.classList.add('activo');
+          document.getElementById('tab-' + btn.dataset.tab).classList.add('visible');
+        });
+      });
     </script>
 
     <script>
