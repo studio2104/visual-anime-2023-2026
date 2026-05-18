@@ -88,22 +88,35 @@
       .tab-contenido.visible { display: block; animation: tabFadeIn 0.25s ease; }
       @keyframes tabFadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
       .bloque-texto { font-size: 19px; line-height: 1.6; color: var(--texto); margin: 0; }
+      .leyenda-trends { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 1.25rem 0 1.5rem; }
+      .ley-card { background: var(--panel); border: 0.5px solid var(--linea); border-radius: 8px; padding: 0.85rem 1rem; display: flex; flex-direction: column; gap: 6px; }
+      .ley-icon { font-size: 16px; color: var(--muted); font-weight: 700; }
+      .ley-titulo { font-size: 12px; font-weight: 700; color: var(--texto); margin: 0; }
+      .ley-desc { font-size: 12px; color: var(--muted); margin: 0; line-height: 1.4; }
+      .score-demo { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
+      .score-bar { height: 10px; border-radius: 2px; background: var(--acento); opacity: 0.7; }
+      .score-num { font-size: 13px; font-weight: 700; color: var(--texto); }
+      .dash-demo { font-size: 18px; color: var(--linea); font-weight: 700; margin-top: 4px; display: block; }
+      .rango { display: flex; align-items: center; gap: 4px; margin-top: 4px; }
+      .rango-bar-lo { width: 8px; height: 10px; border-radius: 2px; background: var(--acento-2); opacity: 0.3; }
+      .rango-bar-hi { width: 36px; height: 10px; border-radius: 2px; background: var(--acento-2); opacity: 0.85; }
+      .rango-label { font-size: 11px; color: var(--muted); }
     </style>
   </head>
   <body>
     <header class="hero">
-  <div class="hero-texto">
-    <p class="serie">Proyecto de visualización de datos</p>
-    <h1>Anime y Latinoamérica: géneros y preferencias (2022–2026)</h1>
-    <p class="meta">Natalia Rocha · natalia.rocha@tec.mx · 29 de abril 2026</p>
-    <p class="entradilla">
-      El anime ya no es un mercado uniforme. La diversificación de géneros y la especialización de estudios han redefinido su consumo global — y Latinoamérica no es la excepción.
-    </p>
-    <p class="entradilla">
-      Este proyecto analiza las preferencias de anime en México, Argentina, Brasil, Colombia y Chile usando datos de AniList, MyAnimeList y Google Trends, con el fin de identificar patrones de consumo y su impacto cultural en la región.
-    </p>
-  </div>
-</header>
+      <div class="hero-texto">
+        <p class="serie">Proyecto de visualización de datos</p>
+        <h1>Anime y Latinoamérica: géneros y preferencias (2022–2026)</h1>
+        <p class="meta">Natalia Rocha · natalia.rocha@tec.mx · 29 de abril 2026</p>
+        <p class="entradilla">
+          El anime ya no es un mercado uniforme. La diversificación de géneros y la especialización de estudios han redefinido su consumo global — y Latinoamérica no es la excepción.
+        </p>
+        <p class="entradilla">
+          Este proyecto analiza las preferencias de anime en México, Argentina, Brasil, Colombia y Chile usando datos de AniList, MyAnimeList y Google Trends, con el fin de identificar patrones de consumo y su impacto cultural en la región.
+        </p>
+      </div>
+    </header>
 
     <main>
       <article>
@@ -161,6 +174,7 @@
             <p class="tt-title" id="tt-title-intro"></p>
             <p class="tt-body" id="tt-body-intro"></p>
           </div>
+
           <div class="red-seccion">
             <p class="red-titulo">Estructura de la red</p>
             <p class="red-bajada">La red está compuesta por <strong><span id="p-nodos">0</span> nodos</strong> y <strong><span id="p-edges">0</span> edges</strong> distribuidos en tres tipos de entidades.</p>
@@ -212,20 +226,49 @@
           </div>
         </section>
 
+        <section class="modulo">
+          <h2>¿Qué tan populares son estas series en Latinoamérica?</h2>
 
-<section class="modulo">
-  <h2>¿Qué tan populares son estas series en Latinoamérica?</h2>
-  <p>La siguiente tabla muestra el score de Google Trends (0–100) de cada anime en cinco países latinoamericanos durante 2022–2026. El score es relativo al pico máximo de búsqueda dentro de cada grupo de consulta, no un volumen absoluto. Un — indica que no hubo datos suficientes para ese par anime-país, no necesariamente que no se vea ahí.</p>
-  <figure>
-    <iframe
-      src="tabla1_interactiva.html"
-      width="100%"
-      height="620"
-      style="border:none; border-radius:6px;">
-    </iframe>
-    <figcaption>Fuente: AniList, Jikan y Google Trends al 6 de mayo 2026.</figcaption>
-  </figure>
-</section>
+          <div class="leyenda-trends">
+            <div class="ley-card">
+              <span class="ley-icon">0 – 100</span>
+              <p class="ley-titulo">¿Qué mide el score?</p>
+              <p class="ley-desc">Interés de búsqueda en Google Trends. El 100 es el pico máximo del grupo, no un volumen absoluto.</p>
+              <div class="score-demo">
+                <div class="score-bar" style="width:38px;"></div>
+                <span class="score-num">38</span>
+              </div>
+            </div>
+            <div class="ley-card">
+              <span class="ley-icon">—</span>
+              <p class="ley-titulo">¿Qué significa —?</p>
+              <p class="ley-desc">Google Trends no tuvo datos suficientes para ese par anime-país. No implica que nadie lo vea ahí.</p>
+              <span class="dash-demo">—</span>
+            </div>
+            <div class="ley-card">
+              <span class="ley-icon">2022 → 2026</span>
+              <p class="ley-titulo">Período cubierto</p>
+              <p class="ley-desc">Datos de México, Argentina, Brasil, Colombia y Chile durante cuatro años.</p>
+              <div class="rango">
+                <span class="rango-label">2022</span>
+                <div class="rango-bar-lo"></div>
+                <div class="rango-bar-hi"></div>
+                <span class="rango-label">2026</span>
+              </div>
+            </div>
+          </div>
+
+          <figure>
+            <iframe
+              src="tabla1_interactiva.html"
+              width="100%"
+              height="620"
+              style="border:none; border-radius:6px;">
+            </iframe>
+            <figcaption>Fuente: AniList, Jikan y Google Trends al 6 de mayo 2026.</figcaption>
+          </figure>
+        </section>
+
         <section class="modulo">
           <div>
             <p class="etiqueta">Importante</p>
