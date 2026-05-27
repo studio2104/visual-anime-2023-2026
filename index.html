@@ -1,524 +1,593 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Análisis de la relación países latinoamericanos y preferencias de géneros del anime contemporáneo (2022–2026)</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-      #lightbox {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(12, 22, 28, 0.92);
-        z-index: 999;
-        cursor: zoom-out;
-        place-items: center;
-      }
-      #lightbox.activo { display: grid; }
-      #lightbox-img {
-        max-width: 94vw;
-        max-height: 92vh;
-        object-fit: contain;
-        border-radius: 4px;
-      }
-      .figuras-hallazgo { display: flex; flex-direction: column; gap: 2rem; }
-      .viz-thumb {
-        width: 100%;
-        display: block;
-        cursor: zoom-in;
-        border: 1px solid var(--linea);
-        border-radius: 6px;
-        transition: opacity 0.2s;
-      }
-      .viz-thumb:hover { opacity: 0.85; }
-      .texto.texto-intro { max-width: 100%; }
-      .term {
-        border-bottom: 1.5px dashed currentColor;
-        cursor: help;
-        opacity: 0.85;
-      }
-      .term:hover { opacity: 1; text-decoration: none; }
-      #tooltip-intro {
-        display: none;
-        position: fixed;
-        z-index: 9999;
-        background: var(--fondo, #fff);
-        border: 0.5px solid var(--linea, #ccc);
-        border-radius: 8px;
-        padding: 10px 14px;
-        max-width: 280px;
-        pointer-events: none;
-      }
-      #tooltip-intro.activo { display: block; }
-      #tooltip-intro .tt-title { font-size: 13px; font-weight: 600; margin: 0 0 4px; }
-      #tooltip-intro .tt-body { font-size: 12px; opacity: 0.75; margin: 0; line-height: 1.5; }
-      .red-row { transition: opacity 0.5s ease, transform 0.5s ease; }
-      .red-seccion { padding: 2rem 0 1rem; }
-      .red-titulo { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 0.5rem; }
-      .red-bajada { font-size: 15px; color: var(--muted); margin: 0 0 1.5rem; line-height: 1.6; }
-      .red-bajada strong { color: var(--texto); font-weight: 500; }
-      .metricas-red { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 1.5rem; }
-      .metrica-red { background: var(--panel); border-radius: 10px; padding: 1rem 1.25rem; }
-      .metrica-red-label { font-size: 12px; color: var(--muted); margin: 0 0 6px; }
-      .metrica-red-valor { font-size: 32px; font-weight: 500; color: var(--texto); margin: 0; line-height: 1; }
-      .metrica-red-sub { font-size: 12px; color: var(--muted); margin: 4px 0 0; }
-      .red-tabla { width: 100%; border-collapse: collapse; }
-      .red-tabla thead th { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); text-align: left; padding: 0 1rem 0.6rem; border-bottom: 0.5px solid var(--linea); }
-      .red-tabla thead th:nth-child(2) { text-align: center; }
-      .red-fila { transition: opacity 0.45s ease, transform 0.45s ease; }
-      .red-fila td { padding: 0.85rem 1rem; border-bottom: 0.5px solid var(--linea); font-size: 14px; color: var(--texto); vertical-align: middle; }
-      .red-fila td:nth-child(2) { text-align: center; }
-      .red-fila:last-child td { border-bottom: none; }
-      .tipo-badge { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; }
-      .tipo-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-      .tipo-desc { font-size: 13px; color: var(--muted); }
-      .cant-num { font-size: 18px; font-weight: 500; }
-      .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; margin-top: 1.5rem; }
-      .tab-nav { display: flex; flex-direction: column; gap: 4px; margin-bottom: 1.25rem; }
-      .tab-btn { display: flex; align-items: center; gap: 10px; background: none; border: none; cursor: pointer; padding: 0.6rem 0.75rem; border-radius: 8px; text-align: left; width: 100%; transition: background 0.15s; }
-      .tab-btn:hover { background: var(--panel); }
-      .tab-btn.activo { background: var(--panel); }
-      .tab-btn.activo .tab-indicador { opacity: 1; }
-      .tab-indicador { width: 3px; height: 32px; border-radius: 2px; background: var(--texto); opacity: 0.15; flex-shrink: 0; transition: opacity 0.2s; }
-      .tab-label-wrap { display: flex; flex-direction: column; gap: 2px; }
-      .tab-etiqueta { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
-      .tab-titulo { font-size: 14px; font-weight: 500; color: var(--texto); text-align: left; }
-      .tab-contenido { display: none; }
-      .tab-contenido.visible { display: block; animation: tabFadeIn 0.25s ease; }
-      @keyframes tabFadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-      .bloque-texto { font-size: 19px; line-height: 1.6; color: var(--texto); margin: 0; }
-      .leyenda-trends { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 1.25rem 0 1.5rem; }
-      .ley-card { background: var(--panel); border: 0.5px solid var(--linea); border-radius: 8px; padding: 0.85rem 1rem; display: flex; flex-direction: column; gap: 6px; }
-      .ley-icon { font-size: 16px; color: var(--muted); font-weight: 700; }
-      .ley-titulo { font-size: 12px; font-weight: 700; color: var(--texto); margin: 0; }
-      .ley-desc { font-size: 12px; color: var(--muted); margin: 0; line-height: 1.4; }
-      .score-demo { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
-      .score-bar { height: 10px; border-radius: 2px; background: var(--acento); opacity: 0.7; }
-      .score-num { font-size: 13px; font-weight: 700; color: var(--texto); }
-      .dash-demo { font-size: 18px; color: var(--linea); font-weight: 700; margin-top: 4px; display: block; }
-      .rango { display: flex; align-items: center; gap: 4px; margin-top: 4px; }
-      .rango-bar-lo { width: 8px; height: 10px; border-radius: 2px; background: var(--acento-2); opacity: 0.3; }
-      .rango-bar-hi { width: 36px; height: 10px; border-radius: 2px; background: var(--acento-2); opacity: 0.85; }
-      .rango-label { font-size: 11px; color: var(--muted); }
-    </style>
-  </head>
-  <body>
-    <header class="hero">
-      <div class="hero-texto">
-        <p class="serie">Proyecto de visualización de datos</p>
-        <h1>Anime y Latinoamérica: géneros y preferencias (2022–2026)</h1>
-        <p class="meta">Natalia Rocha · natalia.rocha@tec.mx · 29 de abril 2026</p>
-        <p class="entradilla">
-          El anime ya no es un mercado uniforme. La diversificación de géneros y la especialización de estudios han redefinido su consumo global — y Latinoamérica no es la excepción.
-        </p>
-        <p class="entradilla">
-          Este proyecto analiza las preferencias de anime en México, Argentina, Brasil, Colombia y Chile usando datos de AniList, MyAnimeList y Google Trends, con el fin de identificar patrones de consumo y su impacto cultural en la región.
-        </p>
-      </div>
-    </header>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anime y Latinoamérica · Recorrido interactivo</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    <main>
-      <article>
+  :root {
+    --wafer: #E6D9D6;
+    --ferra: #77525F;
+    --ferrad: #4a2f38;
+    --ferral: #f2eaec;
+    --blue: #8AADDC;
+    --bluel: #e8eef7;
+    --teak: #BB946E;
+    --teakl: #f5ede3;
+    --t: #1a1412;
+    --m: #6b5c58;
+    --bg: #ffffff;
+    --sf: #f7f3f2;
+    --bd: rgba(100,70,65,0.12);
+    --bd2: rgba(100,70,65,0.28);
+  }
 
-        <section class="texto texto-intro">
-          <h2>Introducción</h2>
+  body {
+    font-family: 'Georgia', serif;
+    background: #faf7f5;
+    color: var(--t);
+    min-height: 100vh;
+    padding: 0;
+  }
 
-          <div class="intro-grid">
-            <div>
-              <nav class="tab-nav" role="tablist">
-                <button class="tab-btn activo" role="tab" data-tab="fuentes">
-                  <span class="tab-indicador"></span>
-                  <span class="tab-label-wrap">
-                    <span class="tab-etiqueta">01 · Fuentes de datos</span>
-                    <span class="tab-titulo">¿De dónde vienen los datos?</span>
-                  </span>
-                </button>
-                <button class="tab-btn" role="tab" data-tab="metodo">
-                  <span class="tab-indicador"></span>
-                  <span class="tab-label-wrap">
-                    <span class="tab-etiqueta">02 · Método de cruce</span>
-                    <span class="tab-titulo">¿Cómo se emparejaron los títulos?</span>
-                  </span>
-                </button>
-                <button class="tab-btn" role="tab" data-tab="limitante">
-                  <span class="tab-indicador"></span>
-                  <span class="tab-label-wrap">
-                    <span class="tab-etiqueta">03 · Limitante clave</span>
-                    <span class="tab-titulo">¿Qué no puede decir este análisis?</span>
-                  </span>
-                </button>
-              </nav>
+  .page-header {
+    background: var(--bg);
+    border-bottom: 0.5px solid var(--bd);
+    padding: 1.25rem 2rem;
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+  }
+  .page-header-title {
+    font-family: 'Georgia', serif;
+    font-size: 15px;
+    font-weight: normal;
+    color: var(--ferra);
+    letter-spacing: 0.02em;
+  }
+  .page-header-sub {
+    font-size: 12px;
+    color: var(--m);
+  }
 
-              <div id="tab-fuentes" class="tab-contenido visible">
-                <p class="bloque-texto">Se cruzaron dos plataformas: <span class="term" data-key="anilist">AniList</span> vía <span class="term" data-key="graphql">GraphQL</span> y <span class="term" data-key="mal">MyAnimeList</span> vía <span class="term" data-key="jikan">API Jikan</span>. De cada una, las 70 series más populares a nivel global.</p>
-              </div>
-              <div id="tab-metodo" class="tab-contenido">
-                <p class="bloque-texto">Los títulos se emparejaron con un <span class="term" data-key="similitud">algoritmo de similitud textual</span>. Útil cuando una misma serie tiene nombres distintos en cada base, como "Shingeki no Kyojin" y "Attack on Titan".</p>
-              </div>
-              <div id="tab-limitante" class="tab-contenido">
-                <p class="bloque-texto">Ninguna plataforma publica <span class="term" data-key="consumo">datos de consumo por país</span>. Este análisis refleja el interés de las dos comunidades de seguimiento de anime más grandes del mundo, no cifras oficiales de audiencia regional.</p>
-              </div>
-            </div>
+  .shell {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+  }
 
-            <iframe
-              src="https://graphcommons.com/graphs/35a53294-5f09-40ff-be3c-08b1b3df6fc3"
-              width="100%"
-              height="480"
-              frameborder="0"
-              style="border-radius: 10px; border: 0.5px solid var(--linea);">
-            </iframe>
-          </div>
+  .pips { display: flex; gap: 5px; margin-bottom: 2.5rem; }
+  .pip { flex: 1; height: 3px; border-radius: 2px; background: var(--bd); transition: background .4s; }
+  .pip.done { background: var(--ferra); }
+  .pip.now { background: var(--teak); }
 
-          <div id="tooltip-intro">
-            <p class="tt-title" id="tt-title-intro"></p>
-            <p class="tt-body" id="tt-body-intro"></p>
-          </div>
+  .screen { display: none; }
+  .screen.on { display: block; animation: fu .3s ease; }
+  @keyframes fu { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-          <div class="red-seccion">
-            <p class="red-titulo">Estructura de la red</p>
-            <p class="red-bajada">La red está compuesta por <strong><span id="p-nodos">0</span> nodos</strong> y <strong><span id="p-edges">0</span> edges</strong> distribuidos en tres tipos de entidades.</p>
+  .slabel {
+    font-size: 11px; font-weight: 600; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--teak); margin-bottom: .6rem;
+  }
+  .stitle {
+    font-size: 24px; font-weight: normal; color: var(--t);
+    line-height: 1.3; margin-bottom: .65rem;
+    font-family: 'Georgia', serif;
+  }
+  .sbody {
+    font-size: 15px; color: var(--m); line-height: 1.75; margin-bottom: 1.5rem;
+  }
 
-            <div class="metricas-red">
-              <div class="metrica-red">
-                <p class="metrica-red-label">Total de nodos</p>
-                <p class="metrica-red-valor" id="m-nodos">0</p>
-                <p class="metrica-red-sub">nodos en la red</p>
-              </div>
-              <div class="metrica-red">
-                <p class="metrica-red-label">Conexiones</p>
-                <p class="metrica-red-valor" id="m-edges">0</p>
-                <p class="metrica-red-sub">edges totales</p>
-              </div>
-              <div class="metrica-red">
-                <p class="metrica-red-label">Tipos de entidad</p>
-                <p class="metrica-red-valor">3</p>
-                <p class="metrica-red-sub">anime · género · país</p>
-              </div>
-            </div>
+  .choices { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1.25rem; }
 
-            <table class="red-tabla">
-              <thead>
-                <tr>
-                  <th>Tipo</th>
-                  <th>Cantidad</th>
-                  <th>Descripción</th>
-                </tr>
-              </thead>
-              <tbody id="red-tbody">
-                <tr class="red-fila" style="opacity:0; transform:translateY(10px);">
-                  <td><span class="tipo-badge"><span class="tipo-dot" style="background:#D4537E;"></span>Anime</span></td>
-                  <td><span class="cant-num" data-target="50">0</span></td>
-                  <td class="tipo-desc">Título de la serie de anime</td>
-                </tr>
-                <tr class="red-fila" style="opacity:0; transform:translateY(10px);">
-                  <td><span class="tipo-badge"><span class="tipo-dot" style="background:#378ADD;"></span>Género</span></td>
-                  <td><span class="cant-num" data-target="16">0</span></td>
-                  <td class="tipo-desc">Categoría narrativa o temática de la serie</td>
-                </tr>
-                <tr class="red-fila" style="opacity:0; transform:translateY(10px);">
-                  <td><span class="tipo-badge"><span class="tipo-dot" style="background:#1D9E75;"></span>País</span></td>
-                  <td><span class="cant-num" data-target="5">0</span></td>
-                  <td class="tipo-desc">País latinoamericano</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
+  .cb {
+    display: flex; align-items: center; gap: 14px;
+    padding: .9rem 1.1rem; background: var(--bg);
+    border: 0.5px solid var(--bd);
+    border-radius: 12px; cursor: pointer; text-align: left;
+    transition: border-color .18s, background .18s, transform .15s;
+    width: 100%;
+  }
+  .cb:hover { border-color: var(--ferra); background: var(--ferral); transform: translateX(4px); }
+  .cb.sel { border-color: var(--ferra); background: var(--ferral); }
+  .cb.sel .carr { color: var(--ferra); }
 
-        <section class="modulo">
-          <h2>¿Qué tan populares son estas series en Latinoamérica?</h2>
+  .cicon {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--wafer); display: flex; align-items: center;
+    justify-content: center; flex-shrink: 0; font-size: 18px; color: var(--ferra);
+  }
+  .ctxt { flex: 1; }
+  .ctit { font-size: 14px; font-weight: 600; color: var(--t); }
+  .csub { font-size: 12px; color: var(--m); margin-top: 2px; }
+  .carr { font-size: 14px; color: var(--bd2); transition: color .18s; }
+  .cb:hover .carr { color: var(--ferra); }
 
-          <div class="leyenda-trends">
-            <div class="ley-card">
-              <span class="ley-icon">0 – 100</span>
-              <p class="ley-titulo">¿Qué mide el score?</p>
-              <p class="ley-desc">Interés de búsqueda en Google Trends. El 100 es el pico máximo del grupo, no un volumen absoluto.</p>
-              <div class="score-demo">
-                <div class="score-bar" style="width:38px;"></div>
-                <span class="score-num">38</span>
-              </div>
-            </div>
-            <div class="ley-card">
-              <span class="ley-icon">—</span>
-              <p class="ley-titulo">¿Qué significa —?</p>
-              <p class="ley-desc">Google Trends no tuvo datos suficientes para ese par anime-país. No implica que nadie lo vea ahí.</p>
-              <span class="dash-demo">—</span>
-            </div>
-            <div class="ley-card">
-              <span class="ley-icon">2022 → 2026</span>
-              <p class="ley-titulo">Período cubierto</p>
-              <p class="ley-desc">Datos de México, Argentina, Brasil, Colombia y Chile durante cuatro años.</p>
-              <div class="rango">
-                <span class="rango-label">2022</span>
-                <div class="rango-bar-lo"></div>
-                <div class="rango-bar-hi"></div>
-                <span class="rango-label">2026</span>
-              </div>
-            </div>
-          </div>
+  .navrow {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 1.75rem; padding-top: 1.25rem;
+    border-top: 0.5px solid var(--bd);
+  }
+  .bbk {
+    font-size: 13px; color: var(--m); background: none; border: none;
+    cursor: pointer; padding: .4rem 0; display: flex; align-items: center; gap: 5px;
+    font-family: inherit;
+  }
+  .bbk:hover { color: var(--t); }
+  .bnx {
+    font-size: 14px; font-weight: 600; color: var(--ferrad);
+    background: var(--wafer); border: 0.5px solid var(--ferra);
+    border-radius: 8px; padding: .6rem 1.3rem; cursor: pointer;
+    display: flex; align-items: center; gap: 6px;
+    transition: background .18s; font-family: inherit;
+  }
+  .bnx:hover { background: #d9c7c3; }
+  .bnx:disabled { opacity: .3; cursor: default; }
 
-          <figure>
-            <iframe
-              src="tabla1_interactiva.html"
-              width="100%"
-              height="620"
-              style="border:none; border-radius:6px;">
-            </iframe>
-            <figcaption>Fuente: AniList, Jikan y Google Trends al 6 de mayo 2026.</figcaption>
-          </figure>
-        </section>
+  .icard {
+    border: 0.5px solid var(--bd); border-radius: 12px;
+    padding: 1.1rem 1.25rem; background: var(--bg);
+    margin-top: 1rem; animation: fu .3s ease;
+  }
+  .ilabel {
+    font-size: 11px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: .08em; color: var(--teak); margin-bottom: .4rem;
+  }
+  .ititl { font-size: 16px; font-weight: 600; color: var(--t); margin-bottom: .4rem; }
+  .ibody { font-size: 14px; color: var(--m); line-height: 1.65; }
 
-        <section class="modulo">
-          <div>
-            <p class="etiqueta">Importante</p>
-            <h2>Clustering por géneros consumidos en México, Argentina, Brasil, Colombia y Chile</h2>
-            <p>
-              Para identificar patrones de consumo y producción, se aplicó el algoritmo de clustering Louvain a la red bipartita de anime y géneros. 
-              El resultado fue la identificación de cinco clusters temáticos que agrupan series de anime con géneros y países asociados, revelando tendencias narrativas y de mercado diversas dentro del corpus analizado.
-            </p>
-          </div>
+  .divider { height: 0.5px; background: var(--bd); margin: 1.5rem 0; }
 
-          <div style="margin-top: 2rem; display: grid; gap: 1px; border: 0.5px solid var(--linea); border-radius: 8px; overflow: hidden;">
-            <div style="display: grid; grid-template-columns: 1fr auto; align-items: center; padding: 0.75rem 1.25rem; background: #f5ede8;">
-              <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);">Clustering · 5 grupos · 71 nodos</span>
-              <span style="font-size: 11px; color: var(--muted);">% del corpus</span>
-            </div>
-            <div style="display: grid; grid-template-columns: 14px 1fr auto; align-items: center; gap: 16px; padding: 1rem 1.25rem; background: #f0e8e5; border-top: 0.5px solid var(--linea);">
-              <div style="width: 14px; height: 14px; border-radius: 50%; background: #D4537E;"></div>
-              <div>
-                <p style="margin: 0; font-size: 15px; font-weight: 500;">Romance y comedia cotidiana</p>
-                <p style="margin: 0.2rem 0 0; font-size: 13px; color: var(--muted);">Josei / Shoujo · audiencias fieles, nicho consolidado</p>
-              </div>
-              <div style="text-align: right;">
-                <p style="margin: 0; font-size: 15px; font-weight: 500;">28%</p>
-                <p style="margin: 0; font-size: 12px; color: var(--muted);">20 nodos</p>
-              </div>
-            </div>
-            <div style="display: grid; grid-template-columns: 14px 1fr auto; align-items: center; gap: 16px; padding: 1rem 1.25rem; background: #f0e8e5; border-top: 0.5px solid var(--linea);">
-              <div style="width: 14px; height: 14px; border-radius: 50%; background: #378ADD;"></div>
-              <div>
-                <p style="margin: 0; font-size: 15px; font-weight: 500;">Aventura y fantasía épica</p>
-                <p style="margin: 0.2rem 0 0; font-size: 13px; color: var(--muted);">Shounen · MAPPA, A-1 Pictures · scores altos en MAL</p>
-              </div>
-              <div style="text-align: right;">
-                <p style="margin: 0; font-size: 15px; font-weight: 500;">24%</p>
-                <p style="margin: 0; font-size: 12px; color: var(--muted);">17 nodos</p>
-              </div>
-            </div>
-            <div style="display: grid; grid-template-columns: 14px 1fr auto; align-items: center; gap: 16px; padding: 1rem 1.25rem; background: #f0e8e5; border-top: 0.5px solid var(--linea);">
-              <div style="width: 14px; height: 14px; border-radius: 50%; background: #888780;"></div>
-              <div>
-                <p style="margin: 0; font-size: 15px; font-weight: 500;">Drama y suspenso psicológico</p>
-                <p style="margin: 0.2rem 0 0; font-size: 13px; color: var(--muted);">Seinen · densamente conectado · crítica especializada</p>
-              </div>
-              <div style="text-align: right;">
-                <p style="margin: 0; font-size: 15px; font-weight: 500;">21%</p>
-                <p style="margin: 0; font-size: 12px; color: var(--muted);">15 nodos</p>
-              </div>
-            </div>
-            <div style="display: grid; grid-template-columns: 14px 1fr auto; align-items: center; gap: 16px; padding: 1rem 1.25rem; background: #f0e8e5; border-top: 0.5px solid var(--linea);">
-              <div style="width: 14px; height: 14px; border-radius: 50%; background: #1D9E75;"></div>
-              <div>
-                <p style="margin: 0; font-size: 15px; font-weight: 500;">Shonen y sci-fi de gran consumo</p>
-                <p style="margin: 0.2rem 0 0; font-size: 13px; color: var(--muted);">Blockbusters · millones de members · mayor tracción LATAM</p>
-              </div>
-              <div style="text-align: right;">
-                <p style="margin: 0; font-size: 15px; font-weight: 500;">18%</p>
-                <p style="margin: 0; font-size: 12px; color: var(--muted);">13 nodos</p>
-              </div>
-            </div>
-            <div style="display: grid; grid-template-columns: 14px 1fr auto; align-items: center; gap: 16px; padding: 1rem 1.25rem; background: #f0e8e5; border-top: 0.5px solid var(--linea);">
-              <div style="width: 14px; height: 14px; border-radius: 50%; background: #EF9F27;"></div>
-              <div>
-                <p style="margin: 0; font-size: 15px; font-weight: 500;">Sobrenatural y horror moderno</p>
-                <p style="margin: 0.2rem 0 0; font-size: 13px; color: var(--muted);">Periférico · Avant Garde, Girls Love · nicho pequeño</p>
-              </div>
-              <div style="text-align: right;">
-                <p style="margin: 0; font-size: 15px; font-weight: 500;">8%</p>
-                <p style="margin: 0; font-size: 12px; color: var(--muted);">6 nodos</p>
-              </div>
-            </div>
-            <div style="padding: 1rem 1.25rem; background: #f5ede8; border-top: 0.5px solid var(--linea);">
-              <p style="margin: 0; font-size: 13px; color: var(--muted); line-height: 1.6;">
-                La red no está dominada por un solo género: cinco clusters relativamente equilibrados apuntan a una industria diversificada. Sin embargo, Romance + Aventura suman el <strong style="color: var(--texto);">52%</strong> — la mitad del corpus sigue dos ejes narrativos tradicionales.
-              </p>
-            </div>
-          </div>
-        </section>
+  .statgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 1.25rem 0; }
+  .stat { background: var(--sf); border-radius: 8px; padding: .85rem 1rem; }
+  .slb { font-size: 11px; color: var(--m); margin-bottom: 4px; }
+  .sval { font-size: 20px; font-weight: 600; color: var(--t); line-height: 1; }
+  .ssub { font-size: 11px; color: var(--m); margin-top: 3px; }
 
-        <section class="modulo modulo-doble invertido modulo-bubble">
-          <figure class="figura-bubble">
-            <iframe
-              src="bubble1.html"
-              width="100%"
-              height="560"
-              style="border:none; border-radius:6px;">
-            </iframe>
-            <figcaption>Fuente: AniList, Jikan y Google Trends al 6 de mayo 2026.</figcaption>
-          </figure>
-          <div>
-            <p class="etiqueta">Hallazgo 2</p>
-            <h2>¿Qué le gusta a los espectadores latinos?</h2>
-            <p>XXXXXXX</p>
-          </div>
-        </section>
+  .tbar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 9px; }
+  .tbar-lbl { font-size: 13px; color: var(--m); width: 32px; flex-shrink: 0; }
+  .tbar-track { flex: 1; height: 8px; background: var(--sf); border-radius: 4px; overflow: hidden; }
+  .tbar-fill { height: 100%; border-radius: 4px; background: var(--blue); width: 0%; transition: width .85s cubic-bezier(.16,1,.3,1); }
+  .tbar-num { font-size: 13px; font-weight: 600; color: var(--t); width: 28px; text-align: right; flex-shrink: 0; }
 
-        <section class="texto cierre">
-          <h2>Cierre</h2>
-          <p>
-            XXXXXXXX
-          </p>
-        </section>
+  .cl-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: .85rem 1rem; background: var(--bg);
+    border: 0.5px solid var(--bd); border-radius: 8px;
+    cursor: pointer; transition: border-color .18s; margin-bottom: 8px;
+  }
+  .cl-row:hover { border-color: var(--bd2); }
+  .cl-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .cl-info { flex: 1; }
+  .cl-name { font-size: 14px; font-weight: 600; color: var(--t); }
+  .cl-sub { font-size: 12px; color: var(--m); margin-top: 2px; }
+  .cl-pct { font-size: 14px; font-weight: 600; color: var(--t); }
 
-      </article>
-    </main>
+  .tag {
+    display: inline-block; font-size: 12px;
+    padding: .25rem .65rem; border-radius: 99px; margin: 3px 3px 0 0;
+  }
 
-    <div id="lightbox">
-      <img id="lightbox-img" src="" alt="">
+  .rbadge {
+    display: inline-block; font-size: 11px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: .1em;
+    background: var(--wafer); color: var(--ferrad);
+    padding: .3rem .9rem; border-radius: 99px; margin-bottom: .85rem;
+  }
+
+  .yr-block { margin-bottom: 1.5rem; }
+  .yr-head { display: flex; align-items: center; gap: 10px; margin-bottom: .75rem; }
+  .yr-pill { font-size: 12px; font-weight: 600; padding: .25rem .8rem; border-radius: 99px; flex-shrink: 0; }
+  .yr-line { flex: 1; height: 0.5px; background: var(--bd); }
+
+  .anime-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .anime-card { background: var(--sf); border-radius: 8px; padding: .8rem 1rem; }
+  .anime-card-title { font-size: 13px; font-weight: 600; color: var(--t); margin-bottom: 3px; line-height: 1.4; }
+  .anime-card-sub { font-size: 12px; color: var(--m); }
+  .anime-card-score { font-size: 11px; margin-top: 6px; display: flex; align-items: center; gap: 5px; }
+  .score-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <span class="page-header-title">Anime y Latinoamérica</span>
+  <span class="page-header-sub">Géneros y preferencias · 2023–2026</span>
+</header>
+
+<div class="shell">
+  <div class="pips" id="pips"></div>
+
+  <div class="screen on" id="s0">
+    <p class="slabel">Bienvenida</p>
+    <p class="stitle">¿Cuál es tu lengua materna?</p>
+    <p class="sbody">Según tu respuesta, veremos qué consume el anime en los países que hablan ese idioma.</p>
+    <div class="choices">
+      <button class="cb" onclick="pickLang('es')">
+        <div class="cicon"><i class="ti ti-language"></i></div>
+        <div class="ctxt"><div class="ctit">Español</div></div>
+        <i class="ti ti-chevron-right carr"></i>
+      </button>
+      <button class="cb" onclick="pickLang('pt')">
+        <div class="cicon"><i class="ti ti-language"></i></div>
+        <div class="ctxt"><div class="ctit">Português</div></div>
+        <i class="ti ti-chevron-right carr"></i>
+      </button>
+      <button class="cb" onclick="pickLang('en')">
+        <div class="cicon"><i class="ti ti-language"></i></div>
+        <div class="ctxt"><div class="ctit">English</div></div>
+        <i class="ti ti-chevron-right carr"></i>
+      </button>
     </div>
+  </div>
 
-    <script>
-      function animateCount(el, target, duration) {
-        const start = performance.now();
-        function step(now) {
-          const progress = Math.min((now - start) / duration, 1);
-          const ease = 1 - Math.pow(1 - progress, 3);
-          el.textContent = Math.round(ease * target);
-          if (progress < 1) requestAnimationFrame(step);
-        }
-        requestAnimationFrame(step);
-      }
+  <div class="screen" id="s1">
+    <p class="slabel" id="s1-label"></p>
+    <p class="stitle" id="s1-title"></p>
+    <p class="sbody" id="s1-body"></p>
+    <div class="statgrid" id="s1-stats"></div>
+    <p style="font-size:13px;color:var(--m);margin-bottom:.75rem">Selecciona una serie para ver su popularidad en tu región:</p>
+    <div class="choices" id="s1-anime"></div>
+    <div id="s1-panel" style="display:none"></div>
+    <div class="navrow">
+      <button class="bbk" onclick="go(0)"><i class="ti ti-arrow-left"></i> Volver</button>
+      <button class="bnx" id="s1-next" onclick="go(2)" disabled>Elegir género <i class="ti ti-arrow-right"></i></button>
+    </div>
+  </div>
 
-      function runRedAnimation() {
-        animateCount(document.getElementById('p-nodos'), 71, 900);
-        animateCount(document.getElementById('p-edges'), 246, 900);
-        animateCount(document.getElementById('m-nodos'), 71, 900);
-        animateCount(document.getElementById('m-edges'), 246, 900);
-        document.querySelectorAll('.red-fila').forEach((row, i) => {
-          setTimeout(() => {
-            row.style.opacity = '1';
-            row.style.transform = 'translateY(0)';
-            row.querySelectorAll('.cant-num').forEach(el => {
-              animateCount(el, parseInt(el.dataset.target), 700);
-            });
-          }, i * 180);
-        });
-      }
+  <div class="screen" id="s2">
+    <p class="slabel">02 · Tu preferencia</p>
+    <p class="stitle">¿Qué tipo de historia prefieres?</p>
+    <p class="sbody">Cada género se conecta con un cluster distinto en la red de consumo. Elige el que más te represente.</p>
+    <div class="choices" id="s2-genres"></div>
+    <div id="s2-panel" style="display:none"></div>
+    <div class="navrow">
+      <button class="bbk" onclick="go(1)"><i class="ti ti-arrow-left"></i> Volver</button>
+      <button class="bnx" id="s2-next" onclick="go(3)" disabled>Ver clusters <i class="ti ti-arrow-right"></i></button>
+    </div>
+  </div>
 
-      function resetRedAnimation() {
-        ['p-nodos','p-edges','m-nodos','m-edges'].forEach(id => {
-          const el = document.getElementById(id);
-          if (el) el.textContent = '0';
-        });
-        document.querySelectorAll('.red-fila').forEach(row => {
-          row.style.opacity = '0';
-          row.style.transform = 'translateY(10px)';
-          row.querySelectorAll('.cant-num').forEach(el => el.textContent = '0');
-        });
-      }
+  <div class="screen" id="s3">
+    <p class="slabel">03 · Clusters temáticos</p>
+    <p class="stitle" id="s3-title"></p>
+    <p class="sbody">El algoritmo Louvain identificó cinco clusters en la red de anime y géneros. Tu género aparece resaltado. Toca cualquiera para explorar su composición.</p>
+    <div id="s3-clusters"></div>
+    <div class="icard" id="s3-detail" style="display:none">
+      <p class="ilabel" id="s3-det-label"></p>
+      <p class="ititl" id="s3-det-title"></p>
+      <p class="ibody" id="s3-det-body"></p>
+      <div style="margin-top:.85rem" id="s3-det-tags"></div>
+    </div>
+    <div class="navrow">
+      <button class="bbk" onclick="go(2)"><i class="ti ti-arrow-left"></i> Volver</button>
+      <button class="bnx" onclick="go(4)">Ver resultado <i class="ti ti-arrow-right"></i></button>
+    </div>
+  </div>
 
-      function initRedObserver() {
-        const tbody = document.getElementById('red-tbody');
-        if (!tbody) return;
-        const observer = new IntersectionObserver(entries => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) runRedAnimation();
-            else resetRedAnimation();
-          });
-        }, { threshold: 0.3 });
-        observer.observe(tbody);
-      }
+  <div class="screen" id="s4">
+    <div style="text-align:center;padding:1.5rem 0 1rem">
+      <span class="rbadge">Tu perfil de consumo</span>
+      <p class="stitle" id="r-title"></p>
+      <p class="sbody" id="r-body"></p>
+    </div>
+    <div class="icard">
+      <p class="ilabel">Hallazgo regional</p>
+      <p class="ititl" id="r-finding"></p>
+      <p class="ibody" id="r-detail"></p>
+      <div style="margin-top:.85rem" id="r-tags"></div>
+    </div>
+    <div class="divider"></div>
+    <p class="slabel" style="margin-bottom:1rem">Animes representativos por año</p>
+    <div id="r-timeline"></div>
+    <div class="divider"></div>
+    <p style="font-size:13px;color:var(--m);line-height:1.7;margin-bottom:1.5rem">
+      Fuente: AniList GraphQL API · Google Trends · Período: 2023–2026
+    </p>
+    <div class="choices">
+      <button class="cb" onclick="resetAll()">
+        <div class="cicon"><i class="ti ti-refresh"></i></div>
+        <div class="ctxt"><div class="ctit">Explorar desde el inicio</div></div>
+        <i class="ti ti-chevron-right carr"></i>
+      </button>
+    </div>
+  </div>
+</div>
 
-      document.addEventListener('DOMContentLoaded', initRedObserver);
-    </script>
+<script>
+const TOTAL = 5;
+let cur = 0, lang = '', genre = '';
 
-    <script>
-      document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('activo'));
-          document.querySelectorAll('.tab-contenido').forEach(c => c.classList.remove('visible'));
-          btn.classList.add('activo');
-          document.getElementById('tab-' + btn.dataset.tab).classList.add('visible');
-        });
-      });
-    </script>
+const LANGS = {
+  es: {
+    label: '01 · Región hispanohablante',
+    title: 'El anime en los países de habla hispana',
+    body: 'México y Colombia son los mercados hispanohablantes del análisis. México lidera con los scores más altos y sostenidos del período 2023–2026.',
+    countries: ['MX', 'CO'],
+    stats: [
+      { l: 'Países', v: 'MX · CO', s: 'México y Colombia' },
+      { l: 'Score promedio MX', v: '74', s: 'sobre 100' },
+      { l: 'Score promedio CO', v: '58', s: 'sobre 100' }
+    ],
+    anime: [
+      { key: 'jjk', title: 'Jujutsu Kaisen S2', sub: 'Acción · Shounen', scores: { MX: 82, CO: 65 }, icon: 'ti-sword' },
+      { key: 'op',  title: 'One Piece', sub: 'Aventura · Shounen', scores: { MX: 70, CO: 72 }, icon: 'ti-anchor' },
+      { key: 'aot', title: 'Attack on Titan Final', sub: 'Drama · Acción', scores: { MX: 76, CO: 58 }, icon: 'ti-shield' },
+      { key: 'demon', title: 'Demon Slayer', sub: 'Acción · Sobrenatural', scores: { MX: 68, CO: 61 }, icon: 'ti-flame' }
+    ],
+    context: 'En México y Colombia los títulos de acción y aventura dominan las búsquedas. Colombia muestra mayor afinidad con One Piece que México.'
+  },
+  pt: {
+    label: '01 · Região lusófona',
+    title: 'El anime en los países de habla portuguesa',
+    body: 'Brasil es el único país lusófono del análisis y el mayor mercado de anime de América Latina en volumen absoluto.',
+    countries: ['BR'],
+    stats: [
+      { l: 'País', v: 'BR', s: 'Brasil' },
+      { l: 'Score promedio', v: '75', s: 'sobre 100' },
+      { l: 'Título top', v: 'One Piece', s: 'Shounen · Toei' }
+    ],
+    anime: [
+      { key: 'op',    title: 'One Piece', sub: 'Aventura · Shounen', scores: { BR: 85 }, icon: 'ti-anchor' },
+      { key: 'jjk',  title: 'Jujutsu Kaisen S2', sub: 'Acción · Shounen', scores: { BR: 74 }, icon: 'ti-sword' },
+      { key: 'demon',title: 'Demon Slayer', sub: 'Acción · Sobrenatural', scores: { BR: 71 }, icon: 'ti-flame' },
+      { key: 'aot',  title: 'Attack on Titan Final', sub: 'Drama · Acción', scores: { BR: 69 }, icon: 'ti-shield' }
+    ],
+    context: 'Brasil destaca como el único mercado donde One Piece supera a Jujutsu Kaisen. La tradición histórica del Shounen de aventura es muy fuerte.'
+  },
+  en: {
+    label: '01 · Región anglohablante',
+    title: 'El anime en los países de habla inglesa',
+    body: 'Estados Unidos registra los scores más altos de todo el dataset. Canadá sigue de cerca. Ambos mercados se inclinan hacia títulos de acción y ciencia ficción.',
+    countries: ['US', 'CA'],
+    stats: [
+      { l: 'Países', v: 'US · CA', s: 'EE.UU. y Canadá' },
+      { l: 'Score promedio US', v: '86', s: 'sobre 100' },
+      { l: 'Score promedio CA', v: '70', s: 'sobre 100' }
+    ],
+    anime: [
+      { key: 'jjk',  title: 'Jujutsu Kaisen S2', sub: 'Acción · Shounen', scores: { US: 91, CA: 78 }, icon: 'ti-sword' },
+      { key: 'aot',  title: 'Attack on Titan Final', sub: 'Drama · Acción', scores: { US: 88, CA: 71 }, icon: 'ti-shield' },
+      { key: 'demon',title: 'Demon Slayer', sub: 'Acción · Sobrenatural', scores: { US: 84, CA: 59 }, icon: 'ti-flame' },
+      { key: 'op',   title: 'One Piece', sub: 'Aventura · Shounen', scores: { US: 79, CA: 62 }, icon: 'ti-anchor' }
+    ],
+    context: 'EE.UU. y Canadá tienen los scores absolutos más altos del análisis. Jujutsu Kaisen lidera en ambos países con ventaja clara.'
+  }
+};
 
-    <script>
-      const tooltipDefs = {
-        anilist: {
-          title: "AniList",
-          body: "Plataforma de seguimiento de anime y manga con más de 10 millones de usuarios. Permite consultar su base de datos pública vía GraphQL."
-        },
-        graphql: {
-          title: "GraphQL",
-          body: "Lenguaje de consulta para APIs que permite pedir exactamente los campos necesarios, a diferencia de REST que devuelve estructuras fijas."
-        },
-        mal: {
-          title: "MyAnimeList (MAL)",
-          body: "La base de datos de anime más grande del mundo con más de 20 millones de usuarios. Ofrece scores, rankings y estadísticas de audiencia globales."
-        },
-        jikan: {
-          title: "API Jikan",
-          body: "API REST no oficial que expone los datos públicos de MyAnimeList. Su nombre significa 'tiempo' en japonés."
-        },
-        similitud: {
-          title: "Algoritmo de similitud textual",
-          body: "Técnica que compara dos cadenas de texto y devuelve un porcentaje de parecido. Se usó SequenceMatcher de Python con un umbral de 0.75."
-        },
-        consumo: {
-          title: "Datos de consumo por país",
-          body: "Información sobre cuántas personas ven un contenido en un país específico. Ni AniList ni MAL la publican; solo existen como dato interno de plataformas como Netflix o Crunchyroll."
-        }
-      };
+const GENRES = [
+  { key: 'accion',  icon: 'ti-sword',         title: 'Acción',               sub: 'Batallas, poderes, rivalidades',     body: 'El género más consumido en todos los mercados. Concentra los scores de Trends más altos y los títulos con mayor popularidad en AniList.', cluster: 'aventura' },
+  { key: 'romance', icon: 'ti-heart',          title: 'Romance / Slice of life', sub: 'Relaciones, cotidiano, sentimientos', body: 'Audiencias fieles y nichos consolidados. Alta retención en México y Colombia.', cluster: 'romance' },
+  { key: 'fantasia',icon: 'ti-sparkles',       title: 'Fantasía épica',       sub: 'Mundos alternativos, magia, aventura', body: 'Fuertemente ligado al Shounen. Blockbusters de MAPPA y A-1 Pictures dominan con millones de usuarios en AniList.', cluster: 'aventura' },
+  { key: 'drama',   icon: 'ti-mood-confuzed',  title: 'Drama / Suspenso',     sub: 'Psicológico, thriller, misterio',     body: 'Seinen densamente conectado. Menor alcance masivo pero alta fidelidad de audiencia.', cluster: 'drama' },
+  { key: 'horror',  icon: 'ti-ghost',          title: 'Horror / Sobrenatural',sub: 'Terror, fenómenos paranormales',       body: 'Nicho pequeño pero diferenciado. Comunidades especializadas con alta cohesión interna.', cluster: 'horror' },
+  { key: 'scifi',   icon: 'ti-rocket',         title: 'Sci-fi / Mecha',       sub: 'Tecnología, robots, futuro',          body: 'Gran consumo histórico en LATAM. Dragon Ball y sucesores mantienen presencia constante.', cluster: 'shonen' }
+];
 
-      const tooltip = document.getElementById('tooltip-intro');
-      const ttTitle = document.getElementById('tt-title-intro');
-      const ttBody  = document.getElementById('tt-body-intro');
+const CLUSTERS = {
+  romance: {
+    color: '#993556', bg: '#FBEAF0',
+    name: 'Romance y comedia cotidiana', demo: 'Josei / Shoujo', pct: '28%', nodos: '20',
+    body: 'Audiencias fieles y nicho consolidado. Alta retención en México y Colombia. Títulos como Kaguya-sama y Oshi no Ko concentran la mayor parte de los nodos.',
+    tags: ['Josei','Shoujo','Comedia','Slice of life','Kaguya-sama','Oshi no Ko'],
+    timeline: {
+      2023: [{ title: 'Kaguya-sama: Love is War – The First Kiss That Never Ends', sub: 'Josei · A-1 Pictures', score: 82 }, { title: 'Oshi no Ko', sub: 'Drama · Doga Kobo', score: 91 }],
+      2024: [{ title: 'Ao no Hako', sub: 'Romance · Telecom Animation Film', score: 78 }, { title: 'Yuzuki-san Chi no Yonkyoudai', sub: 'Slice of life · SynergySP', score: 64 }],
+      2025: [{ title: 'Sakamoto Days', sub: 'Comedia · TMS', score: 80 }, { title: 'Dandadan S2', sub: 'Comedia sobrenatural · Science SARU', score: 83 }],
+      2026: [{ title: 'Wind Breaker S2', sub: 'Acción · CloverWorks', score: 70 }, { title: 'Oshi no Ko S3', sub: 'Drama · Doga Kobo', score: 88 }]
+    }
+  },
+  aventura: {
+    color: '#185FA5', bg: '#E6F1FB',
+    name: 'Aventura y fantasía épica', demo: 'Shounen · MAPPA, A-1', pct: '24%', nodos: '17',
+    body: 'Mayor visibilidad global. MAPPA y A-1 Pictures producen la mayoría. Los scores de Google Trends más altos en todos los países del análisis.',
+    tags: ['Shounen','Fantasía','Acción','MAPPA','A-1 Pictures','JJK','AOT'],
+    timeline: {
+      2023: [{ title: 'Jujutsu Kaisen Season 2', sub: 'Acción · MAPPA', score: 95 }, { title: 'Attack on Titan: The Final Season Part 3', sub: 'Drama · MAPPA', score: 92 }],
+      2024: [{ title: 'Frieren: Beyond Journey\'s End', sub: 'Fantasía · Madhouse', score: 93 }, { title: 'Dungeon Meshi', sub: 'Fantasía · TRIGGER', score: 89 }],
+      2025: [{ title: 'Jujutsu Kaisen Season 3', sub: 'Acción · MAPPA', score: 91 }, { title: 'Bleach: Thousand-Year Blood War Part 3', sub: 'Acción · Pierrot', score: 87 }],
+      2026: [{ title: 'One Piece – Egghead Arc', sub: 'Aventura · Toei Animation', score: 85 }, { title: 'My Hero Academia: Final Arc', sub: 'Shounen · Bones', score: 80 }]
+    }
+  },
+  drama: {
+    color: '#5F5E5A', bg: '#F1EFE8',
+    name: 'Drama y suspenso psicológico', demo: 'Seinen', pct: '21%', nodos: '15',
+    body: 'Seinen densamente conectado. Valorado por la crítica especializada. Menor alcance masivo pero alta fidelidad de audiencia.',
+    tags: ['Seinen','Thriller','Mystery','Psychological','Vinland Saga'],
+    timeline: {
+      2023: [{ title: 'Vinland Saga Season 2', sub: 'Seinen · MAPPA', score: 90 }, { title: 'Heavenly Delusion', sub: 'Sci-fi · Production I.G', score: 78 }],
+      2024: [{ title: 'Suicide Squad Isekai', sub: 'Acción · WIT Studio', score: 65 }, { title: 'Mushishi Zoku Shou', sub: 'Seinen · Artland', score: 72 }],
+      2025: [{ title: 'Medalist', sub: 'Drama · CloverWorks', score: 81 }, { title: 'Zenshu', sub: 'Slice of life · WIT Studio', score: 74 }],
+      2026: [{ title: 'Monogatari Series: Off & Monster Season', sub: 'Psicológico · Shaft', score: 76 }, { title: 'Attack on Titan rerun especial', sub: 'Drama · MAPPA', score: 88 }]
+    }
+  },
+  shonen: {
+    color: '#0F6E56', bg: '#E1F5EE',
+    name: 'Shonen y sci-fi de gran consumo', demo: 'Blockbusters LATAM', pct: '18%', nodos: '13',
+    body: 'Los blockbusters de la región. Millones de members en AniList. Mayor tracción sostenida en LATAM. One Piece y Dragon Ball encabezan el grupo.',
+    tags: ['Shounen','Sci-fi','Mecha','One Piece','Dragon Ball'],
+    timeline: {
+      2023: [{ title: 'Dragon Ball Super: Super Hero', sub: 'Shounen · Toei Animation', score: 80 }, { title: 'One Piece (cierre Wano)', sub: 'Aventura · Toei Animation', score: 85 }],
+      2024: [{ title: 'Dragon Ball Daima', sub: 'Shounen · Toei Animation', score: 82 }, { title: 'One Piece (inicio Egghead)', sub: 'Aventura · Toei Animation', score: 84 }],
+      2025: [{ title: 'Gundam: Requiem for Vengeance', sub: 'Mecha · Sunrise', score: 71 }, { title: 'Evangelion 3.0+1.11 (streaming global)', sub: 'Mecha · Khara', score: 79 }],
+      2026: [{ title: 'Dragon Ball Daima Part 2', sub: 'Shounen · Toei Animation', score: 83 }, { title: 'Naruto: New Arc', sub: 'Shounen · Pierrot', score: 77 }]
+    }
+  },
+  horror: {
+    color: '#854F0B', bg: '#FAEEDA',
+    name: 'Sobrenatural y horror moderno', demo: 'Nicho · Avant Garde', pct: '8%', nodos: '6',
+    body: 'Cluster periférico pero diferenciado. Incluye Avant Garde y subgéneros de nicho. Pequeño pero densamente interconectado.',
+    tags: ['Horror','Sobrenatural','Avant Garde','Girls Love','Nicho'],
+    timeline: {
+      2023: [{ title: 'Undead Murder Farce', sub: 'Misterio sobrenatural · Lapin Track', score: 68 }, { title: 'Shadows House Season 2', sub: 'Misterio · CloverWorks', score: 72 }],
+      2024: [{ title: 'Alya Sometimes Hides Her Feelings in Russian', sub: 'Romance sobrenatural · Doga Kobo', score: 65 }, { title: 'Dungeon People', sub: 'Fantasía oscura · TMS', score: 60 }],
+      2025: [{ title: 'Re:Zero Season 3 Part 2', sub: 'Fantasía oscura · WIT Studio', score: 81 }, { title: 'Yoru no Kurage wa Oyogenai', sub: 'Slice of life · CloverWorks', score: 63 }],
+      2026: [{ title: 'Made in Abyss Season 3', sub: 'Aventura oscura · Kinema Citrus', score: 86 }, { title: 'Overlord Season 5', sub: 'Fantasía oscura · Madhouse', score: 79 }]
+    }
+  }
+};
 
-      document.querySelectorAll('.term').forEach(el => {
-        el.addEventListener('mouseenter', e => {
-          const d = tooltipDefs[el.dataset.key];
-          if (!d) return;
-          ttTitle.textContent = d.title;
-          ttBody.textContent  = d.body;
-          tooltip.classList.add('activo');
-          positionTooltip(e);
-        });
-        el.addEventListener('mousemove', positionTooltip);
-        el.addEventListener('mouseleave', () => tooltip.classList.remove('activo'));
-      });
+const ORDER = ['aventura','romance','drama','shonen','horror'];
+const YEARS = [2023, 2024, 2025, 2026];
 
-      function positionTooltip(e) {
-        const margin = 14, tw = 280;
-        let x = e.clientX + margin;
-        let y = e.clientY + margin;
-        if (x + tw > window.innerWidth - 8) x = e.clientX - tw - margin;
-        tooltip.style.left = x + 'px';
-        tooltip.style.top  = y + 'px';
-      }
-    </script>
+function buildPips() {
+  const el = document.getElementById('pips'); el.innerHTML = '';
+  for (let i = 0; i < TOTAL; i++) {
+    const d = document.createElement('div');
+    d.className = 'pip' + (i < cur ? ' done' : i === cur ? ' now' : '');
+    el.appendChild(d);
+  }
+}
 
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
+function go(n) {
+  document.getElementById('s' + cur).classList.remove('on');
+  cur = n;
+  document.getElementById('s' + cur).classList.add('on');
+  buildPips();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
-        document.querySelectorAll('.viz-thumb').forEach(img => {
-          img.addEventListener('click', () => {
-            lightboxImg.src = img.src;
-            lightbox.classList.add('activo');
-          });
-        });
+buildPips();
 
-        lightbox.addEventListener('click', () => {
-          lightbox.classList.remove('activo');
-        });
+function pickLang(l) {
+  lang = l;
+  const d = LANGS[l];
+  document.getElementById('s1-label').textContent = d.label;
+  document.getElementById('s1-title').textContent = d.title;
+  document.getElementById('s1-body').textContent  = d.body;
+  document.getElementById('s1-stats').innerHTML = d.stats.map(s =>
+    `<div class="stat"><div class="slb">${s.l}</div><div class="sval">${s.v}</div><div class="ssub">${s.s}</div></div>`
+  ).join('');
+  document.getElementById('s1-anime').innerHTML = d.anime.map(a =>
+    `<button class="cb" onclick="showAnime('${a.key}')">
+      <div class="cicon" style="background:var(--bluel);color:var(--blue)"><i class="ti ${a.icon}"></i></div>
+      <div class="ctxt"><div class="ctit">${a.title}</div><div class="csub">${a.sub}</div></div>
+      <i class="ti ti-chevron-right carr"></i>
+    </button>`
+  ).join('');
+  document.getElementById('s2-genres').innerHTML = GENRES.map(g =>
+    `<button class="cb" onclick="pickGenre('${g.key}')">
+      <div class="cicon"><i class="ti ${g.icon}"></i></div>
+      <div class="ctxt"><div class="ctit">${g.title}</div><div class="csub">${g.sub}</div></div>
+      <i class="ti ti-chevron-right carr"></i>
+    </button>`
+  ).join('');
+  document.getElementById('s1-panel').style.display = 'none';
+  document.getElementById('s1-next').disabled = true;
+  go(1);
+}
 
-        document.addEventListener('keydown', e => {
-          if (e.key === 'Escape') lightbox.classList.remove('activo');
-        });
-      });
-    </script>
-  </body>
+function showAnime(key) {
+  const d = LANGS[lang];
+  const a = d.anime.find(x => x.key === key);
+  const bars = Object.entries(a.scores).map(([c, v]) =>
+    `<div class="tbar-row">
+      <span class="tbar-lbl">${c}</span>
+      <div class="tbar-track"><div class="tbar-fill" data-w="${v}"></div></div>
+      <span class="tbar-num">${v}</span>
+    </div>`
+  ).join('');
+  const panel = document.getElementById('s1-panel');
+  panel.innerHTML = `<div class="icard">
+    <p class="ilabel">Google Trends 2023–2026 · Promedio del período</p>
+    <p class="ititl">${a.title}</p>
+    <div style="margin-top:.85rem">${bars}</div>
+    <p style="font-size:12px;color:var(--m);margin-top:.85rem">Score relativo 0–100. El 100 es el pico máximo del grupo.</p>
+    <p style="font-size:13px;color:var(--m);margin-top:.75rem;line-height:1.6">${d.context}</p>
+  </div>`;
+  panel.style.display = 'block';
+  requestAnimationFrame(() => {
+    panel.querySelectorAll('.tbar-fill').forEach(el => { el.style.width = el.dataset.w + '%'; });
+  });
+  document.getElementById('s1-next').disabled = false;
+}
+
+function pickGenre(k) {
+  genre = k;
+  const g = GENRES.find(x => x.key === k);
+  document.querySelectorAll('#s2-genres .cb').forEach(b => {
+    b.classList.toggle('sel', b.getAttribute('onclick').includes("'" + k + "'"));
+  });
+  const panel = document.getElementById('s2-panel');
+  panel.innerHTML = `<div class="icard"><p class="ilabel">¿Por qué este género?</p><p class="ibody">${g.body}</p></div>`;
+  panel.style.display = 'block';
+  document.getElementById('s2-next').disabled = false;
+  buildClusters(g.cluster);
+}
+
+function buildClusters(main) {
+  const ld = LANGS[lang];
+  document.getElementById('s3-title').textContent = 'Los 5 clusters en ' + ld.countries.join(' y ');
+  document.getElementById('s3-clusters').innerHTML = ORDER.map(k => {
+    const c = CLUSTERS[k]; const isMain = k === main;
+    return `<div class="cl-row" style="${isMain ? 'border-color:' + c.color + ';background:' + c.bg + ';' : ''}" onclick="showCluster('${k}')">
+      <div class="cl-dot" style="background:${c.color}"></div>
+      <div class="cl-info">
+        <div class="cl-name">${c.name}${isMain ? ` <span style="font-size:11px;color:${c.color};margin-left:6px">← tu género</span>` : ''}</div>
+        <div class="cl-sub">${c.demo} · ${c.nodos} nodos</div>
+      </div>
+      <div class="cl-pct">${c.pct}</div>
+    </div>`;
+  }).join('');
+  buildResult(main);
+}
+
+function showCluster(k) {
+  const c = CLUSTERS[k];
+  document.getElementById('s3-det-label').textContent = c.pct + ' del corpus · ' + c.nodos + ' nodos';
+  document.getElementById('s3-det-title').textContent = c.name;
+  document.getElementById('s3-det-body').textContent  = c.body;
+  document.getElementById('s3-det-tags').innerHTML = c.tags.map(t =>
+    `<span class="tag" style="background:${c.bg};color:${c.color}">${t}</span>`
+  ).join('');
+  document.getElementById('s3-detail').style.display = 'block';
+}
+
+function buildResult(main) {
+  const c = CLUSTERS[main]; const ld = LANGS[lang];
+  document.getElementById('r-title').textContent  = 'Cluster: ' + c.name;
+  document.getElementById('r-body').textContent   = 'Según tu lengua materna y género favorito, este es el cluster que mejor describe tu perfil de consumo.';
+  document.getElementById('r-finding').textContent = c.name + ' en ' + ld.countries.join(' y ');
+  document.getElementById('r-detail').textContent  = c.body;
+  document.getElementById('r-tags').innerHTML = c.tags.map(t =>
+    `<span class="tag" style="background:${c.bg};color:${c.color}">${t}</span>`
+  ).join('');
+  document.getElementById('r-timeline').innerHTML = YEARS.map(yr => {
+    const animes = c.timeline[yr] || [];
+    const cards = animes.map(a =>
+      `<div class="anime-card">
+        <div class="anime-card-title">${a.title}</div>
+        <div class="anime-card-sub">${a.sub}</div>
+        <div class="anime-card-score">
+          <div class="score-dot" style="background:${c.color}"></div>
+          <span style="font-size:11px;color:var(--m)">Trends score: <strong style="color:var(--t)">${a.score}</strong></span>
+        </div>
+      </div>`
+    ).join('');
+    return `<div class="yr-block">
+      <div class="yr-head">
+        <span class="yr-pill" style="background:${c.bg};color:${c.color}">${yr}</span>
+        <div class="yr-line"></div>
+      </div>
+      <div class="anime-grid">${cards}</div>
+    </div>`;
+  }).join('');
+}
+
+function resetAll() {
+  lang = ''; genre = ''; cur = 0;
+  document.getElementById('s1-next').disabled = true;
+  document.getElementById('s2-next').disabled = true;
+  document.getElementById('s1-panel').style.display = 'none';
+  document.getElementById('s2-panel').style.display = 'none';
+  document.getElementById('s3-detail').style.display = 'none';
+  document.querySelectorAll('.cb').forEach(b => b.classList.remove('sel'));
+  buildPips();
+  go(0);
+}
+</script>
+</body>
 </html>

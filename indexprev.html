@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Análisis de la relación países latinoamericanos y preferencias de géneros del anime contemporáneo (2022–2026)</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+      #lightbox {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(12, 22, 28, 0.92);
+        z-index: 999;
+        cursor: zoom-out;
+        place-items: center;
+      }
+      #lightbox.activo { display: grid; }
+      #lightbox-img {
+        max-width: 94vw;
+        max-height: 92vh;
+        object-fit: contain;
+        border-radius: 4px;
+      }
+      .figuras-hallazgo { display: flex; flex-direction: column; gap: 2rem; }
+      .viz-thumb {
+        width: 100%;
+        display: block;
+        cursor: zoom-in;
+        border: 1px solid var(--linea);
+        border-radius: 6px;
+        transition: opacity 0.2s;
+      }
+      .viz-thumb:hover { opacity: 0.85; }
+      .texto.texto-intro { max-width: 100%; }
+      .term {
+        border-bottom: 1.5px dashed currentColor;
+        cursor: help;
+        opacity: 0.85;
+      }
+      .term:hover { opacity: 1; text-decoration: none; }
+      #tooltip-intro {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        background: var(--fondo, #fff);
+        border: 0.5px solid var(--linea, #ccc);
+        border-radius: 8px;
+        padding: 10px 14px;
+        max-width: 280px;
+        pointer-events: none;
+      }
+      #tooltip-intro.activo { display: block; }
+      #tooltip-intro .tt-title { font-size: 13px; font-weight: 600; margin: 0 0 4px; }
+      #tooltip-intro .tt-body { font-size: 12px; opacity: 0.75; margin: 0; line-height: 1.5; }
+      .red-row { transition: opacity 0.5s ease, transform 0.5s ease; }
+      .red-seccion { padding: 2rem 0 1rem; }
+      .red-titulo { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 0.5rem; }
+      .red-bajada { font-size: 15px; color: var(--muted); margin: 0 0 1.5rem; line-height: 1.6; }
+      .red-bajada strong { color: var(--texto); font-weight: 500; }
+      .metricas-red { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 1.5rem; }
+      .metrica-red { background: var(--panel); border-radius: 10px; padding: 1rem 1.25rem; }
+      .metrica-red-label { font-size: 12px; color: var(--muted); margin: 0 0 6px; }
+      .metrica-red-valor { font-size: 32px; font-weight: 500; color: var(--texto); margin: 0; line-height: 1; }
+      .metrica-red-sub { font-size: 12px; color: var(--muted); margin: 4px 0 0; }
+      .red-tabla { width: 100%; border-collapse: collapse; }
+      .red-tabla thead th { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); text-align: left; padding: 0 1rem 0.6rem; border-bottom: 0.5px solid var(--linea); }
+      .red-tabla thead th:nth-child(2) { text-align: center; }
+      .red-fila { transition: opacity 0.45s ease, transform 0.45s ease; }
+      .red-fila td { padding: 0.85rem 1rem; border-bottom: 0.5px solid var(--linea); font-size: 14px; color: var(--texto); vertical-align: middle; }
+      .red-fila td:nth-child(2) { text-align: center; }
+      .red-fila:last-child td { border-bottom: none; }
+      .tipo-badge { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; }
+      .tipo-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+      .tipo-desc { font-size: 13px; color: var(--muted); }
+      .cant-num { font-size: 18px; font-weight: 500; }
+      .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; margin-top: 1.5rem; }
+      .tab-nav { display: flex; flex-direction: column; gap: 4px; margin-bottom: 1.25rem; }
+      .tab-btn { display: flex; align-items: center; gap: 10px; background: none; border: none; cursor: pointer; padding: 0.6rem 0.75rem; border-radius: 8px; text-align: left; width: 100%; transition: background 0.15s; }
+      .tab-btn:hover { background: var(--panel); }
+      .tab-btn.activo { background: var(--panel); }
+      .tab-btn.activo .tab-indicador { opacity: 1; }
+      .tab-indicador { width: 3px; height: 32px; border-radius: 2px; background: var(--texto); opacity: 0.15; flex-shrink: 0; transition: opacity 0.2s; }
+      .tab-label-wrap { display: flex; flex-direction: column; gap: 2px; }
+      .tab-etiqueta { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+      .tab-titulo { font-size: 14px; font-weight: 500; color: var(--texto); text-align: left; }
+      .tab-contenido { display: none; }
+      .tab-contenido.visible { display: block; animation: tabFadeIn 0.25s ease; }
+      @keyframes tabFadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+      .bloque-texto { font-size: 19px; line-height: 1.6; color: var(--texto); margin: 0; }
+      .leyenda-trends { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 1.25rem 0 1.5rem; }
+      .ley-card { background: var(--panel); border: 0.5px solid var(--linea); border-radius: 8px; padding: 0.85rem 1rem; display: flex; flex-direction: column; gap: 6px; }
+      .ley-icon { font-size: 16px; color: var(--muted); font-weight: 700; }
+      .ley-titulo { font-size: 12px; font-weight: 700; color: var(--texto); margin: 0; }
+      .ley-desc { font-size: 12px; color: var(--muted); margin: 0; line-height: 1.4; }
+      .score-demo { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
+      .score-bar { height: 10px; border-radius: 2px; background: var(--acento); opacity: 0.7; }
+      .score-num { font-size: 13px; font-weight: 700; color: var(--texto); }
+      .dash-demo { font-size: 18px; color: var(--linea); font-weight: 700; margin-top: 4px; display: block; }
+      .rango { display: flex; align-items: center; gap: 4px; margin-top: 4px; }
+      .rango-bar-lo { width: 8px; height: 10px; border-radius: 2px; background: var(--acento-2); opacity: 0.3; }
+      .rango-bar-hi { width: 36px; height: 10px; border-radius: 2px; background: var(--acento-2); opacity: 0.85; }
+      .rango-label { font-size: 11px; color: var(--muted); }
+    </style>
+  </head>
+  <body>
+    <header class="hero">
+      <div class="hero-texto">
+        <p class="serie">Proyecto de visualización de datos</p>
+        <h1>Anime y Latinoamérica: géneros y preferencias (2022–2026)</h1>
+        <p class="meta">Natalia Rocha · natalia.rocha@tec.mx · 29 de abril 2026</p>
+        <p class="entradilla">
+          El anime ya no es un mercado uniforme. La diversificación de géneros y la especialización de estudios han redefinido su consumo global — y Latinoamérica no es la excepción.
+        </p>
+        <p class="entradilla">
+          Este proyecto analiza las preferencias de anime en México, Argentina, Brasil, Colombia y Chile usando datos de AniList, MyAnimeList y Google Trends, con el fin de identificar patrones de consumo y su impacto cultural en la región.
+        </p>
+      </div>
+    </header>
+
+    <main>
+      <article>
+
+        <section class="texto texto-intro">
+          <h2>Introducción</h2>
+
+          <div class="intro-grid">
+            <div>
+              <nav class="tab-nav" role="tablist">
+                <button class="tab-btn activo" role="tab" data-tab="fuentes">
+                  <span class="tab-indicador"></span>
+                  <span class="tab-label-wrap">
+                    <span class="tab-etiqueta">01 · Fuentes de datos</span>
+                    <span class="tab-titulo">¿De dónde vienen los datos?</span>
+                  </span>
+                </button>
+                <button class="tab-btn" role="tab" data-tab="metodo">
+                  <span class="tab-indicador"></span>
+                  <span class="tab-label-wrap">
+                    <span class="tab-etiqueta">02 · Método de cruce</span>
+                    <span class="tab-titulo">¿Cómo se emparejaron los títulos?</span>
+                  </span>
+                </button>
+                <button class="tab-btn" role="tab" data-tab="limitante">
+                  <span class="tab-indicador"></span>
+                  <span class="tab-label-wrap">
+                    <span class="tab-etiqueta">03 · Limitante clave</span>
+                    <span class="tab-titulo">¿Qué no puede decir este análisis?</span>
+                  </span>
+                </button>
+              </nav>
+
+              <div id="tab-fuentes" class="tab-contenido visible">
+                <p class="bloque-texto">Se cruzaron dos plataformas: <span class="term" data-key="anilist">AniList</span> vía <span class="term" data-key="graphql">GraphQL</span> y <span class="term" data-key="mal">MyAnimeList</span> vía <span class="term" data-key="jikan">API Jikan</span>. De cada una, las 70 series más populares a nivel global.</p>
+              </div>
+              <div id="tab-metodo" class="tab-contenido">
+                <p class="bloque-texto">Los títulos se emparejaron con un <span class="term" data-key="similitud">algoritmo de similitud textual</span>. Útil cuando una misma serie tiene nombres distintos en cada base, como "Shingeki no Kyojin" y "Attack on Titan".</p>
+              </div>
+              <div id="tab-limitante" class="tab-contenido">
+                <p class="bloque-texto">Ninguna plataforma publica <span class="term" data-key="consumo">datos de consumo por país</span>. Este análisis refleja el interés de las dos comunidades de seguimiento de anime más grandes del mundo, no cifras oficiales de audiencia regional.</p>
+              </div>
+            </div>
+
+            <iframe
+              src="https://graphcommons.com/graphs/35a53294-5f09-40ff-be3c-08b1b3df6fc3"
+              width="100%"
+              height="480"
+              frameborder="0"
+              style="border-radius: 10px; border: 0.5px solid var(--linea);">
+            </iframe>
+          </div>
+
+          <div id="tooltip-intro">
+            <p class="tt-title" id="tt-title-intro"></p>
+            <p class="tt-body" id="tt-body-intro"></p>
+          </div>
+
+          <div class="red-seccion">
+            <p class="red-titulo">Estructura de la red</p>
+            <p class="red-bajada">La red está compuesta por <strong><span id="p-nodos">0</span> nodos</strong> y <strong><span id="p-edges">0</span> edges</strong> distribuidos en tres tipos de entidades.</p>
+
+            <div class="metricas-red">
+              <div class="metrica-red">
+                <p class="metrica-red-label">Total de nodos</p>
+                <p class="metrica-red-valor" id="m-nodos">0</p>
+                <p class="metrica-red-sub">nodos en la red</p>
+              </div>
+              <div class="metrica-red">
+                <p class="metrica-red-label">Conexiones</p>
+                <p class="metrica-red-valor" id="m-edges">0</p>
+                <p class="metrica-red-sub">edges totales</p>
+              </div>
+              <div class="metrica-red">
+                <p class="metrica-red-label">Tipos de entidad</p>
+                <p class="metrica-red-valor">3</p>
+                <p class="metrica-red-sub">anime · género · país</p>
+              </div>
+            </div>
+
+            <table class="red-tabla">
+              <thead>
+                <tr>
+                  <th>Tipo</th>
+                  <th>Cantidad</th>
+                  <th>Descripción</th>
+                </tr>
+              </thead>
+              <tbody id="red-tbody">
+                <tr class="red-fila" style="opacity:0; transform:translateY(10px);">
+                  <td><span class="tipo-badge"><span class="tipo-dot" style="background:#D4537E;"></span>Anime</span></td>
+                  <td><span class="cant-num" data-target="50">0</span></td>
+                  <td class="tipo-desc">Título de la serie de anime</td>
+                </tr>
+                <tr class="red-fila" style="opacity:0; transform:translateY(10px);">
+                  <td><span class="tipo-badge"><span class="tipo-dot" style="background:#378ADD;"></span>Género</span></td>
+                  <td><span class="cant-num" data-target="16">0</span></td>
+                  <td class="tipo-desc">Categoría narrativa o temática de la serie</td>
+                </tr>
+                <tr class="red-fila" style="opacity:0; transform:translateY(10px);">
+                  <td><span class="tipo-badge"><span class="tipo-dot" style="background:#1D9E75;"></span>País</span></td>
+                  <td><span class="cant-num" data-target="5">0</span></td>
+                  <td class="tipo-desc">País latinoamericano</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="modulo">
+          <h2>¿Qué tan populares son estas series en Latinoamérica?</h2>
+
+          <div class="leyenda-trends">
+            <div class="ley-card">
+              <span class="ley-icon">0 – 100</span>
+              <p class="ley-titulo">¿Qué mide el score?</p>
+              <p class="ley-desc">Interés de búsqueda en Google Trends. El 100 es el pico máximo del grupo, no un volumen absoluto.</p>
+              <div class="score-demo">
+                <div class="score-bar" style="width:38px;"></div>
+                <span class="score-num">38</span>
+              </div>
+            </div>
+            <div class="ley-card">
+              <span class="ley-icon">—</span>
+              <p class="ley-titulo">¿Qué significa —?</p>
+              <p class="ley-desc">Google Trends no tuvo datos suficientes para ese par anime-país. No implica que nadie lo vea ahí.</p>
+              <span class="dash-demo">—</span>
+            </div>
+            <div class="ley-card">
+              <span class="ley-icon">2022 → 2026</span>
+              <p class="ley-titulo">Período cubierto</p>
+              <p class="ley-desc">Datos de México, Argentina, Brasil, Colombia y Chile durante cuatro años.</p>
+              <div class="rango">
+                <span class="rango-label">2022</span>
+                <div class="rango-bar-lo"></div>
+                <div class="rango-bar-hi"></div>
+                <span class="rango-label">2026</span>
+              </div>
+            </div>
+          </div>
+
+          <figure>
+            <iframe
+              src="tabla1_interactiva.html"
+              width="100%"
+              height="620"
+              style="border:none; border-radius:6px;">
+            </iframe>
+            <figcaption>Fuente: AniList, Jikan y Google Trends al 6 de mayo 2026.</figcaption>
+          </figure>
+        </section>
+
+        <section class="modulo">
+          <div>
+            <p class="etiqueta">Importante</p>
+            <h2>Clustering por géneros consumidos en México, Argentina, Brasil, Colombia y Chile</h2>
+            <p>
+              Para identificar patrones de consumo y producción, se aplicó el algoritmo de clustering Louvain a la red bipartita de anime y géneros. 
+              El resultado fue la identificación de cinco clusters temáticos que agrupan series de anime con géneros y países asociados, revelando tendencias narrativas y de mercado diversas dentro del corpus analizado.
+            </p>
+          </div>
+
+          <div style="margin-top: 2rem; display: grid; gap: 1px; border: 0.5px solid var(--linea); border-radius: 8px; overflow: hidden;">
+            <div style="display: grid; grid-template-columns: 1fr auto; align-items: center; padding: 0.75rem 1.25rem; background: #f5ede8;">
+              <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);">Clustering · 5 grupos · 71 nodos</span>
+              <span style="font-size: 11px; color: var(--muted);">% del corpus</span>
+            </div>
+            <div style="display: grid; grid-template-columns: 14px 1fr auto; align-items: center; gap: 16px; padding: 1rem 1.25rem; background: #f0e8e5; border-top: 0.5px solid var(--linea);">
+              <div style="width: 14px; height: 14px; border-radius: 50%; background: #D4537E;"></div>
+              <div>
+                <p style="margin: 0; font-size: 15px; font-weight: 500;">Romance y comedia cotidiana</p>
+                <p style="margin: 0.2rem 0 0; font-size: 13px; color: var(--muted);">Josei / Shoujo · audiencias fieles, nicho consolidado</p>
+              </div>
+              <div style="text-align: right;">
+                <p style="margin: 0; font-size: 15px; font-weight: 500;">28%</p>
+                <p style="margin: 0; font-size: 12px; color: var(--muted);">20 nodos</p>
+              </div>
+            </div>
+            <div style="display: grid; grid-template-columns: 14px 1fr auto; align-items: center; gap: 16px; padding: 1rem 1.25rem; background: #f0e8e5; border-top: 0.5px solid var(--linea);">
+              <div style="width: 14px; height: 14px; border-radius: 50%; background: #378ADD;"></div>
+              <div>
+                <p style="margin: 0; font-size: 15px; font-weight: 500;">Aventura y fantasía épica</p>
+                <p style="margin: 0.2rem 0 0; font-size: 13px; color: var(--muted);">Shounen · MAPPA, A-1 Pictures · scores altos en MAL</p>
+              </div>
+              <div style="text-align: right;">
+                <p style="margin: 0; font-size: 15px; font-weight: 500;">24%</p>
+                <p style="margin: 0; font-size: 12px; color: var(--muted);">17 nodos</p>
+              </div>
+            </div>
+            <div style="display: grid; grid-template-columns: 14px 1fr auto; align-items: center; gap: 16px; padding: 1rem 1.25rem; background: #f0e8e5; border-top: 0.5px solid var(--linea);">
+              <div style="width: 14px; height: 14px; border-radius: 50%; background: #888780;"></div>
+              <div>
+                <p style="margin: 0; font-size: 15px; font-weight: 500;">Drama y suspenso psicológico</p>
+                <p style="margin: 0.2rem 0 0; font-size: 13px; color: var(--muted);">Seinen · densamente conectado · crítica especializada</p>
+              </div>
+              <div style="text-align: right;">
+                <p style="margin: 0; font-size: 15px; font-weight: 500;">21%</p>
+                <p style="margin: 0; font-size: 12px; color: var(--muted);">15 nodos</p>
+              </div>
+            </div>
+            <div style="display: grid; grid-template-columns: 14px 1fr auto; align-items: center; gap: 16px; padding: 1rem 1.25rem; background: #f0e8e5; border-top: 0.5px solid var(--linea);">
+              <div style="width: 14px; height: 14px; border-radius: 50%; background: #1D9E75;"></div>
+              <div>
+                <p style="margin: 0; font-size: 15px; font-weight: 500;">Shonen y sci-fi de gran consumo</p>
+                <p style="margin: 0.2rem 0 0; font-size: 13px; color: var(--muted);">Blockbusters · millones de members · mayor tracción LATAM</p>
+              </div>
+              <div style="text-align: right;">
+                <p style="margin: 0; font-size: 15px; font-weight: 500;">18%</p>
+                <p style="margin: 0; font-size: 12px; color: var(--muted);">13 nodos</p>
+              </div>
+            </div>
+            <div style="display: grid; grid-template-columns: 14px 1fr auto; align-items: center; gap: 16px; padding: 1rem 1.25rem; background: #f0e8e5; border-top: 0.5px solid var(--linea);">
+              <div style="width: 14px; height: 14px; border-radius: 50%; background: #EF9F27;"></div>
+              <div>
+                <p style="margin: 0; font-size: 15px; font-weight: 500;">Sobrenatural y horror moderno</p>
+                <p style="margin: 0.2rem 0 0; font-size: 13px; color: var(--muted);">Periférico · Avant Garde, Girls Love · nicho pequeño</p>
+              </div>
+              <div style="text-align: right;">
+                <p style="margin: 0; font-size: 15px; font-weight: 500;">8%</p>
+                <p style="margin: 0; font-size: 12px; color: var(--muted);">6 nodos</p>
+              </div>
+            </div>
+            <div style="padding: 1rem 1.25rem; background: #f5ede8; border-top: 0.5px solid var(--linea);">
+              <p style="margin: 0; font-size: 13px; color: var(--muted); line-height: 1.6;">
+                La red no está dominada por un solo género: cinco clusters relativamente equilibrados apuntan a una industria diversificada. Sin embargo, Romance + Aventura suman el <strong style="color: var(--texto);">52%</strong> — la mitad del corpus sigue dos ejes narrativos tradicionales.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="modulo modulo-doble invertido modulo-bubble">
+          <figure class="figura-bubble">
+            <iframe
+              src="bubble1.html"
+              width="100%"
+              height="560"
+              style="border:none; border-radius:6px;">
+            </iframe>
+            <figcaption>Fuente: AniList, Jikan y Google Trends al 6 de mayo 2026.</figcaption>
+          </figure>
+          <div>
+            <p class="etiqueta">Hallazgo 2</p>
+            <h2>¿Qué le gusta a los espectadores latinos?</h2>
+            <p>XXXXXXX</p>
+          </div>
+        </section>
+
+        <section class="texto cierre">
+          <h2>Cierre</h2>
+          <p>
+            XXXXXXXX
+          </p>
+        </section>
+
+      </article>
+    </main>
+
+    <div id="lightbox">
+      <img id="lightbox-img" src="" alt="">
+    </div>
+
+    <script>
+      function animateCount(el, target, duration) {
+        const start = performance.now();
+        function step(now) {
+          const progress = Math.min((now - start) / duration, 1);
+          const ease = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.round(ease * target);
+          if (progress < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+
+      function runRedAnimation() {
+        animateCount(document.getElementById('p-nodos'), 71, 900);
+        animateCount(document.getElementById('p-edges'), 246, 900);
+        animateCount(document.getElementById('m-nodos'), 71, 900);
+        animateCount(document.getElementById('m-edges'), 246, 900);
+        document.querySelectorAll('.red-fila').forEach((row, i) => {
+          setTimeout(() => {
+            row.style.opacity = '1';
+            row.style.transform = 'translateY(0)';
+            row.querySelectorAll('.cant-num').forEach(el => {
+              animateCount(el, parseInt(el.dataset.target), 700);
+            });
+          }, i * 180);
+        });
+      }
+
+      function resetRedAnimation() {
+        ['p-nodos','p-edges','m-nodos','m-edges'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.textContent = '0';
+        });
+        document.querySelectorAll('.red-fila').forEach(row => {
+          row.style.opacity = '0';
+          row.style.transform = 'translateY(10px)';
+          row.querySelectorAll('.cant-num').forEach(el => el.textContent = '0');
+        });
+      }
+
+      function initRedObserver() {
+        const tbody = document.getElementById('red-tbody');
+        if (!tbody) return;
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) runRedAnimation();
+            else resetRedAnimation();
+          });
+        }, { threshold: 0.3 });
+        observer.observe(tbody);
+      }
+
+      document.addEventListener('DOMContentLoaded', initRedObserver);
+    </script>
+
+    <script>
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('activo'));
+          document.querySelectorAll('.tab-contenido').forEach(c => c.classList.remove('visible'));
+          btn.classList.add('activo');
+          document.getElementById('tab-' + btn.dataset.tab).classList.add('visible');
+        });
+      });
+    </script>
+
+    <script>
+      const tooltipDefs = {
+        anilist: {
+          title: "AniList",
+          body: "Plataforma de seguimiento de anime y manga con más de 10 millones de usuarios. Permite consultar su base de datos pública vía GraphQL."
+        },
+        graphql: {
+          title: "GraphQL",
+          body: "Lenguaje de consulta para APIs que permite pedir exactamente los campos necesarios, a diferencia de REST que devuelve estructuras fijas."
+        },
+        mal: {
+          title: "MyAnimeList (MAL)",
+          body: "La base de datos de anime más grande del mundo con más de 20 millones de usuarios. Ofrece scores, rankings y estadísticas de audiencia globales."
+        },
+        jikan: {
+          title: "API Jikan",
+          body: "API REST no oficial que expone los datos públicos de MyAnimeList. Su nombre significa 'tiempo' en japonés."
+        },
+        similitud: {
+          title: "Algoritmo de similitud textual",
+          body: "Técnica que compara dos cadenas de texto y devuelve un porcentaje de parecido. Se usó SequenceMatcher de Python con un umbral de 0.75."
+        },
+        consumo: {
+          title: "Datos de consumo por país",
+          body: "Información sobre cuántas personas ven un contenido en un país específico. Ni AniList ni MAL la publican; solo existen como dato interno de plataformas como Netflix o Crunchyroll."
+        }
+      };
+
+      const tooltip = document.getElementById('tooltip-intro');
+      const ttTitle = document.getElementById('tt-title-intro');
+      const ttBody  = document.getElementById('tt-body-intro');
+
+      document.querySelectorAll('.term').forEach(el => {
+        el.addEventListener('mouseenter', e => {
+          const d = tooltipDefs[el.dataset.key];
+          if (!d) return;
+          ttTitle.textContent = d.title;
+          ttBody.textContent  = d.body;
+          tooltip.classList.add('activo');
+          positionTooltip(e);
+        });
+        el.addEventListener('mousemove', positionTooltip);
+        el.addEventListener('mouseleave', () => tooltip.classList.remove('activo'));
+      });
+
+      function positionTooltip(e) {
+        const margin = 14, tw = 280;
+        let x = e.clientX + margin;
+        let y = e.clientY + margin;
+        if (x + tw > window.innerWidth - 8) x = e.clientX - tw - margin;
+        tooltip.style.left = x + 'px';
+        tooltip.style.top  = y + 'px';
+      }
+    </script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+
+        document.querySelectorAll('.viz-thumb').forEach(img => {
+          img.addEventListener('click', () => {
+            lightboxImg.src = img.src;
+            lightbox.classList.add('activo');
+          });
+        });
+
+        lightbox.addEventListener('click', () => {
+          lightbox.classList.remove('activo');
+        });
+
+        document.addEventListener('keydown', e => {
+          if (e.key === 'Escape') lightbox.classList.remove('activo');
+        });
+      });
+    </script>
+  </body>
+</html>
