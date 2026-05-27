@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Anime y Latinoamérica · Recorrido interactivo</title>
+<title>El anime tiene acento. ¿Cuál es el tuyo?</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -195,7 +195,7 @@
 <body>
 
 <header class="page-header">
-  <span class="page-header-title">Anime y Latinoamérica</span>
+  <span class="page-header-title">El anime tiene acento. ¿Cuál es el tuyo?</span>
   <span class="page-header-sub">Géneros y preferencias · 2023–2026</span>
 </header>
 
@@ -204,8 +204,8 @@
 
   <div class="screen on" id="s0">
     <p class="slabel">Bienvenida</p>
-    <p class="stitle">¿Cuál es tu lengua materna?</p>
-    <p class="sbody">Según tu respuesta, veremos qué consume el anime en los países que hablan ese idioma.</p>
+    <p class="stitle">El anime tiene acento. ¿Cuál es el tuyo?</p>
+    <p class="sbody">Según tu lengua materna, veremos qué consume el anime en los países que hablan ese idioma — y si tus géneros favoritos coinciden con tu región.</p>
     <div class="choices">
       <button class="cb" onclick="pickLang('es')">
         <div class="cicon"><i class="ti ti-language"></i></div>
@@ -584,6 +584,15 @@ function resetAll() {
   document.getElementById('s1-panel').style.display = 'none';
   document.getElementById('s2-panel').style.display = 'none';
   document.getElementById('s3-detail').style.display = 'none';
+  document.getElementById('s1-stats').innerHTML = '';
+  document.getElementById('s1-anime').innerHTML = '';
+  document.getElementById('s2-genres').innerHTML = '';
+  document.getElementById('s3-clusters').innerHTML = '';
+  document.getElementById('r-timeline').innerHTML = '';
+  ['s1-label','s1-title','s1-body','s3-title','r-title','r-body','r-finding','r-detail'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.textContent = '';
+  });
+  document.getElementById('r-tags').innerHTML = '';
   document.querySelectorAll('.cb').forEach(b => b.classList.remove('sel'));
   buildPips();
   go(0);
