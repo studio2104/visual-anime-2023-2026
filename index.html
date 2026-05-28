@@ -14,16 +14,8 @@
     --c-card-1:#E6D9D6; --c-card-2:#BB946E; --c-card-3:#8AADDC;
   }
   body { background:var(--c-bg); color:var(--c-texto); transition:background .5s,color .5s; }
-  body.tema-pt {
-    --c-bg:#f7faf8; --c-panel:#d6ede5; --c-texto:#085041; --c-muted:#1D9E75;
-    --c-linea:rgba(93,202,165,0.3); --c-acento:#085041; --c-hover:#c4e8dc;
-    --c-card-1:#d6ede5; --c-card-2:#1D9E75; --c-card-3:#5DCAA5;
-  }
-  body.tema-en {
-    --c-bg:#f7f9fc; --c-panel:#d8e8f5; --c-texto:#0C447C; --c-muted:#378ADD;
-    --c-linea:rgba(133,183,235,0.3); --c-acento:#0C447C; --c-hover:#c5ddf2;
-    --c-card-1:#d8e8f5; --c-card-2:#378ADD; --c-card-3:#85B7EB;
-  }
+  body.tema-pt { --c-bg:#f7faf8; --c-panel:#d6ede5; --c-texto:#085041; --c-muted:#1D9E75; --c-linea:rgba(93,202,165,0.3); --c-acento:#085041; --c-hover:#c4e8dc; --c-card-1:#d6ede5; --c-card-2:#1D9E75; --c-card-3:#5DCAA5; }
+  body.tema-en { --c-bg:#f7f9fc; --c-panel:#d8e8f5; --c-texto:#0C447C; --c-muted:#378ADD; --c-linea:rgba(133,183,235,0.3); --c-acento:#0C447C; --c-hover:#c5ddf2; --c-card-1:#d8e8f5; --c-card-2:#378ADD; --c-card-3:#85B7EB; }
   .hero { min-height:52vh !important; background-size:55% auto !important; background-position:right center !important; }
   .pips { display:flex; gap:5px; margin:2.5rem max(1.25rem,8vw) 0; }
   .pip  { flex:1; height:2px; background:var(--c-acento); opacity:.18; transition:opacity .4s,background .5s; }
@@ -35,15 +27,10 @@
   .stitle { font-family:"Lucida Console","Courier New",monospace; font-size:clamp(2rem,4vw,3.4rem); font-weight:normal; color:var(--c-texto); line-height:1.05; margin-bottom:.85rem; transition:color .5s; }
   .sbody  { font-size:1.1rem; color:var(--c-texto); opacity:.78; line-height:1.8; margin-bottom:1.75rem; transition:color .5s; }
   .choices { display:flex; flex-direction:column; gap:0; margin-bottom:1.25rem; }
-  .cb {
-    display:flex; align-items:center; gap:16px; padding:1rem 1.25rem;
-    background:transparent; border:none; border-bottom:1px solid var(--c-linea);
-    cursor:pointer; text-align:left; width:100%; font-family:inherit;
-    transition:background .18s,transform .15s;
-  }
+  .cb { display:flex; align-items:center; gap:16px; padding:1rem 1.25rem; background:transparent; border:none; border-bottom:1px solid var(--c-linea); cursor:pointer; text-align:left; width:100%; font-family:inherit; transition:background .18s,transform .15s; }
   .cb:first-child { border-top:1px solid var(--c-linea); }
   .cb:hover { background:var(--c-hover); transform:translateX(4px); }
-  .cb.sel   { background:var(--c-panel); }
+  .cb.sel { background:var(--c-panel); }
   .cb.sel .carr { color:var(--c-acento); }
   .cicon { width:32px; height:32px; border-radius:2px; background:var(--c-panel); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:15px; color:var(--c-acento); transition:background .5s,color .5s; }
   .ctxt { flex:1; }
@@ -76,27 +63,13 @@
   .tbar-track { flex:1; height:4px; background:var(--c-bg); transition:background .5s; }
   .tbar-fill  { height:100%; background:var(--c-muted); width:0%; transition:width .85s cubic-bezier(.16,1,.3,1),background .5s; }
   .tbar-num   { font-size:.82rem; font-weight:700; color:var(--c-texto); width:26px; text-align:right; flex-shrink:0; transition:color .5s; }
-
-  /* cluster rows con imagen en hover */
-  .cl-row {
-    display:flex; align-items:center; gap:12px; padding:.8rem 1rem;
-    background:var(--c-panel); border:1px solid var(--c-linea); border-radius:2px;
-    cursor:pointer; transition:border-color .18s,background .5s; margin-bottom:6px;
-    position:relative; overflow:hidden;
-  }
+  .cl-row { display:flex; align-items:center; gap:12px; padding:.8rem 1rem; background:var(--c-panel); border:1px solid var(--c-linea); border-radius:2px; cursor:pointer; transition:border-color .18s,background .5s; margin-bottom:6px; }
   .cl-row:hover { border-color:var(--c-acento); }
-  .cl-thumb {
-    position:absolute; right:0; top:0; height:100%; width:80px;
-    object-fit:cover; opacity:0; transition:opacity .3s ease;
-    pointer-events:none;
-  }
-  .cl-row:hover .cl-thumb { opacity:.18; }
-  .cl-dot  { width:9px; height:9px; border-radius:50%; flex-shrink:0; position:relative; z-index:1; }
-  .cl-info { flex:1; position:relative; z-index:1; }
+  .cl-dot  { width:9px; height:9px; border-radius:50%; flex-shrink:0; }
+  .cl-info { flex:1; }
   .cl-name { font-size:.88rem; font-weight:700; color:var(--c-texto); transition:color .5s; }
   .cl-sub  { font-size:.75rem; color:var(--c-muted); margin-top:2px; transition:color .5s; }
-  .cl-pct  { font-size:.88rem; font-weight:700; color:var(--c-texto); font-family:"Lucida Console","Courier New",monospace; transition:color .5s; position:relative; z-index:1; }
-
+  .cl-pct  { font-size:.88rem; font-weight:700; color:var(--c-texto); font-family:"Lucida Console","Courier New",monospace; transition:color .5s; }
   .tag { display:inline-block; font-size:.7rem; font-weight:700; letter-spacing:.04em; padding:.18rem .55rem; border-radius:2px; margin:3px 3px 0 0; }
   .rbadge { display:inline-block; font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; background:var(--c-bg); color:var(--c-acento); padding:.28rem .85rem; border:1px solid var(--c-linea); border-radius:2px; margin-bottom:.85rem; transition:background .5s,color .5s,border-color .5s; }
   .yr-block { margin-bottom:1.5rem; }
@@ -117,10 +90,15 @@
   .anime-cover-wrap { display:grid; grid-template-columns:90px 1fr; gap:1rem; align-items:start; margin-bottom:.85rem; }
   .anime-cover { width:90px; border-radius:4px; display:block; aspect-ratio:2/3; object-fit:cover; background:var(--c-panel); }
   .anime-cover-ph { width:90px; aspect-ratio:2/3; background:var(--c-panel); border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:1.4rem; color:var(--c-muted); }
-  @media(max-width:640px){ .statgrid{grid-template-columns:1fr 1fr} .anime-grid{grid-template-columns:1fr} .anime-cover-wrap{grid-template-columns:70px 1fr} .anime-cover,.anime-cover-ph{width:70px} }
+  #cl-prev { position:fixed; pointer-events:none; z-index:9999; width:120px; border-radius:6px; overflow:hidden; box-shadow:0 8px 28px rgba(0,0,0,.22); opacity:0; transition:opacity .18s ease; top:0; left:0; }
+  #cl-prev.on { opacity:1; }
+  #cl-prev img { width:100%; display:block; aspect-ratio:2/3; object-fit:cover; }
+  @media(max-width:640px){ .statgrid{grid-template-columns:1fr 1fr} .anime-grid{grid-template-columns:1fr} .anime-cover-wrap{grid-template-columns:70px 1fr} .anime-cover,.anime-cover-ph{width:70px} #cl-prev{display:none} }
 </style>
 </head>
 <body>
+
+<div id="cl-prev"><img id="cl-prev-img" src="" alt=""></div>
 
 <header class="hero">
   <div class="hero-texto">
@@ -134,7 +112,6 @@
 <div class="pips" id="pips"></div>
 
 <div class="shell">
-
   <div class="screen on" id="s0">
     <span class="slabel">Punto de partida</span>
     <p class="stitle">¿Cuál es tu lengua materna?</p>
@@ -261,7 +238,6 @@
       <button class="bbk" onclick="resetAll()"><i class="ti ti-arrow-left" aria-hidden="true"></i> Volver al inicio</button>
     </div>
   </div>
-
 </div>
 
 <script>
@@ -326,12 +302,12 @@ const LANGS={
 };
 
 const GENRES=[
-  {key:'accion',  icon:'ti-sword',       title:'Accion',              sub:'Batallas, poderes, rivalidades',     body:'El genero dominante en todos los mercados. Concentra los scores de Trends mas altos. MAPPA, A-1 Pictures y Science SARU producen los titulos top.',cluster:'aventura'},
-  {key:'romance', icon:'ti-heart',        title:'Romance / Slice of life',sub:'Relaciones, cotidiano, sentimientos',body:'Audiencias fieles con alta retencion. Oshi No Ko y DAN DA DAN mezclan romance con otros generos, elevando su popularidad mas alla del nicho tradicional.',cluster:'romance'},
-  {key:'fantasia',icon:'ti-sparkles',     title:'Fantasia epica',      sub:'Mundos alternativos, magia, aventura',body:'Fuertemente ligado al Shounen. Frieren lidera con el score AniList mas alto del dataset (91). Delicious in Dungeon une fantasia con comedia.',cluster:'aventura'},
-  {key:'drama',   icon:'ti-mood-confuzed',title:'Drama / Suspenso',    sub:'Psicologico, thriller, misterio',    body:'Seinen densamente conectado. Oshi No Ko y Vinland Saga representan este cluster. Menor traccion en Trends pero scores AniList consistentemente altos.',cluster:'drama'},
-  {key:'horror',  icon:'ti-ghost',        title:'Horror / Sobrenatural',sub:'Terror, fenomenos paranormales',    body:'DAN DA DAN mezcla lo sobrenatural con accion y comedia, alcanzando los scores mas altos de Trends en MX y CO. Un nicho que encontro audiencia masiva.',cluster:'horror'},
-  {key:'scifi',   icon:'ti-rocket',       title:'Sci-fi / Mecha',      sub:'Tecnologia, robots, futuro',         body:'Solo Leveling lidera este espacio con scores consistentes en los 5 paises (12-17). Kaiju No. 8 tambien compite con fuerte presencia en Shounen.',cluster:'shonen'}
+  {key:'accion',  icon:'ti-sword',       title:'Accion',                 sub:'Batallas, poderes, rivalidades',      body:'El genero dominante en todos los mercados. Concentra los scores de Trends mas altos. MAPPA, A-1 Pictures y Science SARU producen los titulos top.',cluster:'aventura'},
+  {key:'romance', icon:'ti-heart',        title:'Romance / Slice of life',sub:'Relaciones, cotidiano, sentimientos', body:'Audiencias fieles con alta retencion. Oshi No Ko y DAN DA DAN mezclan romance con otros generos, elevando su popularidad mas alla del nicho tradicional.',cluster:'romance'},
+  {key:'fantasia',icon:'ti-sparkles',     title:'Fantasia epica',         sub:'Mundos alternativos, magia, aventura',body:'Fuertemente ligado al Shounen. Frieren lidera con el score AniList mas alto del dataset (91). Delicious in Dungeon une fantasia con comedia.',cluster:'aventura'},
+  {key:'drama',   icon:'ti-mood-confuzed',title:'Drama / Suspenso',       sub:'Psicologico, thriller, misterio',     body:'Seinen densamente conectado. Oshi No Ko y Vinland Saga representan este cluster. Menor traccion en Trends pero scores AniList consistentemente altos.',cluster:'drama'},
+  {key:'horror',  icon:'ti-ghost',        title:'Horror / Sobrenatural',  sub:'Terror, fenomenos paranormales',      body:'DAN DA DAN mezcla lo sobrenatural con accion y comedia, alcanzando los scores mas altos de Trends en MX y CO. Un nicho que encontro audiencia masiva.',cluster:'horror'},
+  {key:'scifi',   icon:'ti-rocket',       title:'Sci-fi / Mecha',         sub:'Tecnologia, robots, futuro',          body:'Solo Leveling lidera este espacio con scores consistentes en los 5 paises (12-17). Kaiju No. 8 tambien compite con fuerte presencia en Shounen.',cluster:'shonen'}
 ];
 
 const CLUSTERS={
@@ -390,7 +366,7 @@ const JOYAS=[
    body:"El anime con el score AniList mas alto del dataset (91/100) y el segundo en popularidad con 434,823 members — pero practicamente invisible en Google Trends. Una audiencia que lo vive en plataformas, no lo busca en Google.",
    hallazgo:'Score AniList: 91 · Trends promedio: 0.6 · La brecha mas grande del corpus entre calidad percibida e interes de busqueda.'
   },
-  {key:'kusuriya',icon:'ti-flask',img:'img/mao.jpg',
+  {key:'kusuriya',icon:'ti-flask',img:'img/kusuriya.jpg',
    title:'The Apothecary Diaries',titleJP:'Kusuriya no Hitorigoto',
    sub:'Drama · Mystery · OLM | TOHO animation',anio:'2023 · FALL',demo:'Seinen',
    score_anilist:88,popularidad:290856,scores:{MX:21,US:25,CA:26,CO:11,BR:26},
@@ -429,12 +405,24 @@ let MAP_GEO=null;
 const ORDER=['aventura','romance','drama','shonen','horror'];
 const YEARS=[2023,2024,2025,2026];
 
+// --- Preview flotante clusters ---
+var clPrev=document.getElementById('cl-prev');
+var clPrevImg=document.getElementById('cl-prev-img');
+document.addEventListener('mousemove',function(e){
+  if(!clPrev.classList.contains('on'))return;
+  var x=e.clientX+20,y=e.clientY+20;
+  if(x+124>window.innerWidth-8)x=e.clientX-144;
+  if(y+184>window.innerHeight-8)y=e.clientY-204;
+  clPrev.style.transform='translate('+x+'px,'+y+'px)';
+});
+function clPrevHide(){ clPrev.classList.remove('on'); }
+
 function buildPips(){
-  const el=document.getElementById('pips');el.innerHTML='';
+  var el=document.getElementById('pips');el.innerHTML='';
   if(cur===5){el.style.display='none';return;}
   el.style.display='flex';
-  for(let i=0;i<5;i++){
-    const d=document.createElement('div');
+  for(var i=0;i<5;i++){
+    var d=document.createElement('div');
     d.className='pip'+(i<cur?' done':i===cur?' now':'');
     el.appendChild(d);
   }
@@ -460,7 +448,7 @@ buildPips();
 function pickLang(l){
   lang=l;
   document.body.className=TEMAS[l]||'';
-  const d=LANGS[l];
+  var d=LANGS[l];
   document.getElementById('s1-label').textContent=d.label;
   document.getElementById('s1-title').textContent=d.title;
   document.getElementById('s1-body').textContent=d.body;
@@ -486,41 +474,31 @@ function pickLang(l){
 }
 
 function renderRegionMap(l){
-  const el=document.getElementById('region-map');
+  var el=document.getElementById('region-map');
   if(!el||!MAP_GEO)return;
   el.innerHTML='';
-  const cfg=MAP_REGIONS[l];
+  var cfg=MAP_REGIONS[l];
   if(!cfg)return;
-  const W=el.clientWidth||600;
-  const H=Math.round(W*0.78);
-  const svg=d3.select('#region-map').append('svg')
-    .attr('viewBox','0 0 '+W+' '+H)
-    .attr('width','100%')
-    .style('background','#f5f3f0');
-  const proj=d3.geoMercator().center([-75,10]).scale(W*0.52).translate([W*0.42,H*0.48]);
-  const path=d3.geoPath(proj);
-  const features=topojson.feature(MAP_GEO,MAP_GEO.objects.countries).features
+  var W=el.clientWidth||600;
+  var H=Math.round(W*0.78);
+  var svg=d3.select('#region-map').append('svg')
+    .attr('viewBox','0 0 '+W+' '+H).attr('width','100%').style('background','#f5f3f0');
+  var proj=d3.geoMercator().center([-75,10]).scale(W*0.52).translate([W*0.42,H*0.48]);
+  var path=d3.geoPath(proj);
+  var features=topojson.feature(MAP_GEO,MAP_GEO.objects.countries).features
     .filter(function(f){return AMERICAS.has(String(f.id).padStart(3,'0'));});
   svg.selectAll('path').data(features).join('path')
     .attr('d',path)
-    .attr('fill',function(d){
-      var id=String(d.id).padStart(3,'0');
-      return cfg.active[id]?cfg.color:'#e8e4e0';
-    })
-    .attr('stroke','#ffffff')
-    .attr('stroke-width',0.5)
-    .attr('opacity',function(d){
-      return cfg.active[String(d.id).padStart(3,'0')]?1:0.75;
-    });
+    .attr('fill',function(d){var id=String(d.id).padStart(3,'0');return cfg.active[id]?cfg.color:'#e8e4e0';})
+    .attr('stroke','#ffffff').attr('stroke-width',0.5)
+    .attr('opacity',function(d){return cfg.active[String(d.id).padStart(3,'0')]?1:0.75;});
   svg.selectAll('text')
     .data(features.filter(function(f){return cfg.active[String(f.id).padStart(3,'0')];}))
     .join('text')
     .attr('transform',function(d){var c=path.centroid(d);return 'translate('+c[0]+','+c[1]+')';})
     .attr('text-anchor','middle').attr('dy','0.35em')
-    .attr('font-size',Math.max(10,W*0.022))
-    .attr('font-weight','700').attr('fill','#ffffff')
-    .attr('font-family','system-ui,sans-serif')
-    .attr('pointer-events','none')
+    .attr('font-size',Math.max(10,W*0.022)).attr('font-weight','700').attr('fill','#ffffff')
+    .attr('font-family','system-ui,sans-serif').attr('pointer-events','none')
     .text(function(d){return cfg.active[String(d.id).padStart(3,'0')];});
   document.getElementById('region-map-legend').innerHTML=
     '<div class="map-legend-item"><div class="map-legend-sw" style="background:'+cfg.color+'"></div><span>'+cfg.label+'</span></div>'+
@@ -528,32 +506,26 @@ function renderRegionMap(l){
 }
 
 function imgHtml(src,alt){
-  if(src) return '<img class="anime-cover" src="'+src+'" alt="'+alt+'" loading="lazy" onerror="this.style.display=\'none\'">';
+  if(src)return '<img class="anime-cover" src="'+src+'" alt="'+alt+'" loading="lazy" onerror="this.style.display=\'none\'">';
   return '<div class="anime-cover-ph"><i class="ti ti-photo" aria-hidden="true"></i></div>';
 }
 
 function showAnime(key){
-  const d=LANGS[lang];
-  const a=d.anime.find(function(x){return x.key===key;});
-  const bars=Object.entries(a.scores).map(function(e){
-    var c=e[0],v=e[1];
-    return '<div class="tbar-row"><span class="tbar-lbl">'+c+'</span>'+
-      '<div class="tbar-track"><div class="tbar-fill" data-w="'+v+'"></div></div>'+
-      '<span class="tbar-num">'+v+'</span></div>';
+  var d=LANGS[lang];
+  var a=d.anime.find(function(x){return x.key===key;});
+  var bars=Object.entries(a.scores).map(function(e){
+    return '<div class="tbar-row"><span class="tbar-lbl">'+e[0]+'</span>'+
+      '<div class="tbar-track"><div class="tbar-fill" data-w="'+e[1]+'"></div></div>'+
+      '<span class="tbar-num">'+e[1]+'</span></div>';
   }).join('');
-  const panel=document.getElementById('s1-panel');
+  var panel=document.getElementById('s1-panel');
   panel.innerHTML='<div class="icard">'+
-    '<div class="anime-cover-wrap">'+
-      imgHtml(a.img,a.title)+
-      '<div>'+
-        '<span class="ilabel">Google Trends 2023–2026 · Promedio del periodo</span>'+
-        '<p class="ititl" style="margin-bottom:.75rem">'+a.title+'</p>'+
-        bars+
-        '<p style="font-size:.72rem;color:var(--c-muted);margin-top:.75rem">Score relativo 0–100. El 100 es el pico maximo del grupo.</p>'+
-      '</div>'+
-    '</div>'+
-    '<p style="font-size:.85rem;color:var(--c-texto);opacity:.8;margin-top:.5rem;line-height:1.6">'+d.context+'</p>'+
-  '</div>';
+    '<div class="anime-cover-wrap">'+imgHtml(a.img,a.title)+
+    '<div><span class="ilabel">Google Trends 2023–2026 · Promedio del periodo</span>'+
+    '<p class="ititl" style="margin-bottom:.75rem">'+a.title+'</p>'+bars+
+    '<p style="font-size:.72rem;color:var(--c-muted);margin-top:.75rem">Score relativo 0–100. El 100 es el pico maximo del grupo.</p>'+
+    '</div></div>'+
+    '<p style="font-size:.85rem;color:var(--c-texto);opacity:.8;margin-top:.5rem;line-height:1.6">'+d.context+'</p></div>';
   panel.style.display='block';
   requestAnimationFrame(function(){
     panel.querySelectorAll('.tbar-fill').forEach(function(el){el.style.width=el.dataset.w+'%';});
@@ -563,11 +535,11 @@ function showAnime(key){
 
 function pickGenre(k){
   genre=k;
-  const g=GENRES.find(function(x){return x.key===k;});
+  var g=GENRES.find(function(x){return x.key===k;});
   document.querySelectorAll('#s2-genres .cb').forEach(function(b){
     b.classList.toggle('sel',b.getAttribute('onclick').indexOf("'"+k+"'")>-1);
   });
-  const panel=document.getElementById('s2-panel');
+  var panel=document.getElementById('s2-panel');
   panel.innerHTML='<div class="icard"><span class="ilabel">Por que este genero?</span><p class="ibody">'+g.body+'</p></div>';
   panel.style.display='block';
   document.getElementById('s2-next').disabled=false;
@@ -575,18 +547,27 @@ function pickGenre(k){
 }
 
 function buildClusters(main){
-  const ld=LANGS[lang];
+  var ld=LANGS[lang];
   document.getElementById('s3-title').textContent='Los 5 clusters en '+ld.countries.join(' y ');
-  document.getElementById('s3-clusters').innerHTML=ORDER.map(function(k){
-    var c=CLUSTERS[k],isMain=k===main;
-    var thumb=c.img?'<img class="cl-thumb" src="'+c.img+'" alt="" aria-hidden="true">':'';
-    return '<div class="cl-row" style="'+(isMain?'border-color:'+c.color+';background:'+c.bg+';':'')+'" onclick="showCluster(\''+k+'\')">'+
-      thumb+
+  var container=document.getElementById('s3-clusters');
+  container.innerHTML='';
+  ORDER.forEach(function(k){
+    var c=CLUSTERS[k],isMain=(k===main);
+    var div=document.createElement('div');
+    div.className='cl-row';
+    if(isMain)div.style.cssText='border-color:'+c.color+';background:'+c.bg+';';
+    div.innerHTML=
       '<div class="cl-dot" style="background:'+c.color+'"></div>'+
       '<div class="cl-info"><div class="cl-name">'+c.name+(isMain?' <span style="font-size:.7rem;color:'+c.color+';margin-left:6px">← tu genero</span>':'')+'</div>'+
       '<div class="cl-sub">'+c.demo+' · '+c.nodos+' nodos</div></div>'+
-      '<div class="cl-pct">'+c.pct+'</div></div>';
-  }).join('');
+      '<div class="cl-pct">'+c.pct+'</div>';
+    if(c.img){
+      div.addEventListener('mouseenter',function(){clPrevImg.src=c.img;clPrev.classList.add('on');});
+      div.addEventListener('mouseleave',clPrevHide);
+    }
+    div.addEventListener('click',function(){clPrevHide();showCluster(k);});
+    container.appendChild(div);
+  });
   buildResult(main);
 }
 
@@ -662,21 +643,16 @@ function showJoya(key){
 }
 
 function resetAll(){
+  clPrevHide();
   lang='';genre='';cur=0;
   document.body.className='';
   document.getElementById('s1-next').disabled=true;
   document.getElementById('s2-next').disabled=true;
-  ['s1-panel','s2-panel','s3-detail','s5-panel'].forEach(function(id){
-    document.getElementById(id).style.display='none';
-  });
-  ['s1-stats','s1-anime','s2-genres','s3-clusters','r-timeline','s5-choices','r-tags','s3-det-tags'].forEach(function(id){
-    document.getElementById(id).innerHTML='';
-  });
+  ['s1-panel','s2-panel','s3-detail','s5-panel'].forEach(function(id){document.getElementById(id).style.display='none';});
+  ['s1-stats','s1-anime','s2-genres','s3-clusters','r-timeline','s5-choices','r-tags','s3-det-tags'].forEach(function(id){document.getElementById(id).innerHTML='';});
   document.getElementById('region-map').innerHTML='';
   document.getElementById('region-map-legend').innerHTML='';
-  ['s1-label','s1-title','s1-body','s3-title','r-title','r-body','r-finding','r-detail'].forEach(function(id){
-    var el=document.getElementById(id);if(el)el.textContent='';
-  });
+  ['s1-label','s1-title','s1-body','s3-title','r-title','r-body','r-finding','r-detail'].forEach(function(id){var el=document.getElementById(id);if(el)el.textContent='';});
   document.querySelectorAll('.cb').forEach(function(b){b.classList.remove('sel');});
   document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('on');});
   document.getElementById('s0').classList.add('on');
@@ -687,9 +663,7 @@ function resetAll(){
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
 <script>
-d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(function(data){
-  MAP_GEO=data;
-});
+d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(function(data){MAP_GEO=data;});
 </script>
 </body>
 </html>
