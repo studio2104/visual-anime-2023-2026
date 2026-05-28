@@ -355,113 +355,113 @@ const LANGS={
   es:{
     label:'01 · Región hispanohablante',
     title:'El anime en los países de habla hispana',
-    body:'México y Colombia son los mercados hispanohablantes del análisis. México lidera con los scores más altos y sostenidos del período 2023–2026.',
+    body:'México y Colombia son los mercados hispanohablantes del análisis. En ambos dominan los títulos de acción Shounen. DAN DA DAN destaca como el título con mayor score relativo en la región (MX: 39, CO: 43).',
     countries:['MX','CO'],
     stats:[
       {l:'Países',v:'MX · CO',s:'México y Colombia'},
-      {l:'Score promedio MX',v:'74',s:'sobre 100'},
-      {l:'Score promedio CO',v:'58',s:'sobre 100'}
+      {l:'Score promedio MX',v:'5',s:'Google Trends 0–100'},
+      {l:'Score promedio CO',v:'3',s:'Google Trends 0–100'}
     ],
     anime:[
-      {key:'jjk',  title:'Jujutsu Kaisen S2',      sub:'Acción · Shounen',      scores:{MX:82,CO:65},icon:'ti-sword'},
-      {key:'op',   title:'One Piece',               sub:'Aventura · Shounen',    scores:{MX:70,CO:72},icon:'ti-anchor'},
-      {key:'aot',  title:'Attack on Titan Final',   sub:'Drama · Acción',        scores:{MX:76,CO:58},icon:'ti-shield'},
-      {key:'demon',title:'Demon Slayer',             sub:'Acción · Sobrenatural', scores:{MX:68,CO:61},icon:'ti-flame'}
+      {key:'jjk',  title:'JUJUTSU KAISEN Season 2', sub:'Action · MAPPA',        scores:{MX:15,CO:8},  icon:'ti-sword'},
+      {key:'dandadan',title:'DAN DA DAN',            sub:'Action · Science SARU', scores:{MX:39,CO:43}, icon:'ti-bolt'},
+      {key:'solo', title:'Solo Leveling',            sub:'Action · A-1 Pictures', scores:{MX:14,CO:14}, icon:'ti-trending-up'},
+      {key:'oshi', title:'Oshi No Ko',               sub:'Drama · Doga Kobo',     scores:{MX:14,CO:15}, icon:'ti-star'}
     ],
-    context:'En México y Colombia los títulos de acción y aventura dominan las búsquedas. Colombia muestra mayor afinidad con One Piece que México.'
+    context:'DAN DA DAN es el título con mayor interés de búsqueda en MX y CO — superando incluso a Jujutsu Kaisen. Los scores son relativos al máximo del grupo (100 = pico más alto registrado).'
   },
   pt:{
     label:'01 · Região lusófona',
     title:'El anime en los países de habla portuguesa',
-    body:'Brasil es el único país lusófono del análisis y el mayor mercado de anime de América Latina en volumen absoluto.',
+    body:'Brasil es el único país lusófono del análisis y el mayor mercado de anime de América Latina por volumen. DAN DA DAN lidera el interés de búsqueda con score 19, seguido de JUJUTSU KAISEN con 13.',
     countries:['BR'],
     stats:[
       {l:'País',v:'BR',s:'Brasil'},
-      {l:'Score promedio',v:'75',s:'sobre 100'},
-      {l:'Título top',v:'One Piece',s:'Shounen · Toei'}
+      {l:'Score promedio',v:'6',s:'Google Trends 0–100'},
+      {l:'Título con mayor score',v:'DAN DA DAN',s:'Score: 19'}
     ],
     anime:[
-      {key:'op',   title:'One Piece',             sub:'Aventura · Shounen',    scores:{BR:85},icon:'ti-anchor'},
-      {key:'jjk',  title:'Jujutsu Kaisen S2',     sub:'Acción · Shounen',      scores:{BR:74},icon:'ti-sword'},
-      {key:'demon',title:'Demon Slayer',           sub:'Acción · Sobrenatural', scores:{BR:71},icon:'ti-flame'},
-      {key:'aot',  title:'Attack on Titan Final', sub:'Drama · Acción',        scores:{BR:69},icon:'ti-shield'}
+      {key:'dandadan',title:'DAN DA DAN',            sub:'Action · Science SARU', scores:{BR:19}, icon:'ti-bolt'},
+      {key:'jjk',    title:'JUJUTSU KAISEN Season 2',sub:'Action · MAPPA',        scores:{BR:13}, icon:'ti-sword'},
+      {key:'solo',   title:'Solo Leveling',          sub:'Action · A-1 Pictures', scores:{BR:12}, icon:'ti-trending-up'},
+      {key:'dungeon',title:'Delicious in Dungeon',   sub:'Adventure · TRIGGER',   scores:{BR:16}, icon:'ti-tools-kitchen-2'}
     ],
-    context:'Brasil destaca como el único mercado donde One Piece supera a Jujutsu Kaisen. La tradición histórica del Shounen de aventura es muy fuerte.'
+    context:'Brasil muestra un patrón similar al hispanohablante: DAN DA DAN tiene el mayor score de búsqueda, seguido por títulos de acción de MAPPA y A-1. Los scores son relativos al pico máximo del grupo.'
   },
   en:{
     label:'01 · Región anglohablante',
     title:'El anime en los países de habla inglesa',
-    body:'Estados Unidos registra los scores más altos de todo el dataset. Canadá sigue de cerca. Ambos mercados se inclinan hacia títulos de acción y ciencia ficción.',
+    body:'EE.UU. registra los scores absolutos más altos del dataset (máx. 54). Canadá sigue de cerca. Ambos mercados se inclinan fuertemente hacia acción y aventura.',
     countries:['US','CA'],
     stats:[
       {l:'Países',v:'US · CA',s:'EE.UU. y Canadá'},
-      {l:'Score promedio US',v:'86',s:'sobre 100'},
-      {l:'Score promedio CA',v:'70',s:'sobre 100'}
+      {l:'Score promedio US',v:'11',s:'Google Trends 0–100'},
+      {l:'Score promedio CA',v:'7',s:'Google Trends 0–100'}
     ],
     anime:[
-      {key:'jjk',  title:'Jujutsu Kaisen S2',     sub:'Acción · Shounen',      scores:{US:91,CA:78},icon:'ti-sword'},
-      {key:'aot',  title:'Attack on Titan Final',  sub:'Drama · Acción',        scores:{US:88,CA:71},icon:'ti-shield'},
-      {key:'demon',title:'Demon Slayer',            sub:'Acción · Sobrenatural', scores:{US:84,CA:59},icon:'ti-flame'},
-      {key:'op',   title:'One Piece',              sub:'Aventura · Shounen',    scores:{US:79,CA:62},icon:'ti-anchor'}
+      {key:'jjk',    title:'JUJUTSU KAISEN Season 2',sub:'Action · MAPPA',        scores:{US:10,CA:12}, icon:'ti-sword'},
+      {key:'dandadan',title:'DAN DA DAN',            sub:'Action · Science SARU', scores:{US:20,CA:14}, icon:'ti-bolt'},
+      {key:'solo',   title:'Solo Leveling',          sub:'Action · A-1 Pictures', scores:{US:16,CA:17}, icon:'ti-trending-up'},
+      {key:'dungeon',title:'Delicious in Dungeon',   sub:'Adventure · TRIGGER',   scores:{US:21,CA:21}, icon:'ti-tools-kitchen-2'}
     ],
-    context:'EE.UU. y Canadá tienen los scores absolutos más altos del análisis. Jujutsu Kaisen lidera en ambos países con ventaja clara.'
+    context:'Delicious in Dungeon y Solo Leveling tienen scores muy similares en US y CA — inusual para la región, donde generalmente un título domina. DAN DA DAN supera a JJK en EE.UU. Los scores son relativos al pico máximo del grupo.'
   }
 };
 
 const GENRES=[
-  {key:'accion',  icon:'ti-sword',        title:'Acción',                sub:'Batallas, poderes, rivalidades',      body:'El género más consumido en todos los mercados. Concentra los scores de Trends más altos y los títulos con mayor popularidad en AniList.',cluster:'aventura'},
-  {key:'romance', icon:'ti-heart',         title:'Romance / Slice of life',sub:'Relaciones, cotidiano, sentimientos', body:'Audiencias fieles y nichos consolidados. Alta retención en México y Colombia.',cluster:'romance'},
-  {key:'fantasia',icon:'ti-sparkles',      title:'Fantasía épica',        sub:'Mundos alternativos, magia, aventura', body:'Fuertemente ligado al Shounen. Blockbusters de MAPPA y A-1 Pictures dominan con millones de usuarios en AniList.',cluster:'aventura'},
-  {key:'drama',   icon:'ti-mood-confuzed', title:'Drama / Suspenso',      sub:'Psicológico, thriller, misterio',     body:'Seinen densamente conectado. Menor alcance masivo pero alta fidelidad de audiencia.',cluster:'drama'},
-  {key:'horror',  icon:'ti-ghost',         title:'Horror / Sobrenatural', sub:'Terror, fenómenos paranormales',      body:'Nicho pequeño pero diferenciado. Comunidades especializadas con alta cohesión interna.',cluster:'horror'},
-  {key:'scifi',   icon:'ti-rocket',        title:'Sci-fi / Mecha',        sub:'Tecnología, robots, futuro',          body:'Gran consumo histórico en LATAM. Dragon Ball y sucesores mantienen presencia constante.',cluster:'shonen'}
+  {key:'accion',  icon:'ti-sword',        title:'Acción',                sub:'Batallas, poderes, rivalidades',      body:'El género dominante en todos los mercados analizados. Concentra los scores de Trends más altos. MAPPA, A-1 Pictures y Science SARU producen los títulos top.',cluster:'aventura'},
+  {key:'romance', icon:'ti-heart',         title:'Romance / Slice of life',sub:'Relaciones, cotidiano, sentimientos', body:'Audiencias fieles con alta retención. Oshi No Ko y DAN DA DAN mezclan romance con otros géneros, elevando su popularidad más allá del nicho tradicional.',cluster:'romance'},
+  {key:'fantasia',icon:'ti-sparkles',      title:'Fantasía épica',        sub:'Mundos alternativos, magia, aventura', body:'Fuertemente ligado al Shounen. Frieren: Beyond Journey\'s End lidera este espacio con el score AniList más alto del dataset (91). Delicious in Dungeon une fantasía con comedia.',cluster:'aventura'},
+  {key:'drama',   icon:'ti-mood-confuzed', title:'Drama / Suspenso',      sub:'Psicológico, thriller, misterio',     body:'Seinen densamente conectado. Oshi No Ko y Vinland Saga representan este cluster. Menor tracción en Trends pero scores AniList consistentemente altos.',cluster:'drama'},
+  {key:'horror',  icon:'ti-ghost',         title:'Horror / Sobrenatural', sub:'Terror, fenómenos paranormales',      body:'DAN DA DAN mezcla lo sobrenatural con acción y comedia, alcanzando los scores más altos de Trends en MX y CO. Un nicho que encontró audiencia masiva.',cluster:'horror'},
+  {key:'scifi',   icon:'ti-rocket',        title:'Sci-fi / Mecha',        sub:'Tecnología, robots, futuro',          body:'Solo Leveling lidera este espacio con scores consistentes en los 5 países (12–17). Kaiju No. 8 también compite en este cluster con fuerte presencia en Shounen.',cluster:'shonen'}
 ];
 
 const CLUSTERS={
-  romance:{color:'#993556',bg:'#FBEAF0',name:'Romance y comedia cotidiana',demo:'Josei / Shoujo',pct:'28%',nodos:'20',
-    body:'Audiencias fieles y nicho consolidado. Alta retención en México y Colombia. Títulos como Kaguya-sama y Oshi no Ko concentran la mayor parte de los nodos.',
-    tags:['Josei','Shoujo','Comedia','Slice of life','Kaguya-sama','Oshi no Ko'],
+  romance:{color:'#993556',bg:'#FBEAF0',name:'Romance y comedia cotidiana',demo:'Josei / Shoujo · Seinen',pct:'28%',nodos:'20',
+    body:'Oshi No Ko domina este cluster con 309,140 members en AniList y scores de Trends sólidos en todos los países (MX:14, CO:15, BR:8). Mezcla drama, misterio y romance de forma inusual para el género.',
+    tags:['Josei','Shoujo','Drama','Oshi No Ko','DAN DA DAN','Romance'],
     timeline:{
-      2023:[{title:'Kaguya-sama: Love is War – The First Kiss That Never Ends',sub:'Josei · A-1 Pictures',score:82},{title:'Oshi no Ko',sub:'Drama · Doga Kobo',score:91}],
-      2024:[{title:'Ao no Hako',sub:'Romance · Telecom Animation Film',score:78},{title:'Yuzuki-san Chi no Yonkyoudai',sub:'Slice of life · SynergySP',score:64}],
-      2025:[{title:'Sakamoto Days',sub:'Comedia · TMS',score:80},{title:'Dandadan S2',sub:'Comedia sobrenatural · Science SARU',score:83}],
-      2026:[{title:'Wind Breaker S2',sub:'Acción · CloverWorks',score:70},{title:'Oshi no Ko S3',sub:'Drama · Doga Kobo',score:88}]
+      2023:[{title:'Oshi No Ko',sub:'Drama · Doga Kobo',score:12},{title:'Kaguya-sama S3: First Kiss Never Ends',sub:'Josei · A-1 Pictures',score:4}],
+      2024:[{title:'Ao no Hako',sub:'Romance · Telecom Animation Film',score:5},{title:'Kaoru Hana wa Rin to Saku',sub:'Comedy · Platinum Vision',score:5}],
+      2025:[{title:'Kaoru Hana wa Rin to Saku S2',sub:'Romance · Platinum Vision',score:6},{title:'Dandadan 2nd Season',sub:'Action · Science SARU',score:4}],
+      2026:[{title:'Witch Hat Atelier',sub:'Adventure · BUG FILMS',score:3},{title:'Sentenced to Be a Hero',sub:'Action · Studio KAI',score:2}]
     }},
-  aventura:{color:'#185FA5',bg:'#E6F1FB',name:'Aventura y fantasía épica',demo:'Shounen · MAPPA, A-1',pct:'24%',nodos:'17',
-    body:'Mayor visibilidad global. MAPPA y A-1 Pictures producen la mayoría. Los scores de Google Trends más altos en todos los países del análisis.',
-    tags:['Shounen','Fantasía','Acción','MAPPA','A-1 Pictures','JJK','AOT'],
+  aventura:{color:'#185FA5',bg:'#E6F1FB',name:'Aventura y fantasía épica',demo:'Shounen · MAPPA, A-1, MADHOUSE',pct:'24%',nodos:'17',
+    body:'Frieren: Beyond Journey\'s End lidera con el score AniList más alto del dataset (91) y 434,823 members. Solo Leveling es el título con mayor consistencia cross-regional en Trends (12–17 en los 5 países).',
+    tags:['Shounen','Fantasía','Acción','MAPPA','A-1 Pictures','Frieren','Solo Leveling'],
     timeline:{
-      2023:[{title:'Jujutsu Kaisen Season 2',sub:'Acción · MAPPA',score:95},{title:'Attack on Titan: The Final Season Part 3',sub:'Drama · MAPPA',score:92}],
-      2024:[{title:"Frieren: Beyond Journey's End",sub:'Fantasía · Madhouse',score:93},{title:'Dungeon Meshi',sub:'Fantasía · TRIGGER',score:89}],
-      2025:[{title:'Jujutsu Kaisen Season 3',sub:'Acción · MAPPA',score:91},{title:'Bleach: Thousand-Year Blood War Part 3',sub:'Acción · Pierrot',score:87}],
-      2026:[{title:'One Piece – Egghead Arc',sub:'Aventura · Toei Animation',score:85},{title:'My Hero Academia: Final Arc',sub:'Shounen · Bones',score:80}]
+      2023:[{title:'JUJUTSU KAISEN Season 2',sub:'Action · MAPPA',score:12},{title:"Frieren: Beyond Journey's End",sub:'Adventure · MADHOUSE',score:1}],
+      2024:[{title:'Solo Leveling',sub:'Action · A-1 Pictures',score:14},{title:'DAN DA DAN',sub:'Action · Science SARU',score:31}],
+      2025:[{title:'Gachiakuta',sub:'Action · bones film',score:14},{title:'SAKAMOTO DAYS',sub:'Action · TMS Entertainment',score:6}],
+      2026:[{title:'Witch Hat Atelier',sub:'Adventure · BUG FILMS',score:3},{title:'Sentenced to Be a Hero',sub:'Action · Studio KAI',score:2}]
     }},
-  drama:{color:'#5F5E5A',bg:'#F1EFE8',name:'Drama y suspenso psicológico',demo:'Seinen',pct:'21%',nodos:'15',
-    body:'Seinen densamente conectado. Valorado por la crítica especializada. Menor alcance masivo pero alta fidelidad de audiencia.',
-    tags:['Seinen','Thriller','Mystery','Psychological','Vinland Saga'],
+  drama:{color:'#5F5E5A',bg:'#F1EFE8',name:'Drama y suspenso psicológico',demo:'Seinen · Shounen',pct:'21%',nodos:'15',
+    body:'Oshi No Ko (Seinen) y Vinland Saga representan este cluster. Scores AniList altos (86–91) pero menor impacto en Trends — audiencias comprometidas, no masivas.',
+    tags:['Seinen','Drama','Misterio','Psicológico','Oshi No Ko','Vinland Saga'],
     timeline:{
-      2023:[{title:'Vinland Saga Season 2',sub:'Seinen · MAPPA',score:90},{title:'Heavenly Delusion',sub:'Sci-fi · Production I.G',score:78}],
-      2024:[{title:'Suicide Squad Isekai',sub:'Acción · WIT Studio',score:65},{title:'Mushishi Zoku Shou',sub:'Seinen · Artland',score:72}],
-      2025:[{title:'Medalist',sub:'Drama · CloverWorks',score:81},{title:'Zenshu',sub:'Slice of life · WIT Studio',score:74}],
-      2026:[{title:'Monogatari Series: Off & Monster Season',sub:'Psicológico · Shaft',score:76},{title:'Attack on Titan rerun especial',sub:'Drama · MAPPA',score:88}]
+      2023:[{title:'Oshi No Ko',sub:'Drama · Doga Kobo',score:12},{title:'Vinland Saga Season 2',sub:'Seinen · MAPPA',score:3}],
+      2024:[{title:'Delicious in Dungeon',sub:'Adventure · TRIGGER',score:16},{title:'Dungeon People',sub:'Fantasy · TMS',score:2}],
+      2025:[{title:'The Apothecary Diaries Season 2',sub:'Drama · TOHO Animation Studio',score:8},{title:'Medalist',sub:'Drama · CloverWorks',score:4}],
+      2026:[{title:"Frieren: Beyond Journey's End Season 2",sub:'Adventure · MADHOUSE',score:0},{title:'Witch Hat Atelier',sub:'Adventure · BUG FILMS',score:3}]
     }},
-  shonen:{color:'#0F6E56',bg:'#E1F5EE',name:'Shonen y sci-fi de gran consumo',demo:'Blockbusters LATAM',pct:'18%',nodos:'13',
-    body:'Los blockbusters de la región. Millones de members en AniList. Mayor tracción sostenida en LATAM. One Piece y Dragon Ball encabezan el grupo.',
-    tags:['Shounen','Sci-fi','Mecha','One Piece','Dragon Ball'],
+  shonen:{color:'#0F6E56',bg:'#E1F5EE',name:'Acción y sci-fi de gran consumo',demo:'Shounen · A-1, Science SARU',pct:'18%',nodos:'13',
+    body:'DAN DA DAN es el fenómeno del período: scores más altos en MX (39) y CO (43), superando a todos los demás títulos. Solo Leveling mantiene consistencia en los 5 países. Kaiju No. 8 cierra el top 3.',
+    tags:['Shounen','Sci-fi','Acción','DAN DA DAN','Solo Leveling','Kaiju No. 8'],
     timeline:{
-      2023:[{title:'Dragon Ball Super: Super Hero',sub:'Shounen · Toei Animation',score:80},{title:'One Piece (cierre Wano)',sub:'Aventura · Toei Animation',score:85}],
-      2024:[{title:'Dragon Ball Daima',sub:'Shounen · Toei Animation',score:82},{title:'One Piece (inicio Egghead)',sub:'Aventura · Toei Animation',score:84}],
-      2025:[{title:'Gundam: Requiem for Vengeance',sub:'Mecha · Sunrise',score:71},{title:'Evangelion 3.0+1.11 (streaming global)',sub:'Mecha · Khara',score:79}],
-      2026:[{title:'Dragon Ball Daima Part 2',sub:'Shounen · Toei Animation',score:83},{title:'Naruto: New Arc',sub:'Shounen · Pierrot',score:77}]
+      2023:[{title:'JUJUTSU KAISEN Season 2',sub:'Action · MAPPA',score:12},{title:'Hell\'s Paradise',sub:'Action · MAPPA',score:4}],
+      2024:[{title:'DAN DA DAN',sub:'Action · Science SARU',score:31},{title:'Kaiju No. 8',sub:'Action · Production I.G',score:11}],
+      2025:[{title:'Gachiakuta',sub:'Action · bones film',score:14},{title:'SAKAMOTO DAYS',sub:'Action · TMS Entertainment',score:6}],
+      2026:[{title:'Sentenced to Be a Hero',sub:'Action · Studio KAI',score:2},{title:'Hell\'s Paradise Season 2',sub:'Action · MAPPA',score:1}]
     }},
-  horror:{color:'#854F0B',bg:'#FAEEDA',name:'Sobrenatural y horror moderno',demo:'Nicho · Avant Garde',pct:'8%',nodos:'6',
-    body:'Cluster periférico pero diferenciado. Incluye Avant Garde y subgéneros de nicho. Pequeño pero densamente interconectado.',
-    tags:['Horror','Sobrenatural','Avant Garde','Girls Love','Nicho'],
+  horror:{color:'#854F0B',bg:'#FAEEDA',name:'Sobrenatural y horror moderno',demo:'Shounen · Seinen',pct:'8%',nodos:'6',
+    body:'DAN DA DAN redefine este cluster mezclando sobrenatural, comedia y acción. Sus scores (MX:39, CO:43) son los más altos del dataset. El horror tradicional tiene nicho pequeño pero estable.',
+    tags:['Sobrenatural','Horror','DAN DA DAN','Acción','Comedia','Sci-Fi'],
     timeline:{
-      2023:[{title:'Undead Murder Farce',sub:'Misterio sobrenatural · Lapin Track',score:68},{title:'Shadows House Season 2',sub:'Misterio · CloverWorks',score:72}],
-      2024:[{title:'Alya Sometimes Hides Her Feelings in Russian',sub:'Romance sobrenatural · Doga Kobo',score:65},{title:'Dungeon People',sub:'Fantasía oscura · TMS',score:60}],
-      2025:[{title:'Re:Zero Season 3 Part 2',sub:'Fantasía oscura · WIT Studio',score:81},{title:'Yoru no Kurage wa Oyogenai',sub:'Slice of life · CloverWorks',score:63}],
-      2026:[{title:'Made in Abyss Season 3',sub:'Aventura oscura · Kinema Citrus',score:86},{title:'Overlord Season 5',sub:'Fantasía oscura · Madhouse',score:79}]
+      2023:[{title:'Oshi No Ko',sub:'Drama · Doga Kobo',score:12},{title:'Hell\'s Paradise',sub:'Action · MAPPA',score:4}],
+      2024:[{title:'DAN DA DAN',sub:'Action · Science SARU',score:31},{title:'Kaiju No. 8',sub:'Action · Production I.G',score:11}],
+      2025:[{title:'DAN DA DAN Season 2',sub:'Action · Science SARU',score:4},{title:'Re:Zero Season 3',sub:'Fantasy · WIT Studio',score:3}],
+      2026:[{title:'Witch Hat Atelier',sub:'Adventure · BUG FILMS',score:3},{title:'Sentenced to Be a Hero',sub:'Action · Studio KAI',score:2}]
     }}
 };
 
