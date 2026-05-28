@@ -6,6 +6,7 @@
 <title>El anime tiene acento. ¿Cuál es el tuyo?</title>
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@0;1&family=Source+Code+Pro:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --c-bg:#f9f8f7; --c-panel:#E6D9D6; --c-texto:#77525F;
@@ -20,7 +21,7 @@
   .pips { display:flex; gap:5px; margin:2.5rem max(1.25rem,8vw) 0; }
   .pip  { flex:1; height:2px; background:var(--c-acento); opacity:.18; transition:opacity .4s,background .5s; }
   .pip.done { opacity:.7; } .pip.now { opacity:1; background:var(--c-muted); }
-  .shell { width:min(780px,calc(100% - 4rem)); margin:0 auto; padding:3.5rem 0 7rem; font-family:"American Typewriter","Courier New",Courier,monospace; }
+  .shell { width:min(780px,calc(100% - 4rem)); margin:0 auto; padding:3.5rem 0 7rem; font-family:"Libre Baskerville","American Typewriter","Palatino Linotype",Georgia,serif; }
   .screen { display:none; } .screen.on { display:block; animation:fu .3s ease; }
   @keyframes fu { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
   .slabel { display:block; font-size:.8rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--c-muted); margin-bottom:.6rem; transition:color .5s; }
@@ -47,7 +48,7 @@
   .bnx:disabled { opacity:.3; cursor:default; }
   .icard { border:none; border-radius:4px; padding:1.25rem 1.5rem; background:var(--c-panel); margin-top:1rem; animation:fu .3s ease; transition:background .5s; }
   .ilabel { display:block; font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--c-acento); margin-bottom:.5rem; opacity:.7; transition:color .5s; }
-  .ititl  { font-size:1.05rem; font-weight:700; color:var(--c-texto); margin-bottom:.4rem; font-family:"Lucida Console","Courier New",monospace; transition:color .5s; }
+  .ititl  { font-size:1.05rem; font-weight:700; color:var(--c-texto); margin-bottom:.4rem; font-family:"Source Code Pro","Lucida Console","Courier New",monospace; transition:color .5s; }
   .ibody  { font-size:.95rem; color:var(--c-texto); opacity:.82; line-height:1.75; transition:color .5s; }
   .divider { height:1px; background:var(--c-linea); margin:1.75rem 0; transition:background .5s; }
   .statgrid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:1.25rem 0; }
@@ -56,7 +57,7 @@
   .stat:nth-child(2){ background:var(--c-panel); }
   .stat:nth-child(3){ background:var(--c-bg); border:1px solid var(--c-linea); }
   .slb { display:block; font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:var(--c-acento); opacity:.7; margin-bottom:5px; transition:color .5s; }
-  .sval { display:block; font-size:1.2rem; font-weight:700; color:var(--c-texto); font-family:"Lucida Console","Courier New",monospace; transition:color .5s; }
+  .sval { display:block; font-size:1.2rem; font-weight:700; color:var(--c-texto); font-family:"Source Code Pro","Lucida Console","Courier New",monospace; transition:color .5s; }
   .ssub { display:block; font-size:.72rem; color:var(--c-texto); opacity:.6; margin-top:4px; }
   .tbar-row { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
   .tbar-lbl { font-size:.8rem; font-weight:700; color:var(--c-texto); width:30px; flex-shrink:0; transition:color .5s; }
@@ -69,17 +70,17 @@
   .cl-info { flex:1; }
   .cl-name { font-size:.88rem; font-weight:700; color:var(--c-texto); transition:color .5s; }
   .cl-sub  { font-size:.75rem; color:var(--c-muted); margin-top:2px; transition:color .5s; }
-  .cl-pct  { font-size:.88rem; font-weight:700; color:var(--c-texto); font-family:"Lucida Console","Courier New",monospace; transition:color .5s; }
+  .cl-pct  { font-size:.88rem; font-weight:700; color:var(--c-texto); font-family:"Source Code Pro","Lucida Console","Courier New",monospace; transition:color .5s; }
   .tag { display:inline-block; font-size:.7rem; font-weight:700; letter-spacing:.04em; padding:.18rem .55rem; border-radius:2px; margin:3px 3px 0 0; }
   .rbadge { display:inline-block; font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; background:var(--c-bg); color:var(--c-acento); padding:.28rem .85rem; border:1px solid var(--c-linea); border-radius:2px; margin-bottom:.85rem; transition:background .5s,color .5s,border-color .5s; }
   .yr-block { margin-bottom:1.5rem; }
   .yr-head  { display:flex; align-items:center; gap:10px; margin-bottom:.7rem; }
-  .yr-pill  { font-size:.75rem; font-weight:700; padding:.18rem .7rem; border-radius:2px; flex-shrink:0; border:1px solid currentColor; font-family:"Lucida Console","Courier New",monospace; }
+  .yr-pill  { font-size:.75rem; font-weight:700; padding:.18rem .7rem; border-radius:2px; flex-shrink:0; border:1px solid currentColor; font-family:"Source Code Pro","Lucida Console","Courier New",monospace; }
   .yr-line  { flex:1; height:1px; background:var(--c-linea); transition:background .5s; }
   .anime-grid { display:grid; grid-template-columns:1fr 1fr; gap:7px; }
   .anime-card { background:var(--c-panel); border-radius:4px; padding:.9rem 1rem; transition:background .5s; }
   .anime-card:nth-child(even) { background:var(--c-card-1); }
-  .anime-card-title { font-size:.82rem; font-weight:700; color:var(--c-texto); margin-bottom:2px; line-height:1.4; font-family:"Lucida Console","Courier New",monospace; transition:color .5s; }
+  .anime-card-title { font-size:.82rem; font-weight:700; color:var(--c-texto); margin-bottom:2px; line-height:1.4; font-family:"Source Code Pro","Lucida Console","Courier New",monospace; transition:color .5s; }
   .anime-card-sub   { font-size:.75rem; color:var(--c-muted); transition:color .5s; }
   .anime-card-score { font-size:.7rem; margin-top:5px; display:flex; align-items:center; gap:4px; }
   .score-dot { width:5px; height:5px; border-radius:50%; flex-shrink:0; }
@@ -256,10 +257,10 @@ const LANGS={
       {l:'Score promedio CO',v:'3',s:'Google Trends 0–100'}
     ],
     anime:[
-      {key:'jjk',     title:'JUJUTSU KAISEN Season 2',sub:'Action · MAPPA',       scores:{MX:15,CO:8},  icon:'ti-sword',      img:'/img/gojo.jpg'},
-      {key:'dandadan',title:'DAN DA DAN',             sub:'Action · Science SARU',scores:{MX:39,CO:43}, icon:'ti-bolt',       img:'/img/dandadan.jpg'},
-      {key:'solo',    title:'Solo Leveling',           sub:'Action · A-1 Pictures',scores:{MX:14,CO:14}, icon:'ti-trending-up',img:'/img/sl.jpg'},
-      {key:'oshi',    title:'Oshi No Ko',              sub:'Drama · Doga Kobo',    scores:{MX:14,CO:15}, icon:'ti-star',       img:'/img/oshi.jpg'}
+      {key:'jjk',     title:'JUJUTSU KAISEN Season 2',sub:'Action · MAPPA',       scores:{MX:15,CO:8},  icon:'ti-sword',      img:'img/gojo.jpg'},
+      {key:'dandadan',title:'DAN DA DAN',             sub:'Action · Science SARU',scores:{MX:39,CO:43}, icon:'ti-bolt',       img:'img/dandadan.jpg'},
+      {key:'solo',    title:'Solo Leveling',           sub:'Action · A-1 Pictures',scores:{MX:14,CO:14}, icon:'ti-trending-up',img:'img/sl.jpg'},
+      {key:'oshi',    title:'Oshi No Ko',              sub:'Drama · Doga Kobo',    scores:{MX:14,CO:15}, icon:'ti-star',       img:'img/oshi.jpg'}
     ],
     context:'DAN DA DAN es el titulo con mayor interes de busqueda en MX y CO, superando incluso a Jujutsu Kaisen. Los scores son relativos al maximo del grupo.'
   },
@@ -274,10 +275,10 @@ const LANGS={
       {l:'Titulo con mayor score',v:'DAN DA DAN',s:'Score: 19'}
     ],
     anime:[
-      {key:'dandadan',title:'DAN DA DAN',             sub:'Action · Science SARU',scores:{BR:19}, icon:'ti-bolt',        img:'/img/dandadan.jpg'},
-      {key:'jjk',    title:'JUJUTSU KAISEN Season 2',sub:'Action · MAPPA',       scores:{BR:13}, icon:'ti-sword',       img:'/img/gojo.jpg'},
-      {key:'solo',   title:'Solo Leveling',           sub:'Action · A-1 Pictures',scores:{BR:12}, icon:'ti-trending-up', img:'/img/sl.jpg'},
-      {key:'dungeon',title:'Delicious in Dungeon',    sub:'Adventure · TRIGGER',  scores:{BR:16}, icon:'ti-tools-kitchen-2',img:'/img/dd.jpeg'}
+      {key:'dandadan',title:'DAN DA DAN',             sub:'Action · Science SARU',scores:{BR:19}, icon:'ti-bolt',        img:'img/dandadan.jpg'},
+      {key:'jjk',    title:'JUJUTSU KAISEN Season 2',sub:'Action · MAPPA',       scores:{BR:13}, icon:'ti-sword',       img:'img/gojo.jpg'},
+      {key:'solo',   title:'Solo Leveling',           sub:'Action · A-1 Pictures',scores:{BR:12}, icon:'ti-trending-up', img:'img/sl.jpg'},
+      {key:'dungeon',title:'Delicious in Dungeon',    sub:'Adventure · TRIGGER',  scores:{BR:16}, icon:'ti-tools-kitchen-2',img:'img/dd.jpeg'}
     ],
     context:'Brasil muestra un patron similar al hispanohablante: DAN DA DAN tiene el mayor score de busqueda. Los scores son relativos al pico maximo del grupo.'
   },
@@ -292,10 +293,10 @@ const LANGS={
       {l:'Score promedio CA',v:'7',s:'Google Trends 0–100'}
     ],
     anime:[
-      {key:'jjk',    title:'JUJUTSU KAISEN Season 2',sub:'Action · MAPPA',       scores:{US:10,CA:12}, icon:'ti-sword',       img:'/img/gojo.jpg'},
-      {key:'dandadan',title:'DAN DA DAN',            sub:'Action · Science SARU',scores:{US:20,CA:14}, icon:'ti-bolt',        img:'/img/dandadan.jpg'},
-      {key:'solo',   title:'Solo Leveling',          sub:'Action · A-1 Pictures',scores:{US:16,CA:17}, icon:'ti-trending-up', img:'/img/sl.jpg'},
-      {key:'dungeon',title:'Delicious in Dungeon',   sub:'Adventure · TRIGGER',  scores:{US:21,CA:21}, icon:'ti-tools-kitchen-2',img:'/img/dd.jpeg'}
+      {key:'jjk',    title:'JUJUTSU KAISEN Season 2',sub:'Action · MAPPA',       scores:{US:10,CA:12}, icon:'ti-sword',       img:'img/gojo.jpg'},
+      {key:'dandadan',title:'DAN DA DAN',            sub:'Action · Science SARU',scores:{US:20,CA:14}, icon:'ti-bolt',        img:'img/dandadan.jpg'},
+      {key:'solo',   title:'Solo Leveling',          sub:'Action · A-1 Pictures',scores:{US:16,CA:17}, icon:'ti-trending-up', img:'img/sl.jpg'},
+      {key:'dungeon',title:'Delicious in Dungeon',   sub:'Adventure · TRIGGER',  scores:{US:21,CA:21}, icon:'ti-tools-kitchen-2',img:'img/dd.jpeg'}
     ],
     context:'Delicious in Dungeon y Solo Leveling tienen scores muy similares en US y CA. DAN DA DAN supera a JJK en EE.UU. Los scores son relativos al pico maximo del grupo.'
   }
@@ -311,7 +312,7 @@ const GENRES=[
 ];
 
 const CLUSTERS={
-  romance:{color:'#993556',bg:'#FBEAF0',name:'Romance y comedia cotidiana',demo:'Josei / Shoujo / Seinen',pct:'28%',nodos:'20',img:'img/hat.jpg',
+  romance:{color:'#993556',bg:'#FBEAF0',name:'Romance y comedia cotidiana',demo:'Josei / Shoujo / Seinen',pct:'28%',nodos:'20',img:'img/hat.png',
     body:'Oshi No Ko domina este cluster con 309,140 members en AniList y scores de Trends solidos en todos los paises (MX:14, CO:15, BR:8). Mezcla drama, misterio y romance de forma inusual para el genero.',
     tags:['Josei','Shoujo','Drama','Oshi No Ko','DAN DA DAN','Romance'],
     timeline:{
