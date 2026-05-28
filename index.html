@@ -123,7 +123,7 @@
   .meto-toggle-arrow.open { transform:rotate(90deg); }
   .meto-extra { display:none; padding:.85rem 0 .25rem; font-size:.88rem; color:var(--c-texto); opacity:.75; line-height:1.8; }
   .meto-extra.on { display:block; animation:fu .2s ease; }
-  .meto-paises { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:8px; margin:1rem 0; }
+  .meto-países { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:8px; margin:1rem 0; }
   .meto-pais { background:var(--c-panel); border-radius:4px; padding:.8rem 1rem; }
   .meto-pais-code { font-family:"Source Code Pro","Lucida Console",monospace; font-size:1rem; font-weight:700; color:var(--c-acento); display:block; margin-bottom:.2rem; }
   .meto-pais-name { font-size:.8rem; color:var(--c-texto); opacity:.75; }
@@ -296,7 +296,7 @@
 
     <div class="meto-tabs" role="tablist">
       <button class="meto-tab on" onclick="metoTab(this,'mt-fuentes')" role="tab">Fuentes</button>
-      <button class="meto-tab" onclick="metoTab(this,'mt-paises')" role="tab">Países</button>
+      <button class="meto-tab" onclick="metoTab(this,'mt-países')" role="tab">Países</button>
       <button class="meto-tab" onclick="metoTab(this,'mt-proceso')" role="tab">Procesamiento</button>
       <button class="meto-tab" onclick="metoTab(this,'mt-clusters')" role="tab">Clusters</button>
       <button class="meto-tab" onclick="metoTab(this,'mt-limites')" role="tab">Limitaciones</button>
@@ -331,9 +331,9 @@
       </div>
     </div>
 
-    <div class="meto-panel" id="mt-paises">
+    <div class="meto-panel" id="mt-países">
       <p class="meto-step-text" style="margin-bottom:1.25rem;line-height:1.85">Cinco países en tres regiones lingüísticas. La selección responde a representatividad regional y viabilidad técnica: incluir más países en un mismo raspado aumenta exponencialmente la complejidad de cuotas y tiempos de respuesta de la API de Google Trends.</p>
-      <div class="meto-paises">
+      <div class="meto-países">
         <div class="meto-pais"><span class="meto-pais-code">MX</span><span class="meto-pais-name">México</span><span class="meto-pais-lang">Español · Institución de origen</span></div>
         <div class="meto-pais"><span class="meto-pais-code">CO</span><span class="meto-pais-name">Colombia</span><span class="meto-pais-lang">Español · Colaboración UNIANDES</span></div>
         <div class="meto-pais"><span class="meto-pais-code">BR</span><span class="meto-pais-name">Brasil</span><span class="meto-pais-lang">Português · Mayor mercado LATAM</span></div>
@@ -406,19 +406,19 @@ const LANGS={
       {key:'jjk',     title:'JUJUTSU KAISEN Season 2',sub:'Action · MAPPA',       scores:{MX:15,CO:8},  icon:'ti-sword',      img:'img/gojo.jpg'},
       {key:'dandadan',title:'DAN DA DAN',             sub:'Action · Science SARU',scores:{MX:39,CO:43}, icon:'ti-bolt',       img:'img/dandadan.jpg'},
       {key:'solo',    title:'Solo Leveling',           sub:'Action · A-1 Pictures',scores:{MX:14,CO:14}, icon:'ti-trending-up',img:'img/sl.jpg'},
-      {key:'oshi',    title:'Oshi No Ko',              sub:'Drama · Doga Kobo',    scores:{MX:14,CO:15}, icon:'ti-star',       img:'img/oshi.jpg'}
+      {key:'oshi',    title:'Oshi No Ko',              sub:'Drama · Mystery · Psychological · Supernatural · Doga Kobo',    scores:{MX:14,CO:15}, icon:'ti-star',       img:'img/oshi.jpg'}
     ],
-    context:'DAN DA DAN es el titulo con mayor interes de busqueda en MX y CO, superando incluso a Jujutsu Kaisen. Los scores son relativos al maximo del grupo.'
+    context:'DAN DA DAN es el título con mayor interes de búsqueda en MX y CO, superando incluso a Jujutsu Kaisen. Los scores son relativos al máximo del grupo.'
   },
   pt:{
-    label:'01 · Regiao lusofona',
-    title:'El anime en los paises de habla portuguesa',
-    body:'Brasil es el unico pais lusofono del analisis y el mayor mercado de anime de America Latina por volumen. DAN DA DAN lidera el interes de busqueda con score 19.',
+    label:'01 · Região lusófona',
+    title:'El anime en los países de habla portuguesa',
+    body:'Brasil es el único pais lusofono del análisis y el mayor mercado de anime de America Latina por volumen. DAN DA DAN lidera el interes de búsqueda con score 19.',
     countries:['BR'],
     stats:[
       {l:'Pais',v:'BR',s:'Brasil'},
       {l:'Score promedio',v:'6',s:'Google Trends 0–100'},
-      {l:'Titulo con mayor score',v:'DAN DA DAN',s:'Score: 19'}
+      {l:'Título con mayor score',v:'DAN DA DAN',s:'Score: 19'}
     ],
     anime:[
       {key:'dandadan',title:'DAN DA DAN',             sub:'Action · Science SARU',scores:{BR:19}, icon:'ti-bolt',        img:'img/dandadan.jpg'},
@@ -426,15 +426,15 @@ const LANGS={
       {key:'solo',   title:'Solo Leveling',           sub:'Action · A-1 Pictures',scores:{BR:12}, icon:'ti-trending-up', img:'img/sl.jpg'},
       {key:'dungeon',title:'Delicious in Dungeon',    sub:'Adventure · TRIGGER',  scores:{BR:16}, icon:'ti-tools-kitchen-2',img:'img/dd.jpeg'}
     ],
-    context:'Brasil muestra un patron similar al hispanohablante: DAN DA DAN tiene el mayor score de busqueda. Los scores son relativos al pico maximo del grupo.'
+    context:'Brasil muestra un patron similar al hispanohablante: DAN DA DAN tiene el mayor score de búsqueda. Los scores son relativos al pico máximo del grupo.'
   },
   en:{
     label:'01 · Region anglohablante',
-    title:'El anime en los paises de habla inglesa',
-    body:'EE.UU. registra los scores absolutos mas altos del dataset. Canada sigue de cerca. Ambos mercados se inclinan fuertemente hacia accion y aventura.',
+    title:'El anime en los países de habla inglesa',
+    body:'EE.UU. registra los scores absolutos mas altos del dataset. Canada sigue de cerca. Ambos mercados se inclinan fuertemente hacia acción y aventura.',
     countries:['US','CA'],
     stats:[
-      {l:'Paises',v:'US · CA',s:'EE.UU. y Canada'},
+      {l:'Países',v:'US · CA',s:'EE.UU. y Canada'},
       {l:'Score promedio US',v:'11',s:'Google Trends 0–100'},
       {l:'Score promedio CA',v:'7',s:'Google Trends 0–100'}
     ],
@@ -444,64 +444,64 @@ const LANGS={
       {key:'solo',   title:'Solo Leveling',          sub:'Action · A-1 Pictures',scores:{US:16,CA:17}, icon:'ti-trending-up', img:'img/sl.jpg'},
       {key:'dungeon',title:'Delicious in Dungeon',   sub:'Adventure · TRIGGER',  scores:{US:21,CA:21}, icon:'ti-tools-kitchen-2',img:'img/dd.jpeg'}
     ],
-    context:'Delicious in Dungeon y Solo Leveling tienen scores muy similares en US y CA. DAN DA DAN supera a JJK en EE.UU. Los scores son relativos al pico maximo del grupo.'
+    context:'Delicious in Dungeon y Solo Leveling tienen scores muy similares en US y CA. DAN DA DAN supera a JJK en EE.UU. Los scores son relativos al pico máximo del grupo.'
   }
 };
 
 const GENRES=[
-  {key:'accion',  icon:'ti-sword',       title:'Accion',                 sub:'Batallas, poderes, rivalidades',      body:'El genero dominante en todos los mercados. JJK S2 (Action | Drama | Supernatural) y Solo Leveling (Action | Adventure | Fantasy) concentran los scores de Trends mas altos. MAPPA, A-1 Pictures y MADHOUSE producen los titulos top.',cluster:'aventura'},
-  {key:'romance', icon:'ti-heart',        title:'Romance / Slice of life',sub:'Relaciones, cotidiano, sentimientos', body:'DAN DA DAN lidera el grupo con Romance entre sus generos (Action | Comedy | Drama | Romance | Sci-Fi | Supernatural). El cluster incluye comedias romanticas, Slice of Life y Josei con audiencias fieles.',cluster:'romance'},
-  {key:'fantasia',icon:'ti-sparkles',     title:'Fantasia epica',         sub:'Mundos alternativos, magia, aventura',body:'Fuertemente ligado al Shounen. Frieren lidera con el score AniList mas alto del dataset (91). Delicious in Dungeon une fantasia con comedia.',cluster:'aventura'},
-  {key:'drama',   icon:'ti-mood-confuzed',title:'Drama / Suspenso',       sub:'Psicologico, thriller, misterio',     body:'Seinen densamente conectado. Oshi No Ko y Vinland Saga representan este cluster. Menor traccion en Trends pero scores AniList consistentemente altos.',cluster:'drama'},
-  {key:'horror',  icon:'ti-ghost',        title:'Horror / Sobrenatural',  sub:'Terror, fenomenos paranormales',      body:'DAN DA DAN mezcla lo sobrenatural con accion y comedia, alcanzando los scores mas altos de Trends en MX y CO. Un nicho que encontro audiencia masiva.',cluster:'horror'},
-  {key:'scifi',   icon:'ti-rocket',       title:'Sci-fi',                  sub:'Ciencia ficcion, tecnologia, futuro',          body:'Solo Leveling lidera este espacio con scores consistentes en los 5 paises (12-17). Kaiju No. 8 (Action | Sci-Fi | Shounen) es el segundo titulo mas popular del grupo con 260,542 members.',cluster:'shonen'}
+  {key:'acción',  icon:'ti-sword',       title:'Acción',                 sub:'Batallas, poderes, rivalidades',      body:'El género dominante en todos los mercados. JJK S2 (Action | Drama | Supernatural) y Solo Leveling (Action | Adventure | Fantasy) concentran los scores de Trends mas altos. MAPPA, A-1 Pictures y MADHOUSE producen los títulos top.',cluster:'aventura'},
+  {key:'romance', icon:'ti-heart',        title:'Romance / Slice of life',sub:'Relaciónes, cotidiano, sentimientos', body:'DAN DA DAN lidera el grupo con Romance entre sus géneros (Action | Comedy | Drama | Romance | Sci-Fi | Supernatural). El cluster incluye comedias romanticas, Slice of Life y Josei con audiencias fieles.',cluster:'romance'},
+  {key:'fantasía',icon:'ti-sparkles',     title:'Fantasía epica',         sub:'Mundos alternativos, magia, aventura',body:'Fuertemente ligado al Shounen. Frieren lidera con el score AniList mas alto del dataset (91). Delicious in Dungeon une fantasía con comedia.',cluster:'aventura'},
+  {key:'drama',   icon:'ti-mood-confuzed',title:'Drama / Suspenso',       sub:'Psicologico, thriller, misterio',     body:'Seinen densamente conectado. Oshi No Ko y Vinland Saga representan este cluster. Menor tracción en Trends pero scores AniList consistentemente altos.',cluster:'drama'},
+  {key:'horror',  icon:'ti-ghost',        title:'Horror / Sobrenatural',  sub:'Terror, fenomenos paranormales',      body:'DAN DA DAN mezcla lo sobrenatural con acción y comedia, alcanzando los scores mas altos de Trends en MX y CO. Un nicho que encontro audiencia masiva.',cluster:'horror'},
+  {key:'scifi',   icon:'ti-rocket',       title:'Sci-fi',                  sub:'Ciencia ficcion, tecnologia, futuro',          body:'Solo Leveling lidera este espacio con scores consistentes en los 5 países (12-17). Kaiju No. 8 (Action | Sci-Fi | Shounen) es el segundo titulo mas popular del grupo con 260,542 members.',cluster:'shonen'}
 ];
 
 const CLUSTERS={
   romance:{color:'#993556',bg:'#FBEAF0',name:'Romance y comedia cotidiana',demo:'Josei / Shoujo / Seinen',pct:'28%',nodos:'20',img:'img/hat.png',
-    body:'DAN DA DAN (Action | Comedy | Drama | Romance | Sci-Fi | Supernatural) es el titulo con Romance mas popular del corpus con 352,133 members y scores de Trends lideres (MX:39, CO:43). El cluster incluye tambien comedias romanticas Seinen como Kaguya-sama y Slice of Life.',
+    body:'DAN DA DAN (Action | Comedy | Drama | Romance | Sci-Fi | Supernatural) es el titulo con Romance mas popular del corpus con 352,133 members y scores de Trends lideres (MX:39, CO:43). El cluster incluye también comedias romanticas Seinen como Kaguya-sama y Slice of Life.',
     tags:['Romance','Comedy','Slice of Life','DAN DA DAN','Kaguya-sama','Seinen'],
     timeline:{
       2023:[{title:'Kaguya-sama S3',sub:'Comedy · A-1 Pictures',score:4},{title:'Tomo-chan Is a Girl!',sub:'Romance · Brain Base',score:6}],
-      2024:[{title:'Ao no Hako',sub:'Romance · Telecom Animation Film',score:5},{title:'Kaoru Hana wa Rin to Saku',sub:'Comedy · Platinum Vision',score:5}],
-      2025:[{title:'Kaoru Hana wa Rin to Saku S2',sub:'Romance · Platinum Vision',score:6},{title:'Dandadan 2nd Season',sub:'Action · Science SARU',score:4}],
-      2026:[{title:'Witch Hat Atelier',sub:'Adventure · BUG FILMS',score:3},{title:'Sentenced to Be a Hero',sub:'Action · Studio KAI',score:2}]
+      2024:[{title:'Blue Box',sub:'Romance · Sports · Telecom Animation Film',score:5},{title:'The Fragrant Flower Blooms With Dignity',sub:'Comedy · Drama · Romance · Platinum Vision',score:5}],
+      2025:[{title:'The Fragrant Flower Blooms With Dignity S2',sub:'Comedy · Drama · Romance · Platinum Vision',score:6},{title:'DAN DA DAN Season 2',sub:'Action · Sci-Fi · Supernatural · Science SARU',score:4}],
+      2026:[{title:'Witch Hat Atelier',sub:'Adventure · Drama · Fantasy · BUG FILMS',score:3},{title:'Sentenced to Be a Hero',sub:'Action · Drama · Fantasy · Studio KAI',score:2}]
     }},
-  aventura:{color:'#185FA5',bg:'#E6F1FB',name:'Accion, aventura y fantasia',demo:'Shounen · MAPPA, A-1, MADHOUSE',pct:'24%',nodos:'17',img:'img/frieren.jpg',
-    body:'Frieren (Adventure | Drama | Fantasy) lidera con score AniList 91 y 434,823 members. Solo Leveling (Action | Adventure | Fantasy) es el mas consistente en Trends cross-regionalmente (12-17 en los 5 paises). JJK S2 (Action | Drama | Supernatural) ancla el grupo por popularidad aunque no tiene Fantasy.',
+  aventura:{color:'#185FA5',bg:'#E6F1FB',name:'Acción, aventura y fantasía',demo:'Shounen · MAPPA, A-1, MADHOUSE',pct:'24%',nodos:'17',img:'img/frieren.jpg',
+    body:'Frieren (Adventure | Drama | Fantasy) lidera con score AniList 91 y 434,823 members. Solo Leveling (Action | Adventure | Fantasy) es el mas consistente en Trends cross-regionalmente (12-17 en los 5 países). JJK S2 (Action | Drama | Supernatural) ancla el grupo por popularidad aunque no tiene Fantasy.',
     tags:['Shounen','Action','Fantasy','Adventure','JJK','Frieren','Solo Leveling'],
     timeline:{
       2023:[{title:'JUJUTSU KAISEN Season 2',sub:'Action · MAPPA',score:12},{title:"Frieren: Beyond Journey's End",sub:'Adventure · MADHOUSE',score:1}],
       2024:[{title:'Solo Leveling',sub:'Action · A-1 Pictures',score:14},{title:'DAN DA DAN',sub:'Action · Science SARU',score:31}],
-      2025:[{title:'Gachiakuta',sub:'Action · bones film',score:14},{title:'SAKAMOTO DAYS',sub:'Action · TMS Entertainment',score:6}],
-      2026:[{title:'Witch Hat Atelier',sub:'Adventure · BUG FILMS',score:3},{title:'Sentenced to Be a Hero',sub:'Action · Studio KAI',score:2}]
+      2025:[{title:'Gachiakuta',sub:'Action · Drama · Fantasy · bones',score:14},{title:'SAKAMOTO DAYS',sub:'Action · Comedy · TMS Entertainment',score:6}],
+      2026:[{title:'Witch Hat Atelier',sub:'Adventure · Drama · Fantasy · BUG FILMS',score:3},{title:'Sentenced to Be a Hero',sub:'Action · Drama · Fantasy · Studio KAI',score:2}]
     }},
   drama:{color:'#5F5E5A',bg:'#F1EFE8',name:'Drama y suspenso psicologico',demo:'Seinen / Shounen',pct:'21%',nodos:'15',img:'img/vinland.jpg',
-    body:'Oshi No Ko (Drama | Mystery | Psychological | Supernatural) lidera con score AniList 84 y 309,140 members. Kusuriya (Drama | Mystery, score 88) y Vinland Saga (Action | Adventure | Drama) completan el perfil: alto score AniList, audiencias Seinen comprometidas con menor traccion en Trends.',
+    body:'Oshi No Ko (Drama | Mystery | Psychological | Supernatural) lidera con score AniList 84 y 309,140 members. Kusuriya (Drama | Mystery, score 88) y Vinland Saga (Action | Adventure | Drama) completan el perfil: alto score AniList, audiencias Seinen comprometidas con menor tracción en Trends.',
     tags:['Seinen','Drama','Mystery','Psychological','Oshi No Ko','Kusuriya','Vinland Saga'],
     timeline:{
       2023:[{title:'Oshi No Ko',sub:'Drama · Mystery · Doga Kobo',score:12},{title:'Vinland Saga Season 2',sub:'Action · Adventure · Drama · MAPPA',score:3}],
-      2024:[{title:'Delicious in Dungeon',sub:'Adventure · TRIGGER',score:16},{title:'Dungeon People',sub:'Fantasy · TMS',score:2}],
-      2025:[{title:'The Apothecary Diaries Season 2',sub:'Drama · TOHO Animation Studio',score:8},{title:'Medalist',sub:'Drama · CloverWorks',score:4}],
-      2026:[{title:'Frieren Season 2',sub:'Adventure · MADHOUSE',score:0},{title:'Witch Hat Atelier',sub:'Adventure · BUG FILMS',score:3}]
+      2024:[{title:'Delicious in Dungeon',sub:'Adventure · TRIGGER',score:16},{title:'Dungeon People',sub:'Adventure · Comedy · Fantasy · OLM',score:2}],
+      2025:[{title:'The Apothecary Diaries Season 2',sub:'Drama · TOHO Animation Studio',score:8},{title:'Medalist',sub:'Drama · Psychological · Sports · ENGI',score:4}],
+      2026:[{title:'Frieren Season 2',sub:'Adventure · MADHOUSE',score:0},{title:'Witch Hat Atelier',sub:'Adventure · Drama · Fantasy · BUG FILMS',score:3}]
     }},
-  shonen:{color:'#0F6E56',bg:'#E1F5EE',name:'Accion y sci-fi de gran consumo',demo:'Shounen · A-1, Science SARU',pct:'18%',nodos:'13',img:'img/dandadan.jpg',
-    body:'DAN DA DAN es el fenomeno del periodo: scores mas altos en MX (39) y CO (43), superando a todos los demas titulos. Solo Leveling mantiene consistencia en los 5 paises.',
+  shonen:{color:'#0F6E56',bg:'#E1F5EE',name:'Acción y sci-fi de gran consumo',demo:'Shounen · A-1, Science SARU',pct:'18%',nodos:'13',img:'img/dandadan.jpg',
+    body:'DAN DA DAN es el fenomeno del período: scores mas altos en MX (39) y CO (43), superando a todos los demas titulos. Solo Leveling mantiene consistencia en los 5 países.',
     tags:['Shounen','Action','Sci-Fi','DAN DA DAN','Solo Leveling','Kaiju No. 8'],
     timeline:{
       2023:[{title:'JUJUTSU KAISEN Season 2',sub:'Action · MAPPA',score:12},{title:"Hell's Paradise",sub:'Action · MAPPA',score:4}],
       2024:[{title:'DAN DA DAN',sub:'Action · Science SARU',score:31},{title:'Kaiju No. 8',sub:'Action · Production I.G',score:11}],
-      2025:[{title:'Gachiakuta',sub:'Action · bones film',score:14},{title:'SAKAMOTO DAYS',sub:'Action · TMS Entertainment',score:6}],
-      2026:[{title:'Sentenced to Be a Hero',sub:'Action · Studio KAI',score:2},{title:"Hell's Paradise Season 2",sub:'Action · MAPPA',score:1}]
+      2025:[{title:'Gachiakuta',sub:'Action · Drama · Fantasy · bones',score:14},{title:'SAKAMOTO DAYS',sub:'Action · Comedy · TMS Entertainment',score:6}],
+      2026:[{title:'Sentenced to Be a Hero',sub:'Action · Drama · Fantasy · Studio KAI',score:2},{title:"Hell's Paradise Season 2",sub:'Action · MAPPA',score:1}]
     }},
   horror:{color:'#854F0B',bg:'#FAEEDA',name:'Sobrenatural y horror moderno',demo:'Shounen / Seinen',pct:'8%',nodos:'6',img:'img/oshi.jpg',
-    body:'DAN DA DAN redefine este cluster mezclando sobrenatural, comedia y accion. Sus scores (MX:39, CO:43) son los mas altos del dataset. El horror tradicional tiene nicho pequeno pero estable.',
-    tags:['Sobrenatural','Horror','DAN DA DAN','Accion','Comedia','Sci-Fi'],
+    body:'DAN DA DAN redefine este cluster mezclando sobrenatural, comedia y acción. Sus scores (MX:39, CO:43) son los mas altos del dataset. El horror tradicional tiene nicho pequeno pero estable.',
+    tags:['Sobrenatural','Horror','DAN DA DAN','Acción','Comedia','Sci-Fi'],
     timeline:{
-      2023:[{title:'Oshi No Ko',sub:'Drama · Doga Kobo',score:12},{title:"Hell's Paradise",sub:'Action · MAPPA',score:4}],
+      2023:[{title:'Oshi No Ko',sub:'Drama · Mystery · Psychological · Supernatural · Doga Kobo',score:12},{title:"Hell's Paradise",sub:'Action · MAPPA',score:4}],
       2024:[{title:'DAN DA DAN',sub:'Action · Science SARU',score:31},{title:'Kaiju No. 8',sub:'Action · Production I.G',score:11}],
-      2025:[{title:'DAN DA DAN Season 2',sub:'Action · Science SARU',score:4},{title:'Re:Zero Season 3',sub:'Fantasy · WIT Studio',score:3}],
-      2026:[{title:'Witch Hat Atelier',sub:'Adventure · BUG FILMS',score:3},{title:'Sentenced to Be a Hero',sub:'Action · Studio KAI',score:2}]
+      2025:[{title:'DAN DA DAN Season 2',sub:'Action · Science SARU',score:4},{title:'Re:ZERO Season 3',sub:'Action · Drama · Fantasy · Psychological · WHITE FOX',score:3}],
+      2026:[{title:'Witch Hat Atelier',sub:'Adventure · Drama · Fantasy · BUG FILMS',score:3},{title:'Sentenced to Be a Hero',sub:'Action · Drama · Fantasy · Studio KAI',score:2}]
     }}
 };
 
@@ -511,14 +511,14 @@ const JOYAS=[
    sub:'Adventure · Drama · MADHOUSE',anio:'2023 · FALL',demo:'Shounen',
    score_anilist:91,popularidad:434823,scores:{MX:0,US:3,CA:0,CO:0,BR:0},
    body:"El anime con el score AniList mas alto del dataset (91/100) y el segundo en popularidad con 434,823 members — pero practicamente invisible en Google Trends. Una audiencia que lo vive en plataformas, no lo busca en Google.",
-   hallazgo:'Score AniList: 91 · Trends promedio: 0.6 · La brecha mas grande del corpus entre calidad percibida e interes de busqueda.'
+   hallazgo:'Score AniList: 91 · Trends promedio: 0.6 · La brecha mas grande del corpus entre calidad percibida e interes de búsqueda.'
   },
   {key:'kusuriya',icon:'ti-flask',img:'img/mao.jpeg',
    title:'The Apothecary Diaries',titleJP:'Kusuriya no Hitorigoto',
-   sub:'Drama · Mystery · OLM | TOHO animation',anio:'2023 · FALL',demo:'Seinen',
+   sub:'Drama · Mystery · Seinen · OLM | TOHO animation Studio',anio:'2023 · FALL',demo:'Seinen',
    score_anilist:88,popularidad:290856,scores:{MX:21,US:25,CA:26,CO:11,BR:26},
-   body:'La excepcion de las joyas: score AniList alto (88) y el mejor desempeno en Trends de este grupo. MX:21, US:25, CA:26, CO:11, BR:26. Demuestra que drama y misterio pueden cruzar la barrera entre audiencia comprometida y busqueda activa.',
-   hallazgo:'Score AniList: 88 · Trends mas altos del grupo · Unico titulo Seinen que logra traccion transregional sostenida.'
+   body:'La excepcion de las joyas: score AniList alto (88) y el mejor desempeno en Trends de este grupo. MX:21, US:25, CA:26, CO:11, BR:26. Demuestra que drama y misterio pueden cruzar la barrera entre audiencia comprometida y búsqueda activa.',
+   hallazgo:'Score AniList: 88 · Trends mas altos del grupo · Único titulo Seinen que logra tracción transregional sostenida.'
   },
   {key:'zom100',icon:'ti-skull',img:'img/zom100.jpg',
    title:'Zom 100: Bucket List of the Dead',titleJP:'Zom 100: Zombie ni Naru Made ni Shitai 100 no Koto',
@@ -531,15 +531,15 @@ const JOYAS=[
    title:'Delicious in Dungeon',titleJP:'Dungeon Meshi',
    sub:'Adventure · Comedy · Fantasy · TRIGGER',anio:'2024 · WINTER',demo:'Unknown',
    score_anilist:85,popularidad:208156,scores:{MX:7,US:21,CA:21,CO:0,BR:16},
-   body:'La joya con mayor impacto en mercados anglófonos: US:21 y CA:21 son scores notables para una comedia de fantasia. Brasil tambien responde (16). Colombia y Mexico quedan rezagados — clara asimetria norte-sur.',
-   hallazgo:'Score AniList: 85 · US y CA lideran con 21 · El unico titulo del grupo con clara asimetria norte-sur en su distribucion de interes.'
+   body:'La joya con mayor impacto en mercados anglófonos: US:21 y CA:21 son scores notables para una comedia de fantasía. Brasil también responde (16). Colombia y Mexico quedan rezagados — clara asimetria norte-sur.',
+   hallazgo:'Score AniList: 85 · US y CA lideran con 21 · El único titulo del grupo con clara asimetria norte-sur en su distribución de interes.'
   }
 ];
 
 const MAP_REGIONS={
-  es:{active:{'484':'Mexico','170':'Colombia'},color:'#77525F',label:'Paises de habla hispana'},
-  pt:{active:{'076':'Brasil'},                 color:'#085041',label:'Pais de habla portuguesa'},
-  en:{active:{'840':'EE.UU.','124':'Canada'},  color:'#0C447C',label:'Paises de habla inglesa'}
+  es:{active:{'484':'México','170':'Colombia'},color:'#77525F',label:'Países de habla hispana'},
+  pt:{active:{'076':'Brasil'},                 color:'#085041',label:'País de habla portuguesa'},
+  en:{active:{'840':'EE.UU.','124':'Canada'},  color:'#0C447C',label:'Países de habla inglesa'}
 };
 
 const AMERICAS=new Set([
@@ -639,7 +639,7 @@ function renderRegionMap(l){
   var H=Math.round(W*0.78);
   var svg=d3.select('#region-map').append('svg')
     .attr('viewBox','0 0 '+W+' '+H).attr('width','100%').style('background','#f5f3f0');
-  var proj=d3.geoMercator().center([-75,10]).scale(W*0.52).translate([W*0.42,H*0.48]);
+  var proj=d3.geoMercator().center([-80,5]).scale(W*0.46).translate([W*0.5,H*0.5]);
   var path=d3.geoPath(proj);
   var features=topojson.feature(MAP_GEO,MAP_GEO.objects.countries).features
     .filter(function(f){return AMERICAS.has(String(f.id).padStart(3,'0'));});
@@ -653,7 +653,8 @@ function renderRegionMap(l){
     .join('text')
     .attr('transform',function(d){var c=path.centroid(d);return 'translate('+c[0]+','+c[1]+')';})
     .attr('text-anchor','middle').attr('dy','0.35em')
-    .attr('font-size',Math.max(10,W*0.022)).attr('font-weight','700').attr('fill','#ffffff')
+    .attr('font-size',Math.max(9,W*0.02)).attr('font-weight','700').attr('fill','#ffffff')
+    .attr('stroke','rgba(0,0,0,0.25)').attr('stroke-width',3).attr('paint-order','stroke')
     .attr('font-family','system-ui,sans-serif').attr('pointer-events','none')
     .text(function(d){return cfg.active[String(d.id).padStart(3,'0')];});
   document.getElementById('region-map-legend').innerHTML=
@@ -677,9 +678,9 @@ function showAnime(key){
   var panel=document.getElementById('s1-panel');
   panel.innerHTML='<div class="icard">'+
     '<div class="anime-cover-wrap">'+imgHtml(a.img,a.title)+
-    '<div><span class="ilabel">Google Trends 2023–2026 · Promedio del periodo</span>'+
+    '<div><span class="ilabel">Google Trends 2023–2026 · Promedio del período</span>'+
     '<p class="ititl" style="margin-bottom:.75rem">'+a.title+'</p>'+bars+
-    '<p style="font-size:.72rem;color:var(--c-muted);margin-top:.75rem">Score relativo 0–100. El 100 es el pico maximo del grupo.</p>'+
+    '<p style="font-size:.72rem;color:var(--c-muted);margin-top:.75rem">Score relativo 0–100. El 100 es el pico máximo del grupo.</p>'+
     '</div></div>'+
     '<p style="font-size:.85rem;color:var(--c-texto);opacity:.8;margin-top:.5rem;line-height:1.6">'+d.context+'</p></div>';
   panel.style.display='block';
@@ -696,7 +697,7 @@ function pickGenre(k){
     b.classList.toggle('sel',b.getAttribute('onclick').indexOf("'"+k+"'")>-1);
   });
   var panel=document.getElementById('s2-panel');
-  panel.innerHTML='<div class="icard"><span class="ilabel">Por que este genero?</span><p class="ibody">'+g.body+'</p></div>';
+  panel.innerHTML='<div class="icard"><span class="ilabel">Por que este género?</span><p class="ibody">'+g.body+'</p></div>';
   panel.style.display='block';
   document.getElementById('s2-next').disabled=false;
   buildClusters(g.cluster);
@@ -714,7 +715,7 @@ function buildClusters(main){
     if(isMain)div.style.cssText='border-color:'+c.color+';background:'+c.bg+';';
     div.innerHTML=
       '<div class="cl-dot" style="background:'+c.color+'"></div>'+
-      '<div class="cl-info"><div class="cl-name">'+c.name+(isMain?' <span style="font-size:.7rem;color:'+c.color+';margin-left:6px">← tu genero</span>':'')+'</div>'+
+      '<div class="cl-info"><div class="cl-name">'+c.name+(isMain?' <span style="font-size:.7rem;color:'+c.color+';margin-left:6px">← tu género</span>':'')+'</div>'+
       '<div class="cl-sub">'+c.demo+' · '+c.nodos+' nodos</div></div>'+
       '<div class="cl-pct">'+c.pct+'</div>';
     if(c.img){
@@ -741,7 +742,7 @@ function showCluster(k){
 function buildResult(main){
   var c=CLUSTERS[main],ld=LANGS[lang];
   document.getElementById('r-title').textContent='Cluster: '+c.name;
-  document.getElementById('r-body').textContent='Segun tu lengua materna y genero favorito, este es el cluster que mejor describe tu perfil de consumo.';
+  document.getElementById('r-body').textContent='Según tu lengua materna y género favorito, este es el cluster que mejor describe tu perfil de consumo.';
   document.getElementById('r-finding').textContent=c.name+' en '+ld.countries.join(' y ');
   document.getElementById('r-detail').textContent=c.body;
   document.getElementById('r-tags').innerHTML=c.tags.map(function(t){
@@ -782,9 +783,9 @@ function showJoya(key){
   document.getElementById('s5-stats').innerHTML=
     '<div class="stat"><span class="slb">Score AniList</span><span class="sval">'+j.score_anilist+'/100</span><span class="ssub">Puntuacion comunidad</span></div>'+
     '<div class="stat"><span class="slb">Members AniList</span><span class="sval">'+j.popularidad.toLocaleString()+'</span><span class="ssub">Usuarios que la siguen</span></div>'+
-    '<div class="stat"><span class="slb">Trends promedio</span><span class="sval">'+avg+'</span><span class="ssub">5 paises · 0–100</span></div>';
-  var paises=['MX','US','CA','CO','BR'];
-  var bars=paises.map(function(p){
+    '<div class="stat"><span class="slb">Trends promedio</span><span class="sval">'+avg+'</span><span class="ssub">5 países · 0–100</span></div>';
+  var países=['MX','US','CA','CO','BR'];
+  var bars=países.map(function(p){
     var v=j.scores[p]||0;
     return '<div class="tbar-row"><span class="tbar-lbl">'+p+'</span><div class="tbar-track"><div class="tbar-fill" data-w="'+v+'"></div></div><span class="tbar-num">'+v+'</span></div>';
   }).join('');
