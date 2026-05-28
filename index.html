@@ -265,6 +265,32 @@
         <div class="ctxt"><div class="ctit">English</div></div>
         <i class="ti ti-chevron-right carr" aria-hidden="true"></i>
       </button>
+      <button class="cb" onclick="go(5)" style="margin-top:.35rem;border-top:1px solid var(--c-linea)">
+        <div class="cicon"><i class="ti ti-diamond" aria-hidden="true"></i></div>
+        <div class="ctxt">
+          <div class="ctit">Joyas del anime</div>
+          <div class="csub">Alto score AniList, bajo radar en Trends</div>
+        </div>
+        <i class="ti ti-chevron-right carr" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="screen" id="s5">
+    <span class="slabel">Ruta alternativa · Joyas del anime</span>
+    <p class="stitle">Alto score, bajo radar</p>
+    <p class="sbody">Estas series tienen puntuaciones AniList sobresalientes pero scores de Google Trends cercanos a cero: audiencias comprometidas, no masivas. Selecciona una para explorarla.</p>
+    <div class="choices" id="s5-choices"></div>
+    <div class="icard" id="s5-panel" style="display:none">
+      <span class="ilabel" id="s5-ilabel"></span>
+      <p class="ititl" id="s5-title-out"></p>
+      <p class="ibody" id="s5-body-out" style="margin-bottom:.85rem"></p>
+      <div class="statgrid" id="s5-stats" style="margin:0 0 .85rem"></div>
+      <div id="s5-bars"></div>
+      <p style="font-size:.72rem;color:var(--c-muted);margin-top:.85rem">Trends: interés de búsqueda relativo 0–100 · Score AniList: escala 0–100</p>
+    </div>
+    <div class="navrow">
+      <button class="bbk" onclick="go(0)"><i class="ti ti-arrow-left" aria-hidden="true"></i> Volver</button>
     </div>
   </div>
 
@@ -465,8 +491,105 @@ const CLUSTERS={
     }}
 };
 
+const JOYAS=[
+  {
+    key:'frieren',
+    icon:'ti-wand',
+    title:'Frieren: Beyond Journey's End',
+    titleJP:'Sousou no Frieren',
+    sub:'Adventure · Drama · Fantasy · MADHOUSE',
+    anio:'2023 · FALL',
+    demo:'Shounen',
+    score_anilist:91,
+    popularidad:434823,
+    scores:{MX:0,US:3,CA:0,CO:0,BR:0},
+    body:'El anime con el score AniList más alto del dataset (91/100) y el segundo en popularidad con 434,823 members — pero prácticamente invisible en Google Trends. Una audiencia que lo vive en plataformas, no lo busca en Google.',
+    hallazgo:'Score AniList: 91 · Trends promedio: 0.6 · La brecha más grande del corpus entre calidad percibida e interés de búsqueda.'
+  },
+  {
+    key:'kusuriya',
+    icon:'ti-flask',
+    title:'The Apothecary Diaries',
+    titleJP:'Kusuriya no Hitorigoto',
+    sub:'Drama · Mystery · OLM | TOHO animation',
+    anio:'2023 · FALL',
+    demo:'Seinen',
+    score_anilist:88,
+    popularidad:290856,
+    scores:{MX:21,US:25,CA:26,CO:11,BR:26},
+    body:'La excepción de las joyas: score AniList alto (88) y el mejor desempeño en Trends de este grupo. MX:21, US:25, CA:26, CO:11, BR:26. Demuestra que drama y misterio pueden cruzar la barrera entre audiencia comprometida y búsqueda activa.',
+    hallazgo:'Score AniList: 88 · Trends más altos del grupo · Único título Seinen que logra tracción transregional sostenida.'
+  },
+  {
+    key:'zom100',
+    icon:'ti-skull',
+    title:'Zom 100: Bucket List of the Dead',
+    titleJP:'Zom 100: Zombie ni Naru Made ni Shitai 100 no Koto',
+    sub:'Action · Adventure · Comedy · Horror · BUG FILMS',
+    anio:'2023 · SUMMER',
+    demo:'Seinen',
+    score_anilist:76,
+    popularidad:225547,
+    scores:{MX:2,US:7,CA:4,CO:0,BR:2},
+    body:'Combina horror, comedia y crítica laboral en una premisa única: el protagonista celebra el apocalipsis zombie porque ya no tiene que ir a trabajar. Score modesto en Trends pero 225,547 members en AniList apuntan a un nicho muy fiel.',
+    hallazgo:'Score AniList: 76 · Trends bajos (máx. 7 en US) · El título más original del corpus en concepto narrativo.'
+  },
+  {
+    key:'dungeon',
+    icon:'ti-tools-kitchen-2',
+    title:'Delicious in Dungeon',
+    titleJP:'Dungeon Meshi',
+    sub:'Adventure · Comedy · Fantasy · TRIGGER',
+    anio:'2024 · WINTER',
+    demo:'Unknown',
+    score_anilist:85,
+    popularidad:208156,
+    scores:{MX:7,US:21,CA:21,CO:0,BR:16},
+    body:'La joya con mayor impacto en mercados anglófonos: US:21 y CA:21 son scores notables para una comedia de fantasía. Brasil también responde (16). Colombia y México quedan rezagados. Demuestra que el humor gastronómico-fantástico tiene mayor tracción en el norte.',
+    hallazgo:'Score AniList: 85 · US y CA lideran con 21 · El único título del grupo con clara asimetría norte-sur en su distribución de interés.'
+  }
+];
+
 const ORDER=['aventura','romance','drama','shonen','horror'];
 const YEARS=[2023,2024,2025,2026];
+
+function initJoyas(){
+  document.getElementById('s5-choices').innerHTML=JOYAS.map(j=>
+    `<button class="cb" onclick="showJoya('${j.key}')">
+      <div class="cicon"><i class="ti ${j.icon}" aria-hidden="true"></i></div>
+      <div class="ctxt"><div class="ctit">${j.title}</div><div class="csub">${j.sub.split('·')[0].trim()} · ${j.anio}</div></div>
+      <i class="ti ti-chevron-right carr" aria-hidden="true"></i>
+    </button>`
+  ).join('');
+}
+
+function showJoya(key){
+  const j=JOYAS.find(x=>x.key===key);
+  document.querySelectorAll('#s5-choices .cb').forEach(b=>{
+    b.classList.toggle('sel',b.getAttribute('onclick').includes("'"+key+"'"));
+  });
+  document.getElementById('s5-ilabel').textContent=j.titleJP+' · '+j.anio+' · '+j.demo;
+  document.getElementById('s5-title-out').textContent=j.title;
+  document.getElementById('s5-body-out').textContent=j.body;
+  document.getElementById('s5-stats').innerHTML=`
+    <div class="stat"><span class="slb">Score AniList</span><span class="sval">${j.score_anilist}/100</span><span class="ssub">Puntuación comunidad</span></div>
+    <div class="stat"><span class="slb">Members AniList</span><span class="sval">${j.popularidad.toLocaleString()}</span><span class="ssub">Usuarios que la siguen</span></div>
+    <div class="stat"><span class="slb">Trends promedio</span><span class="sval">${(Object.values(j.scores).reduce((a,b)=>a+b,0)/Object.values(j.scores).length).toFixed(1)}</span><span class="ssub">5 países · 0–100</span></div>`;
+  const paises=['MX','US','CA','CO','BR'];
+  const bars=paises.map(p=>`
+    <div class="tbar-row">
+      <span class="tbar-lbl">${p}</span>
+      <div class="tbar-track"><div class="tbar-fill" data-w="${j.scores[p]||0}"></div></div>
+      <span class="tbar-num">${j.scores[p]||0}</span>
+    </div>`).join('');
+  document.getElementById('s5-bars').innerHTML=`<p style="font-size:.75rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--c-muted);margin-bottom:.6rem">Google Trends 2023–2026</p>${bars}
+    <div class="icard" style="margin-top:.85rem;background:var(--c-bg)"><span class="ilabel">Hallazgo</span><p class="ibody">${j.hallazgo}</p></div>`;
+  const panel=document.getElementById('s5-panel');
+  panel.style.display='block';
+  requestAnimationFrame(()=>{
+    panel.querySelectorAll('.tbar-fill').forEach(el=>{el.style.width=el.dataset.w+'%';});
+  });
+}
 
 function setTema(l){
   document.body.className=TEMAS[l]||'';
@@ -486,6 +609,7 @@ function go(n){
   cur=n;
   document.getElementById('s'+cur).classList.add('on');
   buildPips();
+  if(n===5)initJoyas();
 }
 
 buildPips();
@@ -633,6 +757,8 @@ function resetAll(){
     const el=document.getElementById(id);if(el)el.textContent='';
   });
   document.getElementById('r-tags').innerHTML='';
+  document.getElementById('s5-panel').style.display='none';
+  document.getElementById('s5-choices').innerHTML='';
   document.querySelectorAll('.cb').forEach(b=>b.classList.remove('sel'));
   buildPips();
   go(0);
