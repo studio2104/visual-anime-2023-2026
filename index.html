@@ -76,13 +76,27 @@
   .tbar-track { flex:1; height:4px; background:var(--c-bg); transition:background .5s; }
   .tbar-fill  { height:100%; background:var(--c-muted); width:0%; transition:width .85s cubic-bezier(.16,1,.3,1),background .5s; }
   .tbar-num   { font-size:.82rem; font-weight:700; color:var(--c-texto); width:26px; text-align:right; flex-shrink:0; transition:color .5s; }
-  .cl-row { display:flex; align-items:center; gap:12px; padding:.8rem 1rem; background:var(--c-panel); border:1px solid var(--c-linea); border-radius:2px; cursor:pointer; transition:border-color .18s,background .5s; margin-bottom:6px; }
+
+  /* cluster rows con imagen en hover */
+  .cl-row {
+    display:flex; align-items:center; gap:12px; padding:.8rem 1rem;
+    background:var(--c-panel); border:1px solid var(--c-linea); border-radius:2px;
+    cursor:pointer; transition:border-color .18s,background .5s; margin-bottom:6px;
+    position:relative; overflow:hidden;
+  }
   .cl-row:hover { border-color:var(--c-acento); }
-  .cl-dot  { width:9px; height:9px; border-radius:50%; flex-shrink:0; }
-  .cl-info { flex:1; }
+  .cl-thumb {
+    position:absolute; right:0; top:0; height:100%; width:80px;
+    object-fit:cover; opacity:0; transition:opacity .3s ease;
+    pointer-events:none;
+  }
+  .cl-row:hover .cl-thumb { opacity:.18; }
+  .cl-dot  { width:9px; height:9px; border-radius:50%; flex-shrink:0; position:relative; z-index:1; }
+  .cl-info { flex:1; position:relative; z-index:1; }
   .cl-name { font-size:.88rem; font-weight:700; color:var(--c-texto); transition:color .5s; }
   .cl-sub  { font-size:.75rem; color:var(--c-muted); margin-top:2px; transition:color .5s; }
-  .cl-pct  { font-size:.88rem; font-weight:700; color:var(--c-texto); font-family:"Lucida Console","Courier New",monospace; transition:color .5s; }
+  .cl-pct  { font-size:.88rem; font-weight:700; color:var(--c-texto); font-family:"Lucida Console","Courier New",monospace; transition:color .5s; position:relative; z-index:1; }
+
   .tag { display:inline-block; font-size:.7rem; font-weight:700; letter-spacing:.04em; padding:.18rem .55rem; border-radius:2px; margin:3px 3px 0 0; }
   .rbadge { display:inline-block; font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; background:var(--c-bg); color:var(--c-acento); padding:.28rem .85rem; border:1px solid var(--c-linea); border-radius:2px; margin-bottom:.85rem; transition:background .5s,color .5s,border-color .5s; }
   .yr-block { margin-bottom:1.5rem; }
@@ -100,7 +114,10 @@
   .map-legend { display:flex; gap:16px; flex-wrap:wrap; margin-top:8px; font-size:.75rem; color:var(--c-muted); }
   .map-legend-item { display:flex; align-items:center; gap:5px; }
   .map-legend-sw { width:11px; height:11px; border-radius:2px; flex-shrink:0; }
-  @media(max-width:640px){ .statgrid{grid-template-columns:1fr 1fr} .anime-grid{grid-template-columns:1fr} }
+  .anime-cover-wrap { display:grid; grid-template-columns:90px 1fr; gap:1rem; align-items:start; margin-bottom:.85rem; }
+  .anime-cover { width:90px; border-radius:4px; display:block; aspect-ratio:2/3; object-fit:cover; background:var(--c-panel); }
+  .anime-cover-ph { width:90px; aspect-ratio:2/3; background:var(--c-panel); border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:1.4rem; color:var(--c-muted); }
+  @media(max-width:640px){ .statgrid{grid-template-columns:1fr 1fr} .anime-grid{grid-template-columns:1fr} .anime-cover-wrap{grid-template-columns:70px 1fr} .anime-cover,.anime-cover-ph{width:70px} }
 </style>
 </head>
 <body>
@@ -229,8 +246,13 @@
     <div class="choices" id="s5-choices"></div>
     <div class="icard" id="s5-panel" style="display:none">
       <span class="ilabel" id="s5-ilabel"></span>
-      <p class="ititl" id="s5-title-out"></p>
-      <p class="ibody" id="s5-body-out" style="margin-bottom:.85rem"></p>
+      <div class="anime-cover-wrap">
+        <div id="s5-cover"></div>
+        <div>
+          <p class="ititl" id="s5-title-out" style="margin-bottom:.4rem"></p>
+          <p class="ibody" id="s5-body-out"></p>
+        </div>
+      </div>
       <div class="statgrid" id="s5-stats" style="margin:0 0 .85rem"></div>
       <div id="s5-bars"></div>
       <p style="font-size:.72rem;color:var(--c-muted);margin-top:.85rem">Trends: interés de búsqueda relativo 0–100 · Score AniList: escala 0–100</p>
@@ -258,10 +280,10 @@ const LANGS={
       {l:'Score promedio CO',v:'3',s:'Google Trends 0–100'}
     ],
     anime:[
-      {key:'jjk',     title:'JUJUTSU KAISEN Season 2',sub:'Action · MAPPA',       scores:{MX:15,CO:8},  icon:'ti-sword'},
-      {key:'dandadan',title:'DAN DA DAN',             sub:'Action · Science SARU',scores:{MX:39,CO:43}, icon:'ti-bolt'},
-      {key:'solo',    title:'Solo Leveling',           sub:'Action · A-1 Pictures',scores:{MX:14,CO:14}, icon:'ti-trending-up'},
-      {key:'oshi',    title:'Oshi No Ko',              sub:'Drama · Doga Kobo',    scores:{MX:14,CO:15}, icon:'ti-star'}
+      {key:'jjk',     title:'JUJUTSU KAISEN Season 2',sub:'Action · MAPPA',       scores:{MX:15,CO:8},  icon:'ti-sword',      img:'/img/gojo.jpg'},
+      {key:'dandadan',title:'DAN DA DAN',             sub:'Action · Science SARU',scores:{MX:39,CO:43}, icon:'ti-bolt',       img:'/img/dandadan.jpg'},
+      {key:'solo',    title:'Solo Leveling',           sub:'Action · A-1 Pictures',scores:{MX:14,CO:14}, icon:'ti-trending-up',img:'/img/sl.jpg'},
+      {key:'oshi',    title:'Oshi No Ko',              sub:'Drama · Doga Kobo',    scores:{MX:14,CO:15}, icon:'ti-star',       img:'/img/oshi.jpg'}
     ],
     context:'DAN DA DAN es el titulo con mayor interes de busqueda en MX y CO, superando incluso a Jujutsu Kaisen. Los scores son relativos al maximo del grupo.'
   },
@@ -276,10 +298,10 @@ const LANGS={
       {l:'Titulo con mayor score',v:'DAN DA DAN',s:'Score: 19'}
     ],
     anime:[
-      {key:'dandadan',title:'DAN DA DAN',             sub:'Action · Science SARU',scores:{BR:19}, icon:'ti-bolt'},
-      {key:'jjk',    title:'JUJUTSU KAISEN Season 2',sub:'Action · MAPPA',       scores:{BR:13}, icon:'ti-sword'},
-      {key:'solo',   title:'Solo Leveling',           sub:'Action · A-1 Pictures',scores:{BR:12}, icon:'ti-trending-up'},
-      {key:'dungeon',title:'Delicious in Dungeon',    sub:'Adventure · TRIGGER',  scores:{BR:16}, icon:'ti-tools-kitchen-2'}
+      {key:'dandadan',title:'DAN DA DAN',             sub:'Action · Science SARU',scores:{BR:19}, icon:'ti-bolt',        img:'/img/dandadan.jpg'},
+      {key:'jjk',    title:'JUJUTSU KAISEN Season 2',sub:'Action · MAPPA',       scores:{BR:13}, icon:'ti-sword',       img:'/img/gojo.jpg'},
+      {key:'solo',   title:'Solo Leveling',           sub:'Action · A-1 Pictures',scores:{BR:12}, icon:'ti-trending-up', img:'/img/sl.jpg'},
+      {key:'dungeon',title:'Delicious in Dungeon',    sub:'Adventure · TRIGGER',  scores:{BR:16}, icon:'ti-tools-kitchen-2',img:'/img/dd.jpeg'}
     ],
     context:'Brasil muestra un patron similar al hispanohablante: DAN DA DAN tiene el mayor score de busqueda. Los scores son relativos al pico maximo del grupo.'
   },
@@ -294,10 +316,10 @@ const LANGS={
       {l:'Score promedio CA',v:'7',s:'Google Trends 0–100'}
     ],
     anime:[
-      {key:'jjk',    title:'JUJUTSU KAISEN Season 2',sub:'Action · MAPPA',       scores:{US:10,CA:12}, icon:'ti-sword'},
-      {key:'dandadan',title:'DAN DA DAN',            sub:'Action · Science SARU',scores:{US:20,CA:14}, icon:'ti-bolt'},
-      {key:'solo',   title:'Solo Leveling',          sub:'Action · A-1 Pictures',scores:{US:16,CA:17}, icon:'ti-trending-up'},
-      {key:'dungeon',title:'Delicious in Dungeon',   sub:'Adventure · TRIGGER',  scores:{US:21,CA:21}, icon:'ti-tools-kitchen-2'}
+      {key:'jjk',    title:'JUJUTSU KAISEN Season 2',sub:'Action · MAPPA',       scores:{US:10,CA:12}, icon:'ti-sword',       img:'/img/gojo.jpg'},
+      {key:'dandadan',title:'DAN DA DAN',            sub:'Action · Science SARU',scores:{US:20,CA:14}, icon:'ti-bolt',        img:'/img/dandadan.jpg'},
+      {key:'solo',   title:'Solo Leveling',          sub:'Action · A-1 Pictures',scores:{US:16,CA:17}, icon:'ti-trending-up', img:'/img/sl.jpg'},
+      {key:'dungeon',title:'Delicious in Dungeon',   sub:'Adventure · TRIGGER',  scores:{US:21,CA:21}, icon:'ti-tools-kitchen-2',img:'/img/dd.jpeg'}
     ],
     context:'Delicious in Dungeon y Solo Leveling tienen scores muy similares en US y CA. DAN DA DAN supera a JJK en EE.UU. Los scores son relativos al pico maximo del grupo.'
   }
@@ -313,7 +335,7 @@ const GENRES=[
 ];
 
 const CLUSTERS={
-  romance:{color:'#993556',bg:'#FBEAF0',name:'Romance y comedia cotidiana',demo:'Josei / Shoujo / Seinen',pct:'28%',nodos:'20',
+  romance:{color:'#993556',bg:'#FBEAF0',name:'Romance y comedia cotidiana',demo:'Josei / Shoujo / Seinen',pct:'28%',nodos:'20',img:'img/hat.jpg',
     body:'Oshi No Ko domina este cluster con 309,140 members en AniList y scores de Trends solidos en todos los paises (MX:14, CO:15, BR:8). Mezcla drama, misterio y romance de forma inusual para el genero.',
     tags:['Josei','Shoujo','Drama','Oshi No Ko','DAN DA DAN','Romance'],
     timeline:{
@@ -322,7 +344,7 @@ const CLUSTERS={
       2025:[{title:'Kaoru Hana wa Rin to Saku S2',sub:'Romance · Platinum Vision',score:6},{title:'Dandadan 2nd Season',sub:'Action · Science SARU',score:4}],
       2026:[{title:'Witch Hat Atelier',sub:'Adventure · BUG FILMS',score:3},{title:'Sentenced to Be a Hero',sub:'Action · Studio KAI',score:2}]
     }},
-  aventura:{color:'#185FA5',bg:'#E6F1FB',name:'Aventura y fantasia epica',demo:'Shounen · MAPPA, A-1, MADHOUSE',pct:'24%',nodos:'17',
+  aventura:{color:'#185FA5',bg:'#E6F1FB',name:'Aventura y fantasia epica',demo:'Shounen · MAPPA, A-1, MADHOUSE',pct:'24%',nodos:'17',img:'img/frieren.jpg',
     body:'Frieren lidera con el score AniList mas alto del dataset (91) y 434,823 members. Solo Leveling es el titulo con mayor consistencia cross-regional en Trends (12-17 en los 5 paises).',
     tags:['Shounen','Fantasia','Accion','MAPPA','A-1 Pictures','Frieren','Solo Leveling'],
     timeline:{
@@ -331,7 +353,7 @@ const CLUSTERS={
       2025:[{title:'Gachiakuta',sub:'Action · bones film',score:14},{title:'SAKAMOTO DAYS',sub:'Action · TMS Entertainment',score:6}],
       2026:[{title:'Witch Hat Atelier',sub:'Adventure · BUG FILMS',score:3},{title:'Sentenced to Be a Hero',sub:'Action · Studio KAI',score:2}]
     }},
-  drama:{color:'#5F5E5A',bg:'#F1EFE8',name:'Drama y suspenso psicologico',demo:'Seinen / Shounen',pct:'21%',nodos:'15',
+  drama:{color:'#5F5E5A',bg:'#F1EFE8',name:'Drama y suspenso psicologico',demo:'Seinen / Shounen',pct:'21%',nodos:'15',img:'img/vinland.jpg',
     body:'Oshi No Ko y Vinland Saga representan este cluster. Scores AniList altos (86-91) pero menor impacto en Trends — audiencias comprometidas, no masivas.',
     tags:['Seinen','Drama','Misterio','Psicologico','Oshi No Ko','Vinland Saga'],
     timeline:{
@@ -340,7 +362,7 @@ const CLUSTERS={
       2025:[{title:'The Apothecary Diaries Season 2',sub:'Drama · TOHO Animation Studio',score:8},{title:'Medalist',sub:'Drama · CloverWorks',score:4}],
       2026:[{title:'Frieren Season 2',sub:'Adventure · MADHOUSE',score:0},{title:'Witch Hat Atelier',sub:'Adventure · BUG FILMS',score:3}]
     }},
-  shonen:{color:'#0F6E56',bg:'#E1F5EE',name:'Accion y sci-fi de gran consumo',demo:'Shounen · A-1, Science SARU',pct:'18%',nodos:'13',
+  shonen:{color:'#0F6E56',bg:'#E1F5EE',name:'Accion y sci-fi de gran consumo',demo:'Shounen · A-1, Science SARU',pct:'18%',nodos:'13',img:'img/dandadan.jpg',
     body:'DAN DA DAN es el fenomeno del periodo: scores mas altos en MX (39) y CO (43), superando a todos los demas titulos. Solo Leveling mantiene consistencia en los 5 paises.',
     tags:['Shounen','Sci-fi','Accion','DAN DA DAN','Solo Leveling','Kaiju No. 8'],
     timeline:{
@@ -349,7 +371,7 @@ const CLUSTERS={
       2025:[{title:'Gachiakuta',sub:'Action · bones film',score:14},{title:'SAKAMOTO DAYS',sub:'Action · TMS Entertainment',score:6}],
       2026:[{title:'Sentenced to Be a Hero',sub:'Action · Studio KAI',score:2},{title:"Hell's Paradise Season 2",sub:'Action · MAPPA',score:1}]
     }},
-  horror:{color:'#854F0B',bg:'#FAEEDA',name:'Sobrenatural y horror moderno',demo:'Shounen / Seinen',pct:'8%',nodos:'6',
+  horror:{color:'#854F0B',bg:'#FAEEDA',name:'Sobrenatural y horror moderno',demo:'Shounen / Seinen',pct:'8%',nodos:'6',img:'img/oshi.jpg',
     body:'DAN DA DAN redefine este cluster mezclando sobrenatural, comedia y accion. Sus scores (MX:39, CO:43) son los mas altos del dataset. El horror tradicional tiene nicho pequeno pero estable.',
     tags:['Sobrenatural','Horror','DAN DA DAN','Accion','Comedia','Sci-Fi'],
     timeline:{
@@ -361,28 +383,28 @@ const CLUSTERS={
 };
 
 const JOYAS=[
-  {key:'frieren',icon:'ti-wand',
+  {key:'frieren',icon:'ti-wand',img:'img/frieren.jpg',
    title:"Frieren: Beyond Journey's End",titleJP:'Sousou no Frieren',
    sub:'Adventure · Drama · MADHOUSE',anio:'2023 · FALL',demo:'Shounen',
    score_anilist:91,popularidad:434823,scores:{MX:0,US:3,CA:0,CO:0,BR:0},
    body:"El anime con el score AniList mas alto del dataset (91/100) y el segundo en popularidad con 434,823 members — pero practicamente invisible en Google Trends. Una audiencia que lo vive en plataformas, no lo busca en Google.",
    hallazgo:'Score AniList: 91 · Trends promedio: 0.6 · La brecha mas grande del corpus entre calidad percibida e interes de busqueda.'
   },
-  {key:'kusuriya',icon:'ti-flask',
+  {key:'kusuriya',icon:'ti-flask',img:'img/kusuriya.jpg',
    title:'The Apothecary Diaries',titleJP:'Kusuriya no Hitorigoto',
    sub:'Drama · Mystery · OLM | TOHO animation',anio:'2023 · FALL',demo:'Seinen',
    score_anilist:88,popularidad:290856,scores:{MX:21,US:25,CA:26,CO:11,BR:26},
    body:'La excepcion de las joyas: score AniList alto (88) y el mejor desempeno en Trends de este grupo. MX:21, US:25, CA:26, CO:11, BR:26. Demuestra que drama y misterio pueden cruzar la barrera entre audiencia comprometida y busqueda activa.',
    hallazgo:'Score AniList: 88 · Trends mas altos del grupo · Unico titulo Seinen que logra traccion transregional sostenida.'
   },
-  {key:'zom100',icon:'ti-skull',
+  {key:'zom100',icon:'ti-skull',img:'img/zom100.jpg',
    title:'Zom 100: Bucket List of the Dead',titleJP:'Zom 100: Zombie ni Naru Made ni Shitai 100 no Koto',
    sub:'Action · Comedy · Horror · BUG FILMS',anio:'2023 · SUMMER',demo:'Seinen',
    score_anilist:76,popularidad:225547,scores:{MX:2,US:7,CA:4,CO:0,BR:2},
    body:'Combina horror, comedia y critica laboral en una premisa unica: el protagonista celebra el apocalipsis zombie porque ya no tiene que ir a trabajar. Score modesto en Trends pero 225,547 members en AniList apuntan a un nicho muy fiel.',
    hallazgo:'Score AniList: 76 · Trends bajos (max. 7 en US) · El titulo mas original del corpus en concepto narrativo.'
   },
-  {key:'dungeon',icon:'ti-tools-kitchen-2',
+  {key:'dungeon',icon:'ti-tools-kitchen-2',img:'img/dd.jpeg',
    title:'Delicious in Dungeon',titleJP:'Dungeon Meshi',
    sub:'Adventure · Comedy · Fantasy · TRIGGER',anio:'2024 · WINTER',demo:'Unknown',
    score_anilist:85,popularidad:208156,scores:{MX:7,US:21,CA:21,CO:0,BR:16},
@@ -404,7 +426,6 @@ const AMERICAS=new Set([
 ]);
 
 let MAP_GEO=null;
-
 const ORDER=['aventura','romance','drama','shonen','horror'];
 const YEARS=[2023,2024,2025,2026];
 
@@ -506,6 +527,11 @@ function renderRegionMap(l){
     '<div class="map-legend-item"><div class="map-legend-sw" style="background:#e8e4e0;border:1px solid #ccc"></div><span>Resto de América</span></div>';
 }
 
+function imgHtml(src,alt){
+  if(src) return '<img class="anime-cover" src="'+src+'" alt="'+alt+'" loading="lazy" onerror="this.style.display=\'none\'">';
+  return '<div class="anime-cover-ph"><i class="ti ti-photo" aria-hidden="true"></i></div>';
+}
+
 function showAnime(key){
   const d=LANGS[lang];
   const a=d.anime.find(function(x){return x.key===key;});
@@ -516,10 +542,18 @@ function showAnime(key){
       '<span class="tbar-num">'+v+'</span></div>';
   }).join('');
   const panel=document.getElementById('s1-panel');
-  panel.innerHTML='<div class="icard"><span class="ilabel">Google Trends 2023–2026 · Promedio del periodo</span>'+
-    '<p class="ititl">'+a.title+'</p><div style="margin-top:.85rem">'+bars+'</div>'+
-    '<p style="font-size:.72rem;color:var(--c-muted);margin-top:.85rem">Score relativo 0–100. El 100 es el pico maximo del grupo.</p>'+
-    '<p style="font-size:.85rem;color:var(--c-texto);opacity:.8;margin-top:.75rem;line-height:1.6">'+d.context+'</p></div>';
+  panel.innerHTML='<div class="icard">'+
+    '<div class="anime-cover-wrap">'+
+      imgHtml(a.img,a.title)+
+      '<div>'+
+        '<span class="ilabel">Google Trends 2023–2026 · Promedio del periodo</span>'+
+        '<p class="ititl" style="margin-bottom:.75rem">'+a.title+'</p>'+
+        bars+
+        '<p style="font-size:.72rem;color:var(--c-muted);margin-top:.75rem">Score relativo 0–100. El 100 es el pico maximo del grupo.</p>'+
+      '</div>'+
+    '</div>'+
+    '<p style="font-size:.85rem;color:var(--c-texto);opacity:.8;margin-top:.5rem;line-height:1.6">'+d.context+'</p>'+
+  '</div>';
   panel.style.display='block';
   requestAnimationFrame(function(){
     panel.querySelectorAll('.tbar-fill').forEach(function(el){el.style.width=el.dataset.w+'%';});
@@ -545,7 +579,9 @@ function buildClusters(main){
   document.getElementById('s3-title').textContent='Los 5 clusters en '+ld.countries.join(' y ');
   document.getElementById('s3-clusters').innerHTML=ORDER.map(function(k){
     var c=CLUSTERS[k],isMain=k===main;
+    var thumb=c.img?'<img class="cl-thumb" src="'+c.img+'" alt="" aria-hidden="true">':'';
     return '<div class="cl-row" style="'+(isMain?'border-color:'+c.color+';background:'+c.bg+';':'')+'" onclick="showCluster(\''+k+'\')">'+
+      thumb+
       '<div class="cl-dot" style="background:'+c.color+'"></div>'+
       '<div class="cl-info"><div class="cl-name">'+c.name+(isMain?' <span style="font-size:.7rem;color:'+c.color+';margin-left:6px">← tu genero</span>':'')+'</div>'+
       '<div class="cl-sub">'+c.demo+' · '+c.nodos+' nodos</div></div>'+
@@ -601,6 +637,7 @@ function showJoya(key){
     b.classList.toggle('sel',b.getAttribute('onclick').indexOf("'"+key+"'")>-1);
   });
   document.getElementById('s5-ilabel').textContent=j.titleJP+' · '+j.anio+' · '+j.demo;
+  document.getElementById('s5-cover').innerHTML=imgHtml(j.img,j.title);
   document.getElementById('s5-title-out').textContent=j.title;
   document.getElementById('s5-body-out').textContent=j.body;
   var vals=Object.values(j.scores);
