@@ -25,7 +25,7 @@
   .screen { display:none; } .screen.on { display:block; animation:fu .3s ease; }
   @keyframes fu { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
   .slabel { display:block; font-size:.8rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--c-muted); margin-bottom:.6rem; transition:color .5s; }
-  .stitle { font-family:"Lucida Console","Courier New",monospace; font-size:clamp(2rem,4vw,3.4rem); font-weight:normal; color:var(--c-texto); line-height:1.05; margin-bottom:.85rem; transition:color .5s; }
+  .stitle { font-family:"Source Code Pro","Lucida Console","Courier New",monospace; font-size:clamp(2rem,4vw,3.4rem); font-weight:normal; color:var(--c-texto); line-height:1.05; margin-bottom:.85rem; transition:color .5s; }
   .sbody  { font-size:1.1rem; color:var(--c-texto); opacity:.78; line-height:1.8; margin-bottom:1.75rem; transition:color .5s; }
   .choices { display:flex; flex-direction:column; gap:0; margin-bottom:1.25rem; }
   .cb { display:flex; align-items:center; gap:16px; padding:1rem 1.25rem; background:transparent; border:none; border-bottom:1px solid var(--c-linea); cursor:pointer; text-align:left; width:100%; font-family:inherit; transition:background .18s,transform .15s; }
@@ -46,6 +46,8 @@
   .bnx { font-size:.75rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--c-bg); background:var(--c-acento); border:1px solid var(--c-acento); border-radius:2px; padding:.55rem 1.3rem; cursor:pointer; font-family:inherit; display:flex; align-items:center; gap:6px; transition:background .18s,border-color .18s,color .5s; }
   .bnx:hover { background:var(--c-muted); border-color:var(--c-muted); }
   .bnx:disabled { opacity:.3; cursor:default; }
+  .bnx-ghost { font-size:.75rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--c-acento); background:transparent; border:1px solid var(--c-acento); border-radius:2px; padding:.55rem 1.3rem; cursor:pointer; font-family:inherit; display:flex; align-items:center; gap:6px; transition:background .18s,color .18s; }
+  .bnx-ghost:hover { background:var(--c-panel); }
   .icard { border:none; border-radius:4px; padding:1.25rem 1.5rem; background:var(--c-panel); margin-top:1rem; animation:fu .3s ease; transition:background .5s; }
   .ilabel { display:block; font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--c-acento); margin-bottom:.5rem; opacity:.7; transition:color .5s; }
   .ititl  { font-size:1.05rem; font-weight:700; color:var(--c-texto); margin-bottom:.4rem; font-family:"Source Code Pro","Lucida Console","Courier New",monospace; transition:color .5s; }
@@ -94,7 +96,40 @@
   #cl-prev { position:fixed; pointer-events:none; z-index:9999; width:120px; border-radius:6px; overflow:hidden; box-shadow:0 8px 28px rgba(0,0,0,.22); opacity:0; transition:opacity .18s ease; top:0; left:0; }
   #cl-prev.on { opacity:1; }
   #cl-prev img { width:100%; display:block; aspect-ratio:2/3; object-fit:cover; }
-  @media(max-width:640px){ .statgrid{grid-template-columns:1fr 1fr} .anime-grid{grid-template-columns:1fr} .anime-cover-wrap{grid-template-columns:70px 1fr} .anime-cover,.anime-cover-ph{width:70px} #cl-prev{display:none} }
+  /* Metodología */
+  .meto-tabs { display:flex; gap:0; border-bottom:1px solid var(--c-linea); margin-bottom:2rem; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  .meto-tab { font-size:.78rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; padding:.6rem 1.1rem; background:none; border:none; border-bottom:2px solid transparent; cursor:pointer; color:var(--c-muted); white-space:nowrap; font-family:inherit; margin-bottom:-1px; transition:color .18s,border-color .18s; }
+  .meto-tab:hover { color:var(--c-texto); }
+  .meto-tab.on { color:var(--c-acento); border-bottom-color:var(--c-acento); }
+  .meto-panel { display:none; animation:fu .25s ease; }
+  .meto-panel.on { display:block; }
+  .meto-steps { display:flex; flex-direction:column; gap:0; }
+  .meto-step { display:grid; grid-template-columns:36px 1fr; gap:0 1rem; padding:1.25rem 0; border-bottom:1px solid var(--c-linea); }
+  .meto-step:last-child { border-bottom:none; }
+  .meto-step-n { font-family:"Source Code Pro","Lucida Console",monospace; font-size:.75rem; font-weight:700; color:var(--c-muted); padding-top:.15rem; text-align:right; }
+  .meto-step-title { font-size:.95rem; font-weight:700; color:var(--c-texto); margin-bottom:.35rem; font-family:"Source Code Pro","Lucida Console",monospace; }
+  .meto-step-text { font-size:.92rem; color:var(--c-texto); opacity:.78; line-height:1.8; }
+  .meto-step-tag { display:inline-block; font-size:.68rem; font-weight:700; letter-spacing:.05em; padding:.15rem .55rem; border-radius:2px; margin:.4rem .3rem 0 0; background:var(--c-panel); color:var(--c-acento); }
+  .meto-chips { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 1.75rem; }
+  .meto-chip { background:var(--c-panel); border-radius:4px; padding:.75rem 1rem; flex:1; min-width:120px; }
+  .meto-chip-val { display:block; font-size:1.3rem; font-weight:700; font-family:"Source Code Pro","Lucida Console",monospace; color:var(--c-texto); line-height:1; }
+  .meto-chip-lbl { display:block; font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:var(--c-muted); margin-top:.3rem; }
+  .meto-lim { background:var(--c-panel); border-radius:4px; padding:1.1rem 1.3rem; margin-bottom:.6rem; display:flex; gap:.85rem; align-items:flex-start; }
+  .meto-lim-icon { font-size:1rem; color:var(--c-muted); flex-shrink:0; padding-top:.1rem; }
+  .meto-lim-text { font-size:.92rem; color:var(--c-texto); opacity:.8; line-height:1.75; }
+  .meto-toggle { background:none; border:none; cursor:pointer; font-size:.78rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--c-muted); font-family:inherit; padding:.35rem 0; display:flex; align-items:center; gap:.4rem; transition:color .18s; margin-top:.5rem; }
+  .meto-toggle:hover { color:var(--c-acento); }
+  .meto-toggle-arrow { transition:transform .22s ease; display:inline-block; }
+  .meto-toggle-arrow.open { transform:rotate(90deg); }
+  .meto-extra { display:none; padding:.85rem 0 .25rem; font-size:.88rem; color:var(--c-texto); opacity:.75; line-height:1.8; }
+  .meto-extra.on { display:block; animation:fu .2s ease; }
+  .meto-paises { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:8px; margin:1rem 0; }
+  .meto-pais { background:var(--c-panel); border-radius:4px; padding:.8rem 1rem; }
+  .meto-pais-code { font-family:"Source Code Pro","Lucida Console",monospace; font-size:1rem; font-weight:700; color:var(--c-acento); display:block; margin-bottom:.2rem; }
+  .meto-pais-name { font-size:.8rem; color:var(--c-texto); opacity:.75; }
+  .meto-pais-lang { font-size:.7rem; color:var(--c-muted); margin-top:.15rem; display:block; }
+  .meto-cite { font-size:.78rem; color:var(--c-muted); line-height:1.7; padding-top:2rem; border-top:1px solid var(--c-linea); margin-top:2.5rem; }
+  @media(max-width:640px){ .statgrid{grid-template-columns:1fr 1fr} .anime-grid{grid-template-columns:1fr} .anime-cover-wrap{grid-template-columns:70px 1fr} .anime-cover,.anime-cover-ph{width:70px} #cl-prev{display:none} .meto-tab{padding:.6rem .75rem;font-size:.72rem} .meto-chip{min-width:100px} }
 </style>
 </head>
 <body>
@@ -113,6 +148,7 @@
 <div class="pips" id="pips"></div>
 
 <div class="shell">
+
   <div class="screen on" id="s0">
     <span class="slabel">Punto de partida</span>
     <p class="stitle">¿Cuál es tu lengua materna?</p>
@@ -209,6 +245,11 @@
     <div class="divider"></div>
     <p style="font-size:.75rem;color:var(--c-muted);line-height:1.7;margin-bottom:1.5rem">Fuente: AniList GraphQL API · Google Trends · Período: 2023–2026</p>
     <div class="choices">
+      <button class="cb" onclick="go(6)">
+        <div class="cicon"><i class="ti ti-microscope" aria-hidden="true"></i></div>
+        <div class="ctxt"><div class="ctit">Ver metodología</div><div class="csub">Cómo se construyó este análisis</div></div>
+        <i class="ti ti-chevron-right carr" aria-hidden="true"></i>
+      </button>
       <button class="cb" onclick="resetAll()">
         <div class="cicon"><i class="ti ti-refresh" aria-hidden="true"></i></div>
         <div class="ctxt"><div class="ctit">Explorar desde el inicio</div></div>
@@ -237,12 +278,116 @@
     </div>
     <div class="navrow">
       <button class="bbk" onclick="resetAll()"><i class="ti ti-arrow-left" aria-hidden="true"></i> Volver al inicio</button>
+      <button class="bnx-ghost" onclick="go(6)"><i class="ti ti-microscope" aria-hidden="true"></i> Metodología</button>
     </div>
   </div>
+
+  <div class="screen" id="s6">
+    <span class="slabel">Metodología</span>
+    <p class="stitle">Cómo se construyó este análisis</p>
+    <p class="sbody">Este proyecto cruza datos de consumo de anime con señales de búsqueda en internet para trazar un mapa de preferencias regionales en América Latina y Norteamérica. Los datos provienen de dos fuentes públicas y fueron procesados en Python durante el período 2023–2026.</p>
+
+    <div class="meto-chips">
+      <div class="meto-chip"><span class="meto-chip-val">1,926</span><span class="meto-chip-lbl">Animes · AniList</span></div>
+      <div class="meto-chip"><span class="meto-chip-val">100</span><span class="meto-chip-lbl">Títulos · Google Trends</span></div>
+      <div class="meto-chip"><span class="meto-chip-val">5</span><span class="meto-chip-lbl">Países analizados</span></div>
+      <div class="meto-chip"><span class="meto-chip-val">2023–26</span><span class="meto-chip-lbl">Período de análisis</span></div>
+    </div>
+
+    <div class="meto-tabs" role="tablist">
+      <button class="meto-tab on" onclick="metoTab(this,'mt-fuentes')" role="tab">Fuentes</button>
+      <button class="meto-tab" onclick="metoTab(this,'mt-paises')" role="tab">Países</button>
+      <button class="meto-tab" onclick="metoTab(this,'mt-proceso')" role="tab">Procesamiento</button>
+      <button class="meto-tab" onclick="metoTab(this,'mt-clusters')" role="tab">Clusters</button>
+      <button class="meto-tab" onclick="metoTab(this,'mt-limites')" role="tab">Limitaciones</button>
+    </div>
+
+    <div class="meto-panel on" id="mt-fuentes">
+      <div class="meto-steps">
+        <div class="meto-step">
+          <div class="meto-step-n">01</div>
+          <div class="meto-step-body">
+            <div class="meto-step-title">AniList GraphQL API</div>
+            <div class="meto-step-text">Se consultó la API pública de AniList para extraer todos los animes emitidos entre 2023 y 2026, sin filtro de popularidad mínima. Para cada título se obtuvieron nombre original, estudio, géneros, demografía, score de la comunidad (0–100) y número de miembros.</div>
+            <button class="meto-toggle" onclick="metoExtra(this)">
+              <i class="ti ti-chevron-right meto-toggle-arrow" aria-hidden="true"></i> Variables extraídas
+            </button>
+            <div class="meto-extra">
+              <span class="meto-step-tag">titulo_original</span><span class="meto-step-tag">titulo_romanizado</span><span class="meto-step-tag">titulo_ingles</span><span class="meto-step-tag">release_date</span><span class="meto-step-tag">estudio</span><span class="meto-step-tag">generos</span><span class="meto-step-tag">demografia</span><span class="meto-step-tag">formato</span><span class="meto-step-tag">score_promedio</span><span class="meto-step-tag">popularidad</span>
+            </div>
+          </div>
+        </div>
+        <div class="meto-step">
+          <div class="meto-step-n">02</div>
+          <div class="meto-step-body">
+            <div class="meto-step-title">Google Trends · pytrends</div>
+            <div class="meto-step-text">A partir del corpus de AniList se seleccionaron los 100 títulos con mayor popularidad y se consultó su interés de búsqueda para cada uno de los cinco países a lo largo de todo el período 2023–2026 (escala 0–100, donde 100 es el pico máximo del grupo).</div>
+            <button class="meto-toggle" onclick="metoExtra(this)">
+              <i class="ti ti-chevron-right meto-toggle-arrow" aria-hidden="true"></i> Sobre el score de Trends
+            </button>
+            <div class="meto-extra">Google Trends no reporta volumen absoluto de búsquedas sino interés relativo normalizado. Un score de 39 en México para DAN DA DAN significa que ese título concentró el 39% del interés máximo registrado en el grupo durante el período. Los valores son comparables entre países dentro del mismo dataset pero no entre datasets distintos.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="meto-panel" id="mt-paises">
+      <p class="meto-step-text" style="margin-bottom:1.25rem;line-height:1.85">Cinco países en tres regiones lingüísticas. La selección responde a representatividad regional y viabilidad técnica: incluir más países en un mismo raspado aumenta exponencialmente la complejidad de cuotas y tiempos de respuesta de la API de Google Trends.</p>
+      <div class="meto-paises">
+        <div class="meto-pais"><span class="meto-pais-code">MX</span><span class="meto-pais-name">México</span><span class="meto-pais-lang">Español · Institución de origen</span></div>
+        <div class="meto-pais"><span class="meto-pais-code">CO</span><span class="meto-pais-name">Colombia</span><span class="meto-pais-lang">Español · Colaboración UNIANDES</span></div>
+        <div class="meto-pais"><span class="meto-pais-code">BR</span><span class="meto-pais-name">Brasil</span><span class="meto-pais-lang">Português · Mayor mercado LATAM</span></div>
+        <div class="meto-pais"><span class="meto-pais-code">US</span><span class="meto-pais-name">EE.UU.</span><span class="meto-pais-lang">English · Referencia global</span></div>
+        <div class="meto-pais"><span class="meto-pais-code">CA</span><span class="meto-pais-name">Canadá</span><span class="meto-pais-lang">English · Mercado anglófono</span></div>
+      </div>
+      <p class="meto-step-text" style="margin-top:1rem;opacity:.7">La pareja MX–CO refleja el eje institucional del proyecto: la autora es investigadora mexicana en el Tecnológico de Monterrey y el trabajo se desarrolla en colaboración con la Universidad de los Andes (Bogotá). Brasil se incorpora como el mayor consumidor de anime en América Latina por volumen.</p>
+    </div>
+
+    <div class="meto-panel" id="mt-proceso">
+      <div class="meto-steps">
+        <div class="meto-step"><div class="meto-step-n">01</div><div class="meto-step-body"><div class="meto-step-title">Extracción desde AniList</div><div class="meto-step-text">Script en Python con paginación automática sobre la API GraphQL. Se extrajeron todos los títulos del período sin filtro de popularidad, generando un CSV de 1,926 filas.</div><span class="meto-step-tag">Python</span><span class="meto-step-tag">GraphQL</span><span class="meto-step-tag">pandas</span></div></div>
+        <div class="meto-step"><div class="meto-step-n">02</div><div class="meto-step-body"><div class="meto-step-title">Consulta de Google Trends</div><div class="meto-step-text">Los 100 títulos más populares se consultaron con pytrends, con períodos de espera entre llamadas para respetar los límites de la API no oficial. Los scores se almacenaron como columnas en el CSV.</div><span class="meto-step-tag">pytrends</span><span class="meto-step-tag">top 100</span></div></div>
+        <div class="meto-step"><div class="meto-step-n">03</div><div class="meto-step-body"><div class="meto-step-title">Construcción de la red</div><div class="meto-step-text">Se construyó una red bipartita de animes y géneros. Los nodos representan títulos, estudios y géneros; las aristas codifican sus relaciones ponderadas por popularidad y Trends. Resultado: 392 nodos y 1,121 aristas.</div><span class="meto-step-tag">NetworkX</span><span class="meto-step-tag">392 nodos</span><span class="meto-step-tag">1,121 aristas</span></div></div>
+        <div class="meto-step"><div class="meto-step-n">04</div><div class="meto-step-body"><div class="meto-step-title">Detección de comunidades</div><div class="meto-step-text">El algoritmo de Louvain maximiza la modularidad de la red agrupando nodos con más conexiones entre sí que con el resto. Resultado: cinco clusters con perfiles temáticos diferenciados.</div><span class="meto-step-tag">Louvain</span><span class="meto-step-tag">5 clusters</span><span class="meto-step-tag">python-louvain</span></div></div>
+        <div class="meto-step"><div class="meto-step-n">05</div><div class="meto-step-body"><div class="meto-step-title">Visualización interactiva</div><div class="meto-step-text">Los datos procesados se integraron en esta visualización web con HTML, CSS y JavaScript vanilla. D3.js para el mapa geográfico. Sin frameworks de front-end.</div><span class="meto-step-tag">D3.js</span><span class="meto-step-tag">TopoJSON</span><span class="meto-step-tag">JavaScript</span></div></div>
+      </div>
+    </div>
+
+    <div class="meto-panel" id="mt-clusters">
+      <p class="meto-step-text" style="margin-bottom:1.5rem;line-height:1.85">Louvain identificó cinco comunidades en la red de anime–géneros. Los porcentajes indican la proporción de nodos del corpus en cada comunidad.</p>
+      <div class="meto-steps">
+        <div class="meto-step"><div class="meto-step-n" style="color:#185FA5">24%</div><div class="meto-step-body"><div class="meto-step-title" style="color:#185FA5">Aventura y fantasía épica</div><div class="meto-step-text">Más conectado con el mercado anglófono. Frieren lidera en AniList (91/100) y Solo Leveling muestra la mayor consistencia cross-regional en Trends (12–17 en los 5 países). Predominan títulos Shounen de MAPPA, A-1 y MADHOUSE.</div></div></div>
+        <div class="meto-step"><div class="meto-step-n" style="color:#993556">28%</div><div class="meto-step-body"><div class="meto-step-title" style="color:#993556">Romance y comedia cotidiana</div><div class="meto-step-text">El cluster más grande. Oshi No Ko domina con 309,140 miembros en AniList y scores sólidos en todos los países. La mezcla de drama, misterio y romance en un mismo título es característica de esta comunidad.</div></div></div>
+        <div class="meto-step"><div class="meto-step-n" style="color:#5F5E5A">21%</div><div class="meto-step-body"><div class="meto-step-title" style="color:#5F5E5A">Drama y suspenso psicológico</div><div class="meto-step-text">Alta calidad percibida (AniList 86–91) pero menor tracción en Trends. Audiencias comprometidas que consumen en plataformas sin traducirse en búsquedas activas. Vinland Saga y Oshi No Ko anclan este cluster.</div></div></div>
+        <div class="meto-step"><div class="meto-step-n" style="color:#0F6E56">18%</div><div class="meto-step-body"><div class="meto-step-title" style="color:#0F6E56">Acción y sci-fi de gran consumo</div><div class="meto-step-text">DAN DA DAN es el fenómeno del período: scores más altos de Trends en MX (39) y CO (43), superando a todos los demás. Solo Leveling mantiene presencia consistente en los 5 países.</div></div></div>
+        <div class="meto-step"><div class="meto-step-n" style="color:#854F0B">8%</div><div class="meto-step-body"><div class="meto-step-title" style="color:#854F0B">Sobrenatural y horror moderno</div><div class="meto-step-text">El más pequeño pero con el hallazgo más inesperado: DAN DA DAN redefine el género mezclando sobrenatural, comedia y acción, alcanzando los scores más altos del dataset.</div></div></div>
+      </div>
+    </div>
+
+    <div class="meto-panel" id="mt-limites">
+      <p class="meto-step-text" style="margin-bottom:1.5rem;line-height:1.85">Todo análisis implica decisiones metodológicas que abren y cierran posibilidades. Las siguientes limitaciones deben tenerse en cuenta al interpretar los resultados.</p>
+      <div class="meto-lim"><i class="ti ti-map-pin-off meto-lim-icon" aria-hidden="true"></i><div class="meto-lim-text"><strong>Cobertura geográfica parcial.</strong> Argentina, Chile, Perú y el resto de LATAM hispanohablante quedan fuera. Los patrones de MX y CO no son necesariamente extrapolables a toda la región.</div></div>
+      <div class="meto-lim"><i class="ti ti-trending-up meto-lim-icon" aria-hidden="true"></i><div class="meto-lim-text"><strong>Google Trends mide búsquedas, no consumo.</strong> Un score alto indica interés de búsqueda, no visualizaciones. Títulos consumidos por recomendación directa o en plataformas cerradas pueden tener scores bajos sin que eso refleje baja popularidad (caso Frieren).</div></div>
+      <div class="meto-lim"><i class="ti ti-filter meto-lim-icon" aria-hidden="true"></i><div class="meto-lim-text"><strong>Top 100 de Trends.</strong> Solo se consultó Google Trends para los 100 títulos más populares del corpus. Los animes de nicho no están representados en el análisis de búsquedas.</div></div>
+      <div class="meto-lim"><i class="ti ti-clock meto-lim-icon" aria-hidden="true"></i><div class="meto-lim-text"><strong>Datos estáticos.</strong> El corpus refleja el ecosistema entre 2023 y 2026. Las tendencias cambian con cada temporada y los datos no se actualizan en tiempo real.</div></div>
+      <div class="meto-lim"><i class="ti ti-network meto-lim-icon" aria-hidden="true"></i><div class="meto-lim-text"><strong>Clusters como aproximación.</strong> La detección con Louvain depende de la estructura de la red y los parámetros de resolución elegidos. Los cinco clusters son una de las posibles particiones válidas, no la única.</div></div>
+    </div>
+
+    <div class="meto-cite">
+      <strong>Cita sugerida:</strong> Rocha, N. (2026). <em>El anime tiene acento: análisis de preferencias de consumo regional en América Latina y Norteamérica, 2023–2026</em>. Proyecto de visualización de datos, Humanidades Digitales, EHE Tec de Monterrey / Universidad de los Andes.<br><br>
+      <strong>Fuentes:</strong> AniList GraphQL API (api.anilist.co) · Google Trends vía pytrends · D3.js v7 · TopoJSON world-atlas v2
+    </div>
+
+    <div class="navrow">
+      <button class="bbk" onclick="goBack6()"><i class="ti ti-arrow-left" aria-hidden="true"></i> Volver</button>
+      <button class="bnx" onclick="resetAll()"><i class="ti ti-refresh" aria-hidden="true"></i> Inicio</button>
+    </div>
+  </div>
+
 </div>
 
 <script>
-let cur=0,lang='',genre='';
+let cur=0,lang='',genre='',prevScreen=4;
 const TEMAS={es:'',pt:'tema-pt',en:'tema-en'};
 
 const LANGS={
@@ -406,7 +551,6 @@ let MAP_GEO=null;
 const ORDER=['aventura','romance','drama','shonen','horror'];
 const YEARS=[2023,2024,2025,2026];
 
-// --- Preview flotante clusters ---
 var clPrev=document.getElementById('cl-prev');
 var clPrevImg=document.getElementById('cl-prev-img');
 document.addEventListener('mousemove',function(e){
@@ -420,7 +564,7 @@ function clPrevHide(){ clPrev.classList.remove('on'); }
 
 function buildPips(){
   var el=document.getElementById('pips');el.innerHTML='';
-  if(cur===5){el.style.display='none';return;}
+  if(cur===5||cur===6){el.style.display='none';return;}
   el.style.display='flex';
   for(var i=0;i<5;i++){
     var d=document.createElement('div');
@@ -431,9 +575,19 @@ function buildPips(){
 
 function go(n){
   document.getElementById('s'+cur).classList.remove('on');
+  if(n===6) prevScreen=cur;
   cur=n;
   document.getElementById('s'+cur).classList.add('on');
   buildPips();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function goBack6(){
+  document.getElementById('s6').classList.remove('on');
+  cur=prevScreen;
+  document.getElementById('s'+cur).classList.add('on');
+  buildPips();
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
 function goJoyas(){
@@ -645,7 +799,7 @@ function showJoya(key){
 
 function resetAll(){
   clPrevHide();
-  lang='';genre='';cur=0;
+  lang='';genre='';cur=0;prevScreen=4;
   document.body.className='';
   document.getElementById('s1-next').disabled=true;
   document.getElementById('s2-next').disabled=true;
@@ -658,6 +812,22 @@ function resetAll(){
   document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('on');});
   document.getElementById('s0').classList.add('on');
   buildPips();
+}
+
+function metoTab(btn,id){
+  btn.closest('.meto-tabs').querySelectorAll('.meto-tab').forEach(function(t){t.classList.remove('on');});
+  btn.classList.add('on');
+  var panel=btn.closest('.screen');
+  panel.querySelectorAll('.meto-panel').forEach(function(p){p.classList.remove('on');});
+  document.getElementById(id).classList.add('on');
+}
+
+function metoExtra(btn){
+  var arrow=btn.querySelector('.meto-toggle-arrow');
+  var extra=btn.nextElementSibling;
+  var isOpen=extra.classList.contains('on');
+  extra.classList.toggle('on',!isOpen);
+  arrow.classList.toggle('open',!isOpen);
 }
 </script>
 
