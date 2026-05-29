@@ -142,7 +142,7 @@
   <div class="hero-texto">
     <p class="serie">Proyecto de visualización de datos · Humanidades Digitales</p>
     <h1>El anime tiene acento.<br>¿Cuál es el tuyo?</h1>
-    <p class="entradilla">Géneros, preferencias y consumo regional en los países hispanohablantes, lusófonos y anglófonos — 2023 a 2026.</p>
+    <p class="entradilla">Descubre los géneros, preferencias y consumo regional en los países hispanohablantes, lusófonos y anglófonos entre el 2023 a 2026.</p>
     <p class="meta">Natalia Rocha · natalia.rocha@tec.mx · 2026</p>
   </div>
 </header>
@@ -153,8 +153,10 @@
 
   <div class="screen on" id="s0">
     <span class="slabel">Punto de partida</span>
-    <p class="stitle">¿Cuál es tu lengua materna?</p>
-    <p class="sbody">Según tu respuesta, veremos qué consume el anime en los países que hablan ese idioma — y si tus géneros favoritos coinciden con tu región.</p>
+    <p class="stitle">Bienvenida a tu viaje por el mundo del anime contemporáneo</p>
+    <p class="sbody">En este recorrido interactivo, exploraremos cómo el anime se consume de manera diferente según la región y el idioma. A través de tus elecciones, descubriremos patrones de consumo, preferencias de género y las joyas ocultas del anime que podrían haberse pasado por alto en las tendencias regionales.</p>
+    <p class="stitle">Arranquemos con el idioma que hablas</p>
+    <p class="sbody">Según tu respuesta, veremos qué anime se consume en los países que hablan ese idioma — y si tus géneros favoritos coinciden con tu región.</p>
     <div class="choices">
       <button class="cb" onclick="pickLang('es')">
         <div class="cicon"><i class="ti ti-language" aria-hidden="true"></i></div>
@@ -175,7 +177,7 @@
         <div class="cicon"><i class="ti ti-diamond" aria-hidden="true"></i></div>
         <div class="ctxt">
           <div class="ctit">Joyas del anime</div>
-          <div class="csub">Alto score AniList, bajo radar en Trends</div>
+          <div class="csub">Alto score en AniList, perfil bajo en Google Trends</div>
         </div>
         <i class="ti ti-chevron-right carr" aria-hidden="true"></i>
       </button>
@@ -202,8 +204,8 @@
 
   <div class="screen" id="s2">
     <span class="slabel">02 · Tu preferencia</span>
-    <p class="stitle">¿Qué tipo de historia prefieres?</p>
-    <p class="sbody">Cada género se conecta con un cluster distinto en la red de consumo. Elige el que más te represente.</p>
+    <p class="stitle">¿Qué tipo de historias te gustan más?</p>
+    <p class="sbody">Cada género se conecta con un cluster de animes distinto en la red de consumo. Elige el que más te represente.</p>
     <div class="choices" id="s2-genres"></div>
     <div id="s2-panel" style="display:none"></div>
     <div class="navrow">
@@ -249,7 +251,7 @@
     <div class="choices">
       <button class="cb" onclick="go(6)">
         <div class="cicon"><i class="ti ti-microscope" aria-hidden="true"></i></div>
-        <div class="ctxt"><div class="ctit">Ver metodología</div><div class="csub">Cómo se construyó este análisis</div></div>
+        <div class="ctxt"><div class="ctit">Ver metodología</div><div class="csub">¿Cómo se construyó este análisis?</div></div>
         <i class="ti ti-chevron-right carr" aria-hidden="true"></i>
       </button>
       <button class="cb" onclick="resetAll()">
@@ -262,7 +264,7 @@
 
   <div class="screen" id="s5">
     <span class="slabel">Ruta alternativa · Joyas del anime</span>
-    <p class="stitle">Alto score, bajo radar</p>
+    <p class="stitle">Alto score, bajo perfil en Google Trends</p>
     <p class="sbody">Estas series tienen puntuaciones AniList sobresalientes pero scores de Google Trends cercanos a cero: audiencias comprometidas, no masivas. Selecciona una para explorarla.</p>
     <div class="choices" id="s5-choices"></div>
     <div class="icard" id="s5-panel" style="display:none">
@@ -286,7 +288,7 @@
 
   <div class="screen" id="s6">
     <span class="slabel">Metodología</span>
-    <p class="stitle">Cómo se construyó este análisis</p>
+    <p class="stitle">¿Cómo se construyó este análisis?</p>
     <p class="sbody">Este proyecto cruza datos de consumo de anime con señales de búsqueda en internet para trazar un mapa de preferencias regionales en América Latina y Norteamérica. El corpus parte de 1,286 títulos extraídos de AniList, de los cuales 96 tienen datos de Google Trends. El quiz se basa en el cluster de élite: 235 títulos con score promedio 79.5 y 27 con señal activa en Trends.</p>
 
     <div class="meto-chips">
@@ -369,7 +371,7 @@
     <div class="meto-panel" id="mt-limites">
       <p class="meto-step-text" style="margin-bottom:1.5rem;line-height:1.85">Todo análisis implica decisiones metodológicas que abren y cierran posibilidades. Las siguientes limitaciones deben tenerse en cuenta al interpretar los resultados.</p>
       <div class="meto-lim"><i class="ti ti-map-pin-off meto-lim-icon" aria-hidden="true"></i><div class="meto-lim-text"><strong>Cobertura geográfica parcial.</strong> Argentina, Chile, Perú y el resto de LATAM hispanohablante quedan fuera. Los patrones de MX y CO no son necesariamente extrapolables a toda la región.</div></div>
-      <div class="meto-lim"><i class="ti ti-trending-up meto-lim-icon" aria-hidden="true"></i><div class="meto-lim-text"><strong>Google Trends mide búsquedas, no consumo.</strong> Un score alto indica interés de búsqueda, no visualizaciones. Títulos consumidos por recomendación directa o en plataformas cerradas pueden tener scores bajos sin que eso refleje baja popularidad (caso Frieren).</div></div>
+      <div class="meto-lim"><i class="ti ti-trending-up meto-lim-icon" aria-hidden="true"></i><div class="meto-lim-text"><strong>Google Trends mide búsquedas, no consumo.</strong> Un score alto indica interés de búsqueda, no visualizaciones. Títulos consumidos por recomendación directa o en plataformas cerradas pueden tener scores bajos sin que eso refleje baja popularidad (como el caso de Sōsō no Frieren).</div></div>
       <div class="meto-lim"><i class="ti ti-filter meto-lim-icon" aria-hidden="true"></i><div class="meto-lim-text"><strong>Top 100 de Trends.</strong> Solo se consultó Google Trends para los 100 títulos más populares del corpus. Los animes de nicho no están representados en el análisis de búsquedas.</div></div>
       <div class="meto-lim"><i class="ti ti-clock meto-lim-icon" aria-hidden="true"></i><div class="meto-lim-text"><strong>Datos estáticos.</strong> El corpus refleja el ecosistema entre 2023 y 2026. Las tendencias cambian con cada temporada y los datos no se actualizan en tiempo real.</div></div>
       <div class="meto-lim"><i class="ti ti-network meto-lim-icon" aria-hidden="true"></i><div class="meto-lim-text"><strong>Clusters como aproximación.</strong> La detección con Louvain depende de la estructura de la red y los parámetros de resolución elegidos. Los cinco clusters son una de las posibles particiones válidas, no la única.</div></div>
@@ -483,7 +485,7 @@ const CLUSTERS={
     tags:['Seinen','Drama','Mystery','Psychological','Oshi No Ko','Kusuriya','Vinland Saga'],
     timeline:{
       2023:[{title:'Oshi No Ko',sub:'Drama · Mystery · Doga Kobo',score:12,img:'img/oshi.jpg'},{title:'Vinland Saga Season 2',sub:'Action · Adventure · Drama · MAPPA',score:3,img:'img/vinland.jpg'}],
-      2024:[{title:'Delicious in Dungeon',sub:'Adventure · TRIGGER',score:16,img:'img/dd.jpeg'},{title:'Dungeon People',sub:'Adventure · Comedy · Fantasy · OLM',score:2,img:'img/dp.png'}],
+      2024:[{title:'Delicious in Dungeon',sub:'Adventure · TRIGGER',score:16,img:'img/dd.jpeg'},{title:'Dungeon People',sub:'Adventure · Comedy · Fantasy · OLM',score:2,img:'img/dp.jpg'}],
       2025:[{title:'The Apothecary Diaries Season 2',sub:'Drama · TOHO Animation Studio',score:8,img:'img/mao.jpg'},{title:'Medalist',sub:'Drama · Psychological · Sports · ENGI',score:4,img:'img/medalist.jpg'}],
       2026:[{title:'Frieren Season 2',sub:'Adventure · MADHOUSE',score:0,img:'img/img1.png'},{title:'Witch Hat Atelier',sub:'Adventure · Drama · Fantasy · BUG FILMS',score:3,img:'img/hat.png'}]
     }},
