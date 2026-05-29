@@ -417,10 +417,10 @@ const LANGS={
   pt:{
     label:'01 · Região lusófona',
     title:'El anime en los países de habla portuguesa',
-    body:'Brasil es el único pais lusofono del análisis y el mayor mercado de anime de America Latina por volumen. DAN DA DAN lidera el interes de búsqueda con score 19.',
+    body:'Brasil es el único país lusófono del análisis y el mayor mercado de anime de Latinoamérica por volumen. DAN DA DAN lidera el interés de búsqueda con score 19.',
     countries:['BR'],
     stats:[
-      {l:'Pais',v:'BR',s:'Brasil'},
+      {l:'País',v:'BR',s:'Brasil'},
       {l:'Score promedio',v:'6',s:'Google Trends 0–100'},
       {l:'Título con mayor score',v:'DAN DA DAN',s:'Score: 19'}
     ],
@@ -430,12 +430,12 @@ const LANGS={
       {key:'solo',   title:'Solo Leveling',           sub:'Action · A-1 Pictures',scores:{BR:12}, icon:'ti-trending-up', img:'img/sl.jpg'},
       {key:'dungeon',title:'Delicious in Dungeon',    sub:'Adventure · TRIGGER',  scores:{BR:16}, icon:'ti-tools-kitchen-2',img:'img/dd.jpeg'}
     ],
-    context:'Brasil muestra un patron similar al hispanohablante: DAN DA DAN tiene el mayor score de búsqueda. Los scores son relativos al pico máximo del grupo.'
+    context:'Brasil muestra un patrón similar al hispanohablante: DAN DA DAN tiene el mayor score de búsqueda. Los scores son relativos al pico máximo del grupo.'
   },
   en:{
-    label:'01 · Region anglohablante',
+    label:'01 · Región anglohablante',
     title:'El anime en los países de habla inglesa',
-    body:'EE.UU. registra los scores absolutos mas altos del dataset. Canada sigue de cerca. Ambos mercados se inclinan fuertemente hacia acción y aventura.',
+    body:'EE.UU. registra los scores absolutos más altos del dataset. Canadá sigue de cerca. Ambos mercados se inclinan fuertemente hacia acción y aventura.',
     countries:['US','CA'],
     stats:[
       {l:'Países',v:'US · CA',s:'EE.UU. y Canada'},
@@ -453,17 +453,17 @@ const LANGS={
 };
 
 const GENRES=[
-  {key:'acción',  icon:'ti-sword',       title:'Acción',                 sub:'Batallas, poderes, rivalidades',      body:'El género dominante en todos los mercados. JJK S2 (Action | Drama | Supernatural) y Solo Leveling (Action | Adventure | Fantasy) concentran los scores de Trends mas altos. MAPPA, A-1 Pictures y MADHOUSE producen los títulos top.',cluster:'aventura'},
-  {key:'romance', icon:'ti-heart',        title:'Romance / Slice of life',sub:'Relaciónes, cotidiano, sentimientos', body:'DAN DA DAN lidera el grupo con Romance entre sus géneros (Action | Comedy | Drama | Romance | Sci-Fi | Supernatural). El cluster incluye comedias romanticas, Slice of Life y Josei con audiencias fieles.',cluster:'romance'},
-  {key:'fantasía',icon:'ti-sparkles',     title:'Fantasía epica',         sub:'Mundos alternativos, magia, aventura',body:'Fuertemente ligado al Shounen. Frieren lidera con el score AniList mas alto del dataset (91). Delicious in Dungeon une fantasía con comedia.',cluster:'aventura'},
-  {key:'drama',   icon:'ti-mood-confuzed',title:'Drama / Suspenso',       sub:'Psicologico, thriller, misterio',     body:'Seinen densamente conectado. Oshi No Ko y Vinland Saga representan este cluster. Menor tracción en Trends pero scores AniList consistentemente altos.',cluster:'drama'},
-  {key:'horror',  icon:'ti-ghost',        title:'Horror / Sobrenatural',  sub:'Terror, fenomenos paranormales',      body:'DAN DA DAN mezcla lo sobrenatural con acción y comedia, alcanzando los scores mas altos de Trends en MX y CO. Un nicho que encontro audiencia masiva.',cluster:'horror'},
-  {key:'scifi',   icon:'ti-rocket',       title:'Sci-fi',                  sub:'Ciencia ficcion, tecnologia, futuro',          body:'Solo Leveling lidera este espacio con scores consistentes en los 5 países (12-17). Kaiju No. 8 (Action | Sci-Fi | Shounen) es el segundo título mas popular del grupo con 260,542 members.',cluster:'shonen'}
+  {key:'acción',  icon:'ti-sword',       title:'Acción',                 sub:'Batallas, poderes, rivalidades',      body:'El género dominante en todos los mercados. JJK S2 (Action | Drama | Supernatural) y Solo Leveling (Action | Adventure | Fantasy) concentran los scores de Trends más altos. MAPPA, A-1 Pictures y MADHOUSE producen los títulos top.',cluster:'aventura'},
+  {key:'romance', icon:'ti-heart',        title:'Romance / Slice of life',sub:'Relaciones, cotidiano, sentimientos', body:'DAN DA DAN lidera el grupo con Romance entre sus géneros (Action | Comedy | Drama | Romance | Sci-Fi | Supernatural). El cluster incluye comedias románticas, Slice of Life y Josei con audiencias fieles.',cluster:'romance'},
+  {key:'fantasía',icon:'ti-sparkles',     title:'Fantasía épica',         sub:'Mundos alternativos, magia, aventura',body:'Fuertemente ligado al Shounen. Frieren lidera con el score AniList más alto del dataset (91). Delicious in Dungeon une fantasía con comedia.',cluster:'aventura'},
+  {key:'drama',   icon:'ti-mood-confuzed',title:'Drama / Suspenso',       sub:'Psicológico, thriller, misterio',     body:'Seinen densamente conectado. Oshi No Ko y Vinland Saga representan este cluster. Menor tracción en Trends pero scores AniList consistentemente altos.',cluster:'drama'},
+  {key:'horror',  icon:'ti-ghost',        title:'Horror / Sobrenatural',  sub:'Terror, fenomenos paranormales',      body:'DAN DA DAN mezcla lo sobrenatural con acción y comedia, alcanzando los scores más altos de Trends en MX y CO. Un nicho que encontro audiencia masiva.',cluster:'horror'},
+  {key:'scifi',   icon:'ti-rocket',       title:'Sci-fi',                  sub:'Ciencia ficción, tecnología, futuro',          body:'Solo Leveling lidera este espacio con scores consistentes en los 5 países (12-17). Kaiju No. 8 (Action | Sci-Fi | Shounen) es el segundo título más popular del grupo con 260,542 members.',cluster:'shonen'}
 ];
 
 const CLUSTERS={
   romance:{color:'#993556',bg:'#FBEAF0',name:'Romance y comedia cotidiana',demo:'Josei / Shoujo / Seinen',pct:'28%',nodos:'20',img:'img/hat.png',
-    body:'DAN DA DAN (Action | Comedy | Drama | Romance | Sci-Fi | Supernatural) es el título con Romance mas popular del corpus con 352,133 members y scores de Trends lideres (MX:39, CO:43). El cluster incluye también comedias romanticas Seinen como Kaguya-sama y Slice of Life.',
+    body:'DAN DA DAN (Action | Comedy | Drama | Romance | Sci-Fi | Supernatural) es el título con Romance más popular del corpus con 352,133 members y scores de Trends lideres (MX:39, CO:43). El cluster incluye también comedias románticas Seinen como Kaguya-sama y Slice of Life.',
     tags:['Romance','Comedy','Slice of Life','DAN DA DAN','Kaguya-sama','Seinen'],
     timeline:{
       2023:[{title:'Kaguya-sama S3',sub:'Comedy · A-1 Pictures',score:4,img:'img/kaguya.jpg'},{title:'Tomo-chan Is a Girl!',sub:'Romance · Brain Base',score:6,img:'img/tomo.jpg'}],
@@ -472,7 +472,7 @@ const CLUSTERS={
       2026:[{title:'Witch Hat Atelier',sub:'Adventure · Drama · Fantasy · BUG FILMS',score:3,img:'img/hat.png'},{title:'Sentenced to Be a Hero',sub:'Action · Drama · Fantasy · Studio KAI',score:2,img:'img/hero.jpeg'}]
     }},
   aventura:{color:'#185FA5',bg:'#E6F1FB',name:'Acción, aventura y fantasía',demo:'Shounen · MAPPA, A-1, MADHOUSE',pct:'24%',nodos:'17',img:'img/img1.png',
-    body:'Frieren (Adventure | Drama | Fantasy) lidera con score AniList 91 y 434,823 members. Solo Leveling (Action | Adventure | Fantasy) es el mas consistente en Trends cross-regionalmente (12-17 en los 5 países). JJK S2 (Action | Drama | Supernatural) ancla el grupo por popularidad aunque no tiene Fantasy.',
+    body:'Frieren (Adventure | Drama | Fantasy) lidera con score AniList 91 y 434,823 members. Solo Leveling (Action | Adventure | Fantasy) es el más consistente en Trends cross-regionalmente (12-17 en los 5 países). JJK S2 (Action | Drama | Supernatural) ancla el grupo por popularidad aunque no tiene Fantasy.',
     tags:['Shounen','Action','Fantasy','Adventure','JJK','Frieren','Solo Leveling'],
     timeline:{
       2023:[{title:'JUJUTSU KAISEN Season 2',sub:'Action · MAPPA',score:12,img:'img/gojo.jpg'},{title:"Frieren: Beyond Journey's End",sub:'Adventure · MADHOUSE',score:1, img:'img/img1.png'}],
@@ -480,7 +480,7 @@ const CLUSTERS={
       2025:[{title:'Gachiakuta',sub:'Action · Drama · Fantasy · bones',score:14,img:'img/gachi.jpg'},{title:'SAKAMOTO DAYS',sub:'Action · Comedy · TMS Entertainment',score:6,img:'img/sakamoto.jpg'}],
       2026:[{title:'Witch Hat Atelier',sub:'Adventure · Drama · Fantasy · BUG FILMS',score:3,img:'img/hat.png'},{title:'Sentenced to Be a Hero',sub:'Action · Drama · Fantasy · Studio KAI',score:2,img:'img/hero.jpeg'}]
     }},
-  drama:{color:'#5F5E5A',bg:'#F1EFE8',name:'Drama y suspenso psicologico',demo:'Seinen / Shounen',pct:'21%',nodos:'15',img:'img/vinland.jpg',
+  drama:{color:'#5F5E5A',bg:'#F1EFE8',name:'Drama y suspenso psicológico',demo:'Seinen / Shounen',pct:'21%',nodos:'15',img:'img/vinland.jpg',
     body:'Oshi No Ko (Drama | Mystery | Psychological | Supernatural) lidera con score AniList 84 y 309,140 members. Kusuriya (Drama | Mystery, score 88) y Vinland Saga (Action | Adventure | Drama) completan el perfil: alto score AniList, audiencias Seinen comprometidas con menor tracción en Trends.',
     tags:['Seinen','Drama','Mystery','Psychological','Oshi No Ko','Kusuriya','Vinland Saga'],
     timeline:{
@@ -490,7 +490,7 @@ const CLUSTERS={
       2026:[{title:'Frieren Season 2',sub:'Adventure · MADHOUSE',score:0,img:'img/img1.png'},{title:'Witch Hat Atelier',sub:'Adventure · Drama · Fantasy · BUG FILMS',score:3,img:'img/hat.png'}]
     }},
   shonen:{color:'#0F6E56',bg:'#E1F5EE',name:'Acción y sci-fi de gran consumo',demo:'Shounen · A-1, Science SARU',pct:'18%',nodos:'13',img:'img/dandadan.jpg',
-    body:'DAN DA DAN es el fenomeno del período: scores mas altos en MX (39) y CO (43), superando a todos los demás títulos. Solo Leveling mantiene consistencia en los 5 países.',
+    body:'DAN DA DAN es el fenómeno del período: scores mas altos en MX (39) y CO (43), superando a todos los demás títulos. Solo Leveling mantiene consistencia en los 5 países.',
     tags:['Shounen','Action','Sci-Fi','DAN DA DAN','Solo Leveling','Kaiju No. 8'],
     timeline:{
       2023:[{title:'JUJUTSU KAISEN Season 2',sub:'Action · MAPPA',score:12,img:'img/gojo.jpg'},{title:"Hell's Paradise",sub:'Action · MAPPA',score:4,img:'img/hell.jpeg'}],
@@ -499,7 +499,7 @@ const CLUSTERS={
       2026:[{title:'Sentenced to Be a Hero',sub:'Action · Drama · Fantasy · Studio KAI',score:2,img:'img/hero.jpeg'},{title:"Hell's Paradise Season 2",sub:'Action · MAPPA',score:1, img:'img/hell.jpeg'}]
     }},
   horror:{color:'#854F0B',bg:'#FAEEDA',name:'Sobrenatural y horror moderno',demo:'Shounen / Seinen',pct:'8%',nodos:'6',img:'img/oshi.jpg',
-    body:'DAN DA DAN redefine este cluster mezclando sobrenatural, comedia y acción. Sus scores (MX:39, CO:43) son los mas altos del dataset. El horror tradicional tiene nicho pequeno pero estable.',
+    body:'DAN DA DAN redefine este cluster mezclando sobrenatural, comedia y acción. Sus scores (MX:39, CO:43) son los más altos del dataset. El horror tradicional tiene nicho pequeno pero estable.',
     tags:['Sobrenatural','Horror','DAN DA DAN','Acción','Comedia','Sci-Fi'],
     timeline:{
       2023:[{title:'Oshi No Ko',sub:'Drama · Mystery · Psychological · Supernatural · Doga Kobo',score:12,img:'img/oshi.jpg'},{title:"Hell's Paradise",sub:'Action · MAPPA',score:4,img:'img/hell.jpeg'}],
@@ -514,29 +514,29 @@ const JOYAS=[
    title:"Frieren: Beyond Journey's End",titleJP:'Sousou no Frieren',
    sub:'Adventure · Drama · MADHOUSE',anio:'2023 · FALL',demo:'Shounen',
    score_anilist:91,popularidad:434823,scores:{MX:0,US:3,CA:0,CO:0,BR:0},
-   body:"El anime con el score AniList mas alto del dataset (91/100) y el segundo en popularidad con 434,823 members — pero practicamente invisible en Google Trends. Una audiencia que lo vive en plataformas, no lo busca en Google.",
-   hallazgo:'Score AniList: 91 · Trends promedio: 0.6 · La brecha mas grande del corpus entre calidad percibida e interes de búsqueda.'
+   body:"El anime con el score AniList más alto del dataset (91/100) y el segundo en popularidad con 434,823 members — pero practicamente invisible en Google Trends. Una audiencia que lo vive en plataformas, no lo busca en Google.",
+   hallazgo:'Score AniList: 91 · Trends promedio: 0.6 · La brecha mas grande del corpus entre calidad percibida e interés de búsqueda.'
   },
   {key:'kusuriya',icon:'ti-flask',img:'img/mao.jpg',
    title:'The Apothecary Diaries',titleJP:'Kusuriya no Hitorigoto',
    sub:'Drama · Mystery · Seinen · OLM | TOHO animation Studio',anio:'2023 · FALL',demo:'Seinen',
    score_anilist:88,popularidad:290856,scores:{MX:21,US:25,CA:26,CO:11,BR:26},
-   body:'La excepcion de las joyas: score AniList alto (88) y el mejor desempeno en Trends de este grupo. MX:21, US:25, CA:26, CO:11, BR:26. Demuestra que drama y misterio pueden cruzar la barrera entre audiencia comprometida y búsqueda activa.',
-   hallazgo:'Score AniList: 88 · Trends mas altos del grupo · Único título Seinen que logra tracción transregional sostenida.'
+   body:'La excepción de las joyas: score AniList alto (88) y el mejor desempeño en Trends de este grupo. MX:21, US:25, CA:26, CO:11, BR:26. Demuestra que drama y misterio pueden cruzar la barrera entre audiencia comprometida y búsqueda activa.',
+   hallazgo:'Score AniList: 88 · Trends más altos del grupo · Único título Seinen que logra tracción transregional sostenida.'
   },
   {key:'zom100',icon:'ti-skull',img:'img/zom100.jpg',
    title:'Zom 100: Bucket List of the Dead',titleJP:'Zom 100: Zombie ni Naru Made ni Shitai 100 no Koto',
    sub:'Action · Comedy · Horror · BUG FILMS',anio:'2023 · SUMMER',demo:'Seinen',
    score_anilist:76,popularidad:225547,scores:{MX:2,US:7,CA:4,CO:0,BR:2},
    body:'Combina horror, comedia y critica laboral en una premisa unica: el protagonista celebra el apocalipsis zombie porque ya no tiene que ir a trabajar. Score modesto en Trends pero 225,547 members en AniList apuntan a un nicho muy fiel.',
-   hallazgo:'Score AniList: 76 · Trends bajos (max. 7 en US) · El título mas original del corpus en concepto narrativo.'
+   hallazgo:'Score AniList: 76 · Trends bajos (max. 7 en US) · El título más original del corpus en concepto narrativo.'
   },
   {key:'dungeon',icon:'ti-tools-kitchen-2',img:'img/dd.jpeg',
    title:'Delicious in Dungeon',titleJP:'Dungeon Meshi',
    sub:'Adventure · Comedy · Fantasy · TRIGGER',anio:'2024 · WINTER',demo:'Unknown',
    score_anilist:85,popularidad:208156,scores:{MX:7,US:21,CA:21,CO:0,BR:16},
-   body:'La joya con mayor impacto en mercados anglófonos: US:21 y CA:21 son scores notables para una comedia de fantasía. Brasil también responde (16). Colombia y Mexico quedan rezagados — clara asimetria norte-sur.',
-   hallazgo:'Score AniList: 85 · US y CA lideran con 21 · El único título del grupo con clara asimetria norte-sur en su distribución de interes.'
+   body:'La joya con mayor impacto en mercados anglófonos: US:21 y CA:21 son scores notables para una comedia de fantasía. Brasil también responde (16). Colombia y México quedan rezagados — clara asimetría norte-sur.',
+   hallazgo:'Score AniList: 85 · US y CA lideran con 21 · El único título del grupo con clara asimetría norte-sur en su distribución de interés.'
   }
 ];
 
