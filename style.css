@@ -1,642 +1,294 @@
-<!doctype html>
-<html lang="es">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>El anime tiene acento. ¿Cuál es el tuyo?</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --fondo: #E6D9D6;
+  --texto: #77525F;
+  --muted: #8AADDC;
+  --linea: #BB946E;
+  --acento: #77525F;
+  --acento-2: #BB946E;
+  --panel: #ffffff;
+}
 
-  :root {
-    --fondo:   #E6D9D6;
-    --texto:   #77525F;
-    --muted:   #8AADDC;
-    --linea:   #BB946E;
-    --acento:  #77525F;
-    --acento-2:#BB946E;
-    --panel:   #ffffff;
-    --fondo-sf:#f0e8e5;
-    --bd:      rgba(119,82,95,0.18);
-    --bd2:     rgba(119,82,95,0.38);
-  }
+* {
+  box-sizing: border-box;
+}
 
-  body {
-    margin: 0;
-    background: var(--fondo);
-    color: var(--texto);
-    font-family: "American Typewriter", "Courier New", Courier, monospace;
-    line-height: 1.7;
-    font-size: 1.05rem;
-    -webkit-font-smoothing: antialiased;
-  }
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: "American Typewriter", "Courier New", Courier, monospace;
+  line-height: 1.7;
+  font-size: 1.05rem;
+  -webkit-font-smoothing: antialiased;
+}
 
+.hero {
+  min-height: 84vh;
+  display: grid;
+  align-items: end;
+  padding: 5rem max(1.25rem, 8vw);
+  color: #fff;
+  background:
+    linear-gradient(90deg, rgba(12, 22, 28, 0.86), rgba(12, 22, 28, 0.35)),
+    url("img/img1.png") center / cover;
+}
+
+.hero-texto {
+  max-width: 980px;
+}
+
+.serie,
+.meta,
+.etiqueta,
+figcaption {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero .serie,
+.hero .meta {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+h1 {
+  margin-top: 1rem;
+  max-width: 960px;
+  font-family: "American Typewriter", "Courier New", Courier, monospace;
+  font-size: clamp(2.5rem, 6vw, 5.5rem);
+  line-height: 0.95;
+  letter-spacing: 0;
+}
+
+.entradilla {
+  max-width: 680px;
+  margin-top: 1.6rem;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.meta {
+  margin-top: 2rem;
+}
+
+article {
+  width: min(1160px, calc(100% - 2.5rem));
+  margin: 0 auto;
+}
+
+/* ── Texto corrido ── */
+.texto {
+  max-width: 680px;
+  padding: 5rem 0;
+}
+
+.texto.texto-intro {
+  max-width: 100%;
+}
+
+.texto p {
+  font-size: 1.08rem;
+  line-height: 1.8;
+  color: var(--texto);
+}
+
+.texto p + p {
+  margin-top: 1.5rem;
+}
+
+.lead {
+  font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+  line-height: 1.45;
+  color: var(--texto);
+}
+
+/* ── Tabla ── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2rem;
+  font-size: 0.95rem;
+}
+
+th {
+  text-align: left;
+  padding: 0.6rem 1rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 2px solid var(--linea);
+}
+
+td {
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid var(--linea);
+  line-height: 1.5;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+/* ── Headings dentro del artículo ── */
+h3 {
+  margin-top: 3rem;
+  font-family: "Lucida Console", "Courier New", monospace;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  letter-spacing: 0.03em;
+  color: var(--texto);
+}
+
+/* ── Módulos ── */
+.modulo {
+  margin: 2rem 0 5rem;
+  padding: 4rem 0;
+  border-top: 1px solid var(--linea);
+  border-bottom: 1px solid var(--linea);
+}
+
+.modulo-doble {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.72fr) minmax(320px, 1fr);
+  gap: 3rem;
+  align-items: center;
+}
+
+.modulo-doble.invertido {
+  grid-template-columns: minmax(320px, 1fr) minmax(260px, 0.72fr);
+}
+
+h2 {
+  margin-top: 0.75rem;
+  font-family: "Lucida Console", "Courier New", monospace;
+  font-size: clamp(2rem, 4vw, 4rem);
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
+.modulo p:not(.etiqueta) {
+  margin-top: 1.1rem;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--texto);
+}
+
+figure {
+  margin: 0;
+}
+
+.placeholder-viz {
+  min-height: 420px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--linea);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(14, 111, 100, 0.18), transparent 52%),
+    linear-gradient(45deg, rgba(143, 45, 86, 0.18), transparent 48%),
+    var(--panel);
+  color: var(--muted);
+  font-weight: 700;
+}
+
+figcaption {
+  margin-top: 0.85rem;
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 500;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+/* ── Destacado ── */
+.destacado {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.35fr) minmax(260px, 1fr);
+  gap: 2rem;
+  align-items: center;
+}
+
+.cifra {
+  color: var(--acento);
+  font-family: "American Typewriter", "Courier New", Courier, monospace;
+  font-size: clamp(4rem, 12vw, 9rem);
+  line-height: 0.9;
+}
+
+.cierre {
+  padding-bottom: 7rem;
+}
+
+/* ── Lightbox ── */
+.figuras-hallazgo {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.viz-thumb {
+  width: 100%;
+  display: block;
+  cursor: zoom-in;
+  border: 1px solid var(--linea);
+  border-radius: 6px;
+  transition: opacity 0.2s;
+}
+
+.viz-thumb:hover {
+  opacity: 0.85;
+}
+
+#lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(12, 22, 28, 0.92);
+  z-index: 999;
+  cursor: zoom-out;
+  place-items: center;
+}
+
+#lightbox.activo {
+  display: grid;
+}
+
+#lightbox-img {
+  max-width: 94vw;
+  max-height: 92vh;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 780px) {
   .hero {
-    min-height: 72vh;
-    display: grid;
-    align-items: end;
-    padding: 5rem max(1.25rem, 8vw);
-    color: #fff;
-    background:
-      linear-gradient(90deg, rgba(12,22,28,0.86), rgba(12,22,28,0.35)),
-      url("img/img1.png") center / cover;
-  }
-  .hero-texto { max-width: 780px; }
-  .hero-serie {
-    margin: 0;
-    color: rgba(255,255,255,0.7);
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-  .hero-title {
-    margin-top: .75rem;
-    font-family: "American Typewriter", "Courier New", Courier, monospace;
-    font-size: clamp(2.2rem, 5.5vw, 4.5rem);
-    line-height: 1;
-    letter-spacing: 0;
-    color: #fff;
-  }
-  .hero-sub {
-    margin-top: 1.25rem;
-    font-size: clamp(1rem, 1.8vw, 1.3rem);
-    line-height: 1.6;
-    color: rgba(255,255,255,0.85);
-    max-width: 560px;
-  }
-  .hero-meta {
-    margin-top: 1.75rem;
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.6);
+    min-height: 76vh;
+    padding-top: 4rem;
   }
 
-  .shell {
-    width: min(680px, calc(100% - 2.5rem));
-    margin: 0 auto;
-    padding: 4rem 0 6rem;
+  .modulo-doble,
+  .modulo-doble.invertido,
+  .destacado {
+    grid-template-columns: 1fr;
   }
 
-  .pips { display: flex; gap: 5px; margin-bottom: 2.5rem; }
-  .pip { flex: 1; height: 2px; border-radius: 2px; background: var(--bd); transition: background .4s; }
-  .pip.done { background: var(--texto); }
-  .pip.now  { background: var(--linea); }
-
-  .screen { display: none; }
-  .screen.on { display: block; animation: fu .3s ease; }
-  @keyframes fu { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-
-  .slabel {
-    font-size: 0.72rem; font-weight: 700; letter-spacing: .1em;
-    text-transform: uppercase; color: var(--muted); margin-bottom: .5rem;
-  }
-  .stitle {
-    font-family: "Lucida Console", "Courier New", monospace;
-    font-size: clamp(1.6rem, 3.5vw, 2.6rem);
-    font-weight: normal; color: var(--texto);
-    line-height: 1.1; margin-bottom: .75rem;
-  }
-  .sbody {
-    font-size: 1rem; color: var(--texto); line-height: 1.75;
-    margin-bottom: 1.75rem; opacity: .85;
+  .placeholder-viz {
+    min-height: 320px;
   }
 
-  .choices { display: flex; flex-direction: column; gap: 6px; margin-bottom: 1.25rem; }
-
-  .cb {
-    display: flex; align-items: center; gap: 14px;
-    padding: .9rem 1.1rem; background: var(--panel);
-    border: 1px solid var(--bd);
-    border-radius: 4px; cursor: pointer; text-align: left;
-    transition: border-color .18s, background .18s, transform .15s;
-    width: 100%; font-family: inherit;
-  }
-  .cb:hover { border-color: var(--texto); background: #f5ecea; transform: translateX(3px); }
-  .cb.sel   { border-color: var(--texto); background: #f5ecea; }
-  .cb.sel .carr { color: var(--texto); }
-
-  .cicon {
-    width: 36px; height: 36px; border-radius: 50%;
-    background: var(--fondo); display: flex; align-items: center;
-    justify-content: center; flex-shrink: 0; font-size: 16px; color: var(--texto);
-  }
-  .ctxt { flex: 1; }
-  .ctit { font-size: 0.95rem; font-weight: 700; color: var(--texto); font-family: inherit; }
-  .csub { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
-  .carr { font-size: 14px; color: var(--bd2); transition: color .18s; }
-  .cb:hover .carr { color: var(--texto); }
-
-  .navrow {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-top: 2rem; padding-top: 1.25rem;
-    border-top: 1px solid var(--linea);
-  }
-  .bbk {
-    font-size: 0.85rem; color: var(--muted); background: none; border: none;
-    cursor: pointer; padding: .4rem 0; display: flex; align-items: center; gap: 5px;
-    font-family: inherit; letter-spacing: .03em;
-  }
-  .bbk:hover { color: var(--texto); }
-  .bnx {
-    font-size: 0.85rem; font-weight: 700; letter-spacing: .06em;
-    text-transform: uppercase; color: var(--panel);
-    background: var(--texto); border: 1px solid var(--texto);
-    border-radius: 2px; padding: .6rem 1.4rem; cursor: pointer;
-    display: flex; align-items: center; gap: 7px;
-    transition: background .18s, border-color .18s; font-family: inherit;
-  }
-  .bnx:hover { background: var(--acento-2); border-color: var(--acento-2); }
-  .bnx:disabled { opacity: .3; cursor: default; }
-
-  .icard {
-    border: 1px solid var(--linea);
-    border-radius: 4px;
-    padding: 1.1rem 1.25rem; background: var(--panel);
-    margin-top: 1rem; animation: fu .3s ease;
-  }
-  .ilabel {
-    font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
-    letter-spacing: .08em; color: var(--linea); margin-bottom: .4rem;
-  }
-  .ititl { font-size: 1rem; font-weight: 700; color: var(--texto); margin-bottom: .4rem; font-family: "Lucida Console", "Courier New", monospace; }
-  .ibody { font-size: 0.9rem; color: var(--texto); line-height: 1.7; opacity: .85; }
-
-  .divider { height: 1px; background: var(--linea); margin: 1.75rem 0; }
-
-  .statgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 1.25rem 0; }
-  .stat { background: var(--fondo-sf); border-radius: 2px; padding: .85rem 1rem; border: 1px solid var(--bd); }
-  .slb { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 4px; }
-  .sval { font-size: 1.15rem; font-weight: 700; color: var(--texto); line-height: 1; font-family: "Lucida Console","Courier New",monospace; }
-  .ssub { font-size: 0.72rem; color: var(--texto); opacity: .65; margin-top: 3px; }
-
-  .tbar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 9px; }
-  .tbar-lbl { font-size: 0.8rem; color: var(--texto); width: 32px; flex-shrink: 0; font-weight: 700; }
-  .tbar-track { flex: 1; height: 6px; background: var(--fondo); border-radius: 0; overflow: hidden; }
-  .tbar-fill { height: 100%; background: var(--muted); width: 0%; transition: width .85s cubic-bezier(.16,1,.3,1); }
-  .tbar-num { font-size: 0.85rem; font-weight: 700; color: var(--texto); width: 28px; text-align: right; flex-shrink: 0; }
-
-  .cl-row {
-    display: flex; align-items: center; gap: 12px;
-    padding: .85rem 1rem; background: var(--panel);
-    border: 1px solid var(--bd); border-radius: 2px;
-    cursor: pointer; transition: border-color .18s; margin-bottom: 6px;
-  }
-  .cl-row:hover { border-color: var(--texto); }
-  .cl-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-  .cl-info { flex: 1; }
-  .cl-name { font-size: 0.9rem; font-weight: 700; color: var(--texto); }
-  .cl-sub  { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
-  .cl-pct  { font-size: 0.9rem; font-weight: 700; color: var(--texto); font-family: "Lucida Console","Courier New",monospace; }
-
-  .tag {
-    display: inline-block; font-size: 0.75rem;
-    padding: .2rem .6rem; border-radius: 2px; margin: 3px 3px 0 0;
-    font-weight: 700; letter-spacing: .04em;
-  }
-
-  .rbadge {
-    display: inline-block; font-size: 0.72rem; font-weight: 700;
-    text-transform: uppercase; letter-spacing: .1em;
-    background: var(--fondo); color: var(--texto);
-    padding: .3rem .9rem; border-radius: 2px;
-    border: 1px solid var(--linea); margin-bottom: .85rem;
-  }
-
-  .yr-block { margin-bottom: 1.5rem; }
-  .yr-head  { display: flex; align-items: center; gap: 10px; margin-bottom: .75rem; }
-  .yr-pill  {
-    font-size: 0.78rem; font-weight: 700; padding: .2rem .75rem;
-    border-radius: 2px; flex-shrink: 0; border: 1px solid currentColor;
-    font-family: "Lucida Console","Courier New",monospace;
-  }
-  .yr-line  { flex: 1; height: 1px; background: var(--linea); }
-
-  .anime-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .anime-card { background: var(--fondo-sf); border-radius: 2px; padding: .8rem 1rem; border: 1px solid var(--bd); }
-  .anime-card-title { font-size: 0.85rem; font-weight: 700; color: var(--texto); margin-bottom: 3px; line-height: 1.4; font-family: "Lucida Console","Courier New",monospace; }
-  .anime-card-sub   { font-size: 0.78rem; color: var(--muted); }
-  .anime-card-score { font-size: 0.72rem; margin-top: 6px; display: flex; align-items: center; gap: 5px; }
-  .score-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
-
-  @media (max-width: 640px) {
-    .statgrid { grid-template-columns: 1fr 1fr; }
-    .anime-grid { grid-template-columns: 1fr; }
-    .hero { min-height: 60vh; padding-top: 3rem; }
-  }
-</style>
-</head>
-<body>
-
-<header class="hero">
-  <div class="hero-texto">
-    <p class="hero-serie">Proyecto de visualización de datos · Humanidades Digitales</p>
-    <h1 class="hero-title">El anime tiene acento.<br>¿Cuál es el tuyo?</h1>
-    <p class="hero-sub">Géneros, preferencias y consumo regional en los países hispanohablantes, lusófonos y anglófonos — 2023 a 2026.</p>
-    <p class="hero-meta">Natalia Rocha · natalia.rocha@tec.mx · 2026</p>
-  </div>
-</header>
-
-<div class="shell">
-  <div class="pips" id="pips"></div>
-
-  <div class="screen on" id="s0">
-    <p class="slabel">Punto de partida</p>
-    <p class="stitle">¿Cuál es tu lengua materna?</p>
-    <p class="sbody">Según tu respuesta, veremos qué consume el anime en los países que hablan ese idioma — y si tus géneros favoritos coinciden con tu región.</p>
-    <div class="choices">
-      <button class="cb" onclick="pickLang('es')">
-        <div class="cicon"><i class="ti ti-language"></i></div>
-        <div class="ctxt"><div class="ctit">Español</div></div>
-        <i class="ti ti-chevron-right carr"></i>
-      </button>
-      <button class="cb" onclick="pickLang('pt')">
-        <div class="cicon"><i class="ti ti-language"></i></div>
-        <div class="ctxt"><div class="ctit">Português</div></div>
-        <i class="ti ti-chevron-right carr"></i>
-      </button>
-      <button class="cb" onclick="pickLang('en')">
-        <div class="cicon"><i class="ti ti-language"></i></div>
-        <div class="ctxt"><div class="ctit">English</div></div>
-        <i class="ti ti-chevron-right carr"></i>
-      </button>
-    </div>
-  </div>
-
-  <div class="screen" id="s1">
-    <p class="slabel" id="s1-label"></p>
-    <p class="stitle" id="s1-title"></p>
-    <p class="sbody" id="s1-body"></p>
-    <div class="statgrid" id="s1-stats"></div>
-    <p style="font-size:13px;color:var(--m);margin-bottom:.75rem">Selecciona una serie para ver su popularidad en tu región:</p>
-    <div class="choices" id="s1-anime"></div>
-    <div id="s1-panel" style="display:none"></div>
-    <div class="navrow">
-      <button class="bbk" onclick="go(0)"><i class="ti ti-arrow-left"></i> Volver</button>
-      <button class="bnx" id="s1-next" onclick="go(2)" disabled>Elegir género <i class="ti ti-arrow-right"></i></button>
-    </div>
-  </div>
-
-  <div class="screen" id="s2">
-    <p class="slabel">02 · Tu preferencia</p>
-    <p class="stitle">¿Qué tipo de historia prefieres?</p>
-    <p class="sbody">Cada género se conecta con un cluster distinto en la red de consumo. Elige el que más te represente.</p>
-    <div class="choices" id="s2-genres"></div>
-    <div id="s2-panel" style="display:none"></div>
-    <div class="navrow">
-      <button class="bbk" onclick="go(1)"><i class="ti ti-arrow-left"></i> Volver</button>
-      <button class="bnx" id="s2-next" onclick="go(3)" disabled>Ver clusters <i class="ti ti-arrow-right"></i></button>
-    </div>
-  </div>
-
-  <div class="screen" id="s3">
-    <p class="slabel">03 · Clusters temáticos</p>
-    <p class="stitle" id="s3-title"></p>
-    <p class="sbody">El algoritmo Louvain identificó cinco clusters en la red de anime y géneros. Tu género aparece resaltado. Toca cualquiera para explorar su composición.</p>
-    <div id="s3-clusters"></div>
-    <div class="icard" id="s3-detail" style="display:none">
-      <p class="ilabel" id="s3-det-label"></p>
-      <p class="ititl" id="s3-det-title"></p>
-      <p class="ibody" id="s3-det-body"></p>
-      <div style="margin-top:.85rem" id="s3-det-tags"></div>
-    </div>
-    <div class="navrow">
-      <button class="bbk" onclick="go(2)"><i class="ti ti-arrow-left"></i> Volver</button>
-      <button class="bnx" onclick="go(4)">Ver resultado <i class="ti ti-arrow-right"></i></button>
-    </div>
-  </div>
-
-  <div class="screen" id="s4">
-    <div style="text-align:center;padding:1.5rem 0 1rem">
-      <span class="rbadge">Tu perfil de consumo</span>
-      <p class="stitle" id="r-title"></p>
-      <p class="sbody" id="r-body"></p>
-    </div>
-    <div class="icard">
-      <p class="ilabel">Hallazgo regional</p>
-      <p class="ititl" id="r-finding"></p>
-      <p class="ibody" id="r-detail"></p>
-      <div style="margin-top:.85rem" id="r-tags"></div>
-    </div>
-    <div class="divider"></div>
-    <p class="slabel" style="margin-bottom:1rem">Animes representativos por año</p>
-    <div id="r-timeline"></div>
-    <div class="divider"></div>
-    <p style="font-size:13px;color:var(--m);line-height:1.7;margin-bottom:1.5rem">
-      Fuente: AniList GraphQL API · Google Trends · Período: 2023–2026
-    </p>
-    <div class="choices">
-      <button class="cb" onclick="resetAll()">
-        <div class="cicon"><i class="ti ti-refresh"></i></div>
-        <div class="ctxt"><div class="ctit">Explorar desde el inicio</div></div>
-        <i class="ti ti-chevron-right carr"></i>
-      </button>
-    </div>
-  </div>
-</div>
-
-<script>
-const TOTAL = 5;
-let cur = 0, lang = '', genre = '';
-
-const LANGS = {
-  es: {
-    label: '01 · Región hispanohablante',
-    title: 'El anime en los países de habla hispana',
-    body: 'México y Colombia son los mercados hispanohablantes del análisis. México lidera con los scores más altos y sostenidos del período 2023–2026.',
-    countries: ['MX', 'CO'],
-    stats: [
-      { l: 'Países', v: 'MX · CO', s: 'México y Colombia' },
-      { l: 'Score promedio MX', v: '74', s: 'sobre 100' },
-      { l: 'Score promedio CO', v: '58', s: 'sobre 100' }
-    ],
-    anime: [
-      { key: 'jjk', title: 'Jujutsu Kaisen S2', sub: 'Acción · Shounen', scores: { MX: 82, CO: 65 }, icon: 'ti-sword' },
-      { key: 'op',  title: 'One Piece', sub: 'Aventura · Shounen', scores: { MX: 70, CO: 72 }, icon: 'ti-anchor' },
-      { key: 'aot', title: 'Attack on Titan Final', sub: 'Drama · Acción', scores: { MX: 76, CO: 58 }, icon: 'ti-shield' },
-      { key: 'demon', title: 'Demon Slayer', sub: 'Acción · Sobrenatural', scores: { MX: 68, CO: 61 }, icon: 'ti-flame' }
-    ],
-    context: 'En México y Colombia los títulos de acción y aventura dominan las búsquedas. Colombia muestra mayor afinidad con One Piece que México.'
-  },
-  pt: {
-    label: '01 · Região lusófona',
-    title: 'El anime en los países de habla portuguesa',
-    body: 'Brasil es el único país lusófono del análisis y el mayor mercado de anime de América Latina en volumen absoluto.',
-    countries: ['BR'],
-    stats: [
-      { l: 'País', v: 'BR', s: 'Brasil' },
-      { l: 'Score promedio', v: '75', s: 'sobre 100' },
-      { l: 'Título top', v: 'One Piece', s: 'Shounen · Toei' }
-    ],
-    anime: [
-      { key: 'op',    title: 'One Piece', sub: 'Aventura · Shounen', scores: { BR: 85 }, icon: 'ti-anchor' },
-      { key: 'jjk',  title: 'Jujutsu Kaisen S2', sub: 'Acción · Shounen', scores: { BR: 74 }, icon: 'ti-sword' },
-      { key: 'demon',title: 'Demon Slayer', sub: 'Acción · Sobrenatural', scores: { BR: 71 }, icon: 'ti-flame' },
-      { key: 'aot',  title: 'Attack on Titan Final', sub: 'Drama · Acción', scores: { BR: 69 }, icon: 'ti-shield' }
-    ],
-    context: 'Brasil destaca como el único mercado donde One Piece supera a Jujutsu Kaisen. La tradición histórica del Shounen de aventura es muy fuerte.'
-  },
-  en: {
-    label: '01 · Región anglohablante',
-    title: 'El anime en los países de habla inglesa',
-    body: 'Estados Unidos registra los scores más altos de todo el dataset. Canadá sigue de cerca. Ambos mercados se inclinan hacia títulos de acción y ciencia ficción.',
-    countries: ['US', 'CA'],
-    stats: [
-      { l: 'Países', v: 'US · CA', s: 'EE.UU. y Canadá' },
-      { l: 'Score promedio US', v: '86', s: 'sobre 100' },
-      { l: 'Score promedio CA', v: '70', s: 'sobre 100' }
-    ],
-    anime: [
-      { key: 'jjk',  title: 'Jujutsu Kaisen S2', sub: 'Acción · Shounen', scores: { US: 91, CA: 78 }, icon: 'ti-sword' },
-      { key: 'aot',  title: 'Attack on Titan Final', sub: 'Drama · Acción', scores: { US: 88, CA: 71 }, icon: 'ti-shield' },
-      { key: 'demon',title: 'Demon Slayer', sub: 'Acción · Sobrenatural', scores: { US: 84, CA: 59 }, icon: 'ti-flame' },
-      { key: 'op',   title: 'One Piece', sub: 'Aventura · Shounen', scores: { US: 79, CA: 62 }, icon: 'ti-anchor' }
-    ],
-    context: 'EE.UU. y Canadá tienen los scores absolutos más altos del análisis. Jujutsu Kaisen lidera en ambos países con ventaja clara.'
-  }
-};
-
-const GENRES = [
-  { key: 'accion',  icon: 'ti-sword',         title: 'Acción',               sub: 'Batallas, poderes, rivalidades',     body: 'El género más consumido en todos los mercados. Concentra los scores de Trends más altos y los títulos con mayor popularidad en AniList.', cluster: 'aventura' },
-  { key: 'romance', icon: 'ti-heart',          title: 'Romance / Slice of life', sub: 'Relaciones, cotidiano, sentimientos', body: 'Audiencias fieles y nichos consolidados. Alta retención en México y Colombia.', cluster: 'romance' },
-  { key: 'fantasia',icon: 'ti-sparkles',       title: 'Fantasía épica',       sub: 'Mundos alternativos, magia, aventura', body: 'Fuertemente ligado al Shounen. Blockbusters de MAPPA y A-1 Pictures dominan con millones de usuarios en AniList.', cluster: 'aventura' },
-  { key: 'drama',   icon: 'ti-mood-confuzed',  title: 'Drama / Suspenso',     sub: 'Psicológico, thriller, misterio',     body: 'Seinen densamente conectado. Menor alcance masivo pero alta fidelidad de audiencia.', cluster: 'drama' },
-  { key: 'horror',  icon: 'ti-ghost',          title: 'Horror / Sobrenatural',sub: 'Terror, fenómenos paranormales',       body: 'Nicho pequeño pero diferenciado. Comunidades especializadas con alta cohesión interna.', cluster: 'horror' },
-  { key: 'scifi',   icon: 'ti-rocket',         title: 'Sci-fi / Mecha',       sub: 'Tecnología, robots, futuro',          body: 'Gran consumo histórico en LATAM. Dragon Ball y sucesores mantienen presencia constante.', cluster: 'shonen' }
-];
-
-const CLUSTERS = {
-  romance: {
-    color: '#993556', bg: '#FBEAF0',
-    name: 'Romance y comedia cotidiana', demo: 'Josei / Shoujo', pct: '28%', nodos: '20',
-    body: 'Audiencias fieles y nicho consolidado. Alta retención en México y Colombia. Títulos como Kaguya-sama y Oshi no Ko concentran la mayor parte de los nodos.',
-    tags: ['Josei','Shoujo','Comedia','Slice of life','Kaguya-sama','Oshi no Ko'],
-    timeline: {
-      2023: [{ title: 'Kaguya-sama: Love is War – The First Kiss That Never Ends', sub: 'Josei · A-1 Pictures', score: 82 }, { title: 'Oshi no Ko', sub: 'Drama · Doga Kobo', score: 91 }],
-      2024: [{ title: 'Ao no Hako', sub: 'Romance · Telecom Animation Film', score: 78 }, { title: 'Yuzuki-san Chi no Yonkyoudai', sub: 'Slice of life · SynergySP', score: 64 }],
-      2025: [{ title: 'Sakamoto Days', sub: 'Comedia · TMS', score: 80 }, { title: 'Dandadan S2', sub: 'Comedia sobrenatural · Science SARU', score: 83 }],
-      2026: [{ title: 'Wind Breaker S2', sub: 'Acción · CloverWorks', score: 70 }, { title: 'Oshi no Ko S3', sub: 'Drama · Doga Kobo', score: 88 }]
-    }
-  },
-  aventura: {
-    color: '#185FA5', bg: '#E6F1FB',
-    name: 'Aventura y fantasía épica', demo: 'Shounen · MAPPA, A-1', pct: '24%', nodos: '17',
-    body: 'Mayor visibilidad global. MAPPA y A-1 Pictures producen la mayoría. Los scores de Google Trends más altos en todos los países del análisis.',
-    tags: ['Shounen','Fantasía','Acción','MAPPA','A-1 Pictures','JJK','AOT'],
-    timeline: {
-      2023: [{ title: 'Jujutsu Kaisen Season 2', sub: 'Acción · MAPPA', score: 95 }, { title: 'Attack on Titan: The Final Season Part 3', sub: 'Drama · MAPPA', score: 92 }],
-      2024: [{ title: 'Frieren: Beyond Journey\'s End', sub: 'Fantasía · Madhouse', score: 93 }, { title: 'Dungeon Meshi', sub: 'Fantasía · TRIGGER', score: 89 }],
-      2025: [{ title: 'Jujutsu Kaisen Season 3', sub: 'Acción · MAPPA', score: 91 }, { title: 'Bleach: Thousand-Year Blood War Part 3', sub: 'Acción · Pierrot', score: 87 }],
-      2026: [{ title: 'One Piece – Egghead Arc', sub: 'Aventura · Toei Animation', score: 85 }, { title: 'My Hero Academia: Final Arc', sub: 'Shounen · Bones', score: 80 }]
-    }
-  },
-  drama: {
-    color: '#5F5E5A', bg: '#F1EFE8',
-    name: 'Drama y suspenso psicológico', demo: 'Seinen', pct: '21%', nodos: '15',
-    body: 'Seinen densamente conectado. Valorado por la crítica especializada. Menor alcance masivo pero alta fidelidad de audiencia.',
-    tags: ['Seinen','Thriller','Mystery','Psychological','Vinland Saga'],
-    timeline: {
-      2023: [{ title: 'Vinland Saga Season 2', sub: 'Seinen · MAPPA', score: 90 }, { title: 'Heavenly Delusion', sub: 'Sci-fi · Production I.G', score: 78 }],
-      2024: [{ title: 'Suicide Squad Isekai', sub: 'Acción · WIT Studio', score: 65 }, { title: 'Mushishi Zoku Shou', sub: 'Seinen · Artland', score: 72 }],
-      2025: [{ title: 'Medalist', sub: 'Drama · CloverWorks', score: 81 }, { title: 'Zenshu', sub: 'Slice of life · WIT Studio', score: 74 }],
-      2026: [{ title: 'Monogatari Series: Off & Monster Season', sub: 'Psicológico · Shaft', score: 76 }, { title: 'Attack on Titan rerun especial', sub: 'Drama · MAPPA', score: 88 }]
-    }
-  },
-  shonen: {
-    color: '#0F6E56', bg: '#E1F5EE',
-    name: 'Shonen y sci-fi de gran consumo', demo: 'Blockbusters LATAM', pct: '18%', nodos: '13',
-    body: 'Los blockbusters de la región. Millones de members en AniList. Mayor tracción sostenida en LATAM. One Piece y Dragon Ball encabezan el grupo.',
-    tags: ['Shounen','Sci-fi','Mecha','One Piece','Dragon Ball'],
-    timeline: {
-      2023: [{ title: 'Dragon Ball Super: Super Hero', sub: 'Shounen · Toei Animation', score: 80 }, { title: 'One Piece (cierre Wano)', sub: 'Aventura · Toei Animation', score: 85 }],
-      2024: [{ title: 'Dragon Ball Daima', sub: 'Shounen · Toei Animation', score: 82 }, { title: 'One Piece (inicio Egghead)', sub: 'Aventura · Toei Animation', score: 84 }],
-      2025: [{ title: 'Gundam: Requiem for Vengeance', sub: 'Mecha · Sunrise', score: 71 }, { title: 'Evangelion 3.0+1.11 (streaming global)', sub: 'Mecha · Khara', score: 79 }],
-      2026: [{ title: 'Dragon Ball Daima Part 2', sub: 'Shounen · Toei Animation', score: 83 }, { title: 'Naruto: New Arc', sub: 'Shounen · Pierrot', score: 77 }]
-    }
-  },
-  horror: {
-    color: '#854F0B', bg: '#FAEEDA',
-    name: 'Sobrenatural y horror moderno', demo: 'Nicho · Avant Garde', pct: '8%', nodos: '6',
-    body: 'Cluster periférico pero diferenciado. Incluye Avant Garde y subgéneros de nicho. Pequeño pero densamente interconectado.',
-    tags: ['Horror','Sobrenatural','Avant Garde','Girls Love','Nicho'],
-    timeline: {
-      2023: [{ title: 'Undead Murder Farce', sub: 'Misterio sobrenatural · Lapin Track', score: 68 }, { title: 'Shadows House Season 2', sub: 'Misterio · CloverWorks', score: 72 }],
-      2024: [{ title: 'Alya Sometimes Hides Her Feelings in Russian', sub: 'Romance sobrenatural · Doga Kobo', score: 65 }, { title: 'Dungeon People', sub: 'Fantasía oscura · TMS', score: 60 }],
-      2025: [{ title: 'Re:Zero Season 3 Part 2', sub: 'Fantasía oscura · WIT Studio', score: 81 }, { title: 'Yoru no Kurage wa Oyogenai', sub: 'Slice of life · CloverWorks', score: 63 }],
-      2026: [{ title: 'Made in Abyss Season 3', sub: 'Aventura oscura · Kinema Citrus', score: 86 }, { title: 'Overlord Season 5', sub: 'Fantasía oscura · Madhouse', score: 79 }]
-    }
-  }
-};
-
-const ORDER = ['aventura','romance','drama','shonen','horror'];
-const YEARS = [2023, 2024, 2025, 2026];
-
-function buildPips() {
-  const el = document.getElementById('pips'); el.innerHTML = '';
-  for (let i = 0; i < TOTAL; i++) {
-    const d = document.createElement('div');
-    d.className = 'pip' + (i < cur ? ' done' : i === cur ? ' now' : '');
-    el.appendChild(d);
+  .texto {
+    max-width: 100%;
   }
 }
-
-function go(n) {
-  document.getElementById('s' + cur).classList.remove('on');
-  cur = n;
-  document.getElementById('s' + cur).classList.add('on');
-  buildPips();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-buildPips();
-
-function pickLang(l) {
-  lang = l;
-  const d = LANGS[l];
-  document.getElementById('s1-label').textContent = d.label;
-  document.getElementById('s1-title').textContent = d.title;
-  document.getElementById('s1-body').textContent  = d.body;
-  document.getElementById('s1-stats').innerHTML = d.stats.map(s =>
-    `<div class="stat"><div class="slb">${s.l}</div><div class="sval">${s.v}</div><div class="ssub">${s.s}</div></div>`
-  ).join('');
-  document.getElementById('s1-anime').innerHTML = d.anime.map(a =>
-    `<button class="cb" onclick="showAnime('${a.key}')">
-      <div class="cicon" style="background:var(--bluel);color:var(--blue)"><i class="ti ${a.icon}"></i></div>
-      <div class="ctxt"><div class="ctit">${a.title}</div><div class="csub">${a.sub}</div></div>
-      <i class="ti ti-chevron-right carr"></i>
-    </button>`
-  ).join('');
-  document.getElementById('s2-genres').innerHTML = GENRES.map(g =>
-    `<button class="cb" onclick="pickGenre('${g.key}')">
-      <div class="cicon"><i class="ti ${g.icon}"></i></div>
-      <div class="ctxt"><div class="ctit">${g.title}</div><div class="csub">${g.sub}</div></div>
-      <i class="ti ti-chevron-right carr"></i>
-    </button>`
-  ).join('');
-  document.getElementById('s1-panel').style.display = 'none';
-  document.getElementById('s1-next').disabled = true;
-  go(1);
-}
-
-function showAnime(key) {
-  const d = LANGS[lang];
-  const a = d.anime.find(x => x.key === key);
-  const bars = Object.entries(a.scores).map(([c, v]) =>
-    `<div class="tbar-row">
-      <span class="tbar-lbl">${c}</span>
-      <div class="tbar-track"><div class="tbar-fill" data-w="${v}"></div></div>
-      <span class="tbar-num">${v}</span>
-    </div>`
-  ).join('');
-  const panel = document.getElementById('s1-panel');
-  panel.innerHTML = `<div class="icard">
-    <p class="ilabel">Google Trends 2023–2026 · Promedio del período</p>
-    <p class="ititl">${a.title}</p>
-    <div style="margin-top:.85rem">${bars}</div>
-    <p style="font-size:12px;color:var(--m);margin-top:.85rem">Score relativo 0–100. El 100 es el pico máximo del grupo.</p>
-    <p style="font-size:13px;color:var(--m);margin-top:.75rem;line-height:1.6">${d.context}</p>
-  </div>`;
-  panel.style.display = 'block';
-  requestAnimationFrame(() => {
-    panel.querySelectorAll('.tbar-fill').forEach(el => { el.style.width = el.dataset.w + '%'; });
-  });
-  document.getElementById('s1-next').disabled = false;
-}
-
-function pickGenre(k) {
-  genre = k;
-  const g = GENRES.find(x => x.key === k);
-  document.querySelectorAll('#s2-genres .cb').forEach(b => {
-    b.classList.toggle('sel', b.getAttribute('onclick').includes("'" + k + "'"));
-  });
-  const panel = document.getElementById('s2-panel');
-  panel.innerHTML = `<div class="icard"><p class="ilabel">¿Por qué este género?</p><p class="ibody">${g.body}</p></div>`;
-  panel.style.display = 'block';
-  document.getElementById('s2-next').disabled = false;
-  buildClusters(g.cluster);
-}
-
-function buildClusters(main) {
-  const ld = LANGS[lang];
-  document.getElementById('s3-title').textContent = 'Los 5 clusters en ' + ld.countries.join(' y ');
-  document.getElementById('s3-clusters').innerHTML = ORDER.map(k => {
-    const c = CLUSTERS[k]; const isMain = k === main;
-    return `<div class="cl-row" style="${isMain ? 'border-color:' + c.color + ';background:' + c.bg + ';' : ''}" onclick="showCluster('${k}')">
-      <div class="cl-dot" style="background:${c.color}"></div>
-      <div class="cl-info">
-        <div class="cl-name">${c.name}${isMain ? ` <span style="font-size:11px;color:${c.color};margin-left:6px">← tu género</span>` : ''}</div>
-        <div class="cl-sub">${c.demo} · ${c.nodos} nodos</div>
-      </div>
-      <div class="cl-pct">${c.pct}</div>
-    </div>`;
-  }).join('');
-  buildResult(main);
-}
-
-function showCluster(k) {
-  const c = CLUSTERS[k];
-  document.getElementById('s3-det-label').textContent = c.pct + ' del corpus · ' + c.nodos + ' nodos';
-  document.getElementById('s3-det-title').textContent = c.name;
-  document.getElementById('s3-det-body').textContent  = c.body;
-  document.getElementById('s3-det-tags').innerHTML = c.tags.map(t =>
-    `<span class="tag" style="background:${c.bg};color:${c.color}">${t}</span>`
-  ).join('');
-  document.getElementById('s3-detail').style.display = 'block';
-}
-
-function buildResult(main) {
-  const c = CLUSTERS[main]; const ld = LANGS[lang];
-  document.getElementById('r-title').textContent  = 'Cluster: ' + c.name;
-  document.getElementById('r-body').textContent   = 'Según tu lengua materna y género favorito, este es el cluster que mejor describe tu perfil de consumo.';
-  document.getElementById('r-finding').textContent = c.name + ' en ' + ld.countries.join(' y ');
-  document.getElementById('r-detail').textContent  = c.body;
-  document.getElementById('r-tags').innerHTML = c.tags.map(t =>
-    `<span class="tag" style="background:${c.bg};color:${c.color}">${t}</span>`
-  ).join('');
-  document.getElementById('r-timeline').innerHTML = YEARS.map(yr => {
-    const animes = c.timeline[yr] || [];
-    const cards = animes.map(a =>
-      `<div class="anime-card">
-        <div class="anime-card-title">${a.title}</div>
-        <div class="anime-card-sub">${a.sub}</div>
-        <div class="anime-card-score">
-          <div class="score-dot" style="background:${c.color}"></div>
-          <span style="font-size:11px;color:var(--m)">Trends score: <strong style="color:var(--t)">${a.score}</strong></span>
-        </div>
-      </div>`
-    ).join('');
-    return `<div class="yr-block">
-      <div class="yr-head">
-        <span class="yr-pill" style="background:${c.bg};color:${c.color}">${yr}</span>
-        <div class="yr-line"></div>
-      </div>
-      <div class="anime-grid">${cards}</div>
-    </div>`;
-  }).join('');
-}
-
-function resetAll() {
-  lang = ''; genre = ''; cur = 0;
-  document.getElementById('s1-next').disabled = true;
-  document.getElementById('s2-next').disabled = true;
-  document.getElementById('s1-panel').style.display = 'none';
-  document.getElementById('s2-panel').style.display = 'none';
-  document.getElementById('s3-detail').style.display = 'none';
-  document.getElementById('s1-stats').innerHTML = '';
-  document.getElementById('s1-anime').innerHTML = '';
-  document.getElementById('s2-genres').innerHTML = '';
-  document.getElementById('s3-clusters').innerHTML = '';
-  document.getElementById('r-timeline').innerHTML = '';
-  ['s1-label','s1-title','s1-body','s3-title','r-title','r-body','r-finding','r-detail'].forEach(id => {
-    const el = document.getElementById(id); if (el) el.textContent = '';
-  });
-  document.getElementById('r-tags').innerHTML = '';
-  document.querySelectorAll('.cb').forEach(b => b.classList.remove('sel'));
-  buildPips();
-  go(0);
-}
-</script>
-</body>
-</html>
