@@ -85,6 +85,8 @@
   .anime-card-title { font-size:.82rem; font-weight:700; color:var(--c-texto); margin-bottom:2px; line-height:1.4; font-family:"Source Code Pro","Lucida Console","Courier New",monospace; transition:color .5s; }
   .anime-card-sub   { font-size:.75rem; color:var(--c-muted); transition:color .5s; }
   .anime-card-score { font-size:.7rem; margin-top:5px; display:flex; align-items:center; gap:4px; }
+  .anime-card-img { width:100%; aspect-ratio:2/3; object-fit:cover; border-radius:3px; display:block; margin-bottom:.5rem; background:var(--c-bg); }
+  .anime-card-img-ph { width:100%; aspect-ratio:2/3; background:var(--c-bg); border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:1.2rem; color:var(--c-muted); margin-bottom:.5rem; }
   .score-dot { width:5px; height:5px; border-radius:50%; flex-shrink:0; }
   .map-wrap { margin:1.25rem 0 1.5rem; }
   .map-legend { display:flex; gap:16px; flex-wrap:wrap; margin-top:8px; font-size:.75rem; color:var(--c-muted); }
@@ -462,46 +464,46 @@ const CLUSTERS={
     body:'DAN DA DAN (Action | Comedy | Drama | Romance | Sci-Fi | Supernatural) es el titulo con Romance mas popular del corpus con 352,133 members y scores de Trends lideres (MX:39, CO:43). El cluster incluye también comedias romanticas Seinen como Kaguya-sama y Slice of Life.',
     tags:['Romance','Comedy','Slice of Life','DAN DA DAN','Kaguya-sama','Seinen'],
     timeline:{
-      2023:[{title:'Kaguya-sama S3',sub:'Comedy · A-1 Pictures',score:4},{title:'Tomo-chan Is a Girl!',sub:'Romance · Brain Base',score:6}],
-      2024:[{title:'Blue Box',sub:'Romance · Sports · Telecom Animation Film',score:5},{title:'The Fragrant Flower Blooms With Dignity',sub:'Comedy · Drama · Romance · Platinum Vision',score:5}],
-      2025:[{title:'The Fragrant Flower Blooms With Dignity S2',sub:'Comedy · Drama · Romance · Platinum Vision',score:6},{title:'DAN DA DAN Season 2',sub:'Action · Sci-Fi · Supernatural · Science SARU',score:4}],
-      2026:[{title:'Witch Hat Atelier',sub:'Adventure · Drama · Fantasy · BUG FILMS',score:3},{title:'Sentenced to Be a Hero',sub:'Action · Drama · Fantasy · Studio KAI',score:2}]
+      2023:[{title:'Kaguya-sama S3',sub:'Comedy · A-1 Pictures',score:4,img:''},{title:'Tomo-chan Is a Girl!',sub:'Romance · Brain Base',score:6,img:''}],
+      2024:[{title:'Blue Box',sub:'Romance · Sports · Telecom Animation Film',score:5,img:''},{title:'The Fragrant Flower Blooms With Dignity',sub:'Comedy · Drama · Romance · Platinum Vision',score:5,img:''}],
+      2025:[{title:'The Fragrant Flower Blooms With Dignity S2',sub:'Comedy · Drama · Romance · Platinum Vision',score:6,img:''},{title:'DAN DA DAN Season 2',sub:'Action · Sci-Fi · Supernatural · Science SARU',score:4,img:''}],
+      2026:[{title:'Witch Hat Atelier',sub:'Adventure · Drama · Fantasy · BUG FILMS',score:3,img:''},{title:'Sentenced to Be a Hero',sub:'Action · Drama · Fantasy · Studio KAI',score:2,img:''}]
     }},
   aventura:{color:'#185FA5',bg:'#E6F1FB',name:'Acción, aventura y fantasía',demo:'Shounen · MAPPA, A-1, MADHOUSE',pct:'24%',nodos:'17',img:'img/frieren.jpg',
     body:'Frieren (Adventure | Drama | Fantasy) lidera con score AniList 91 y 434,823 members. Solo Leveling (Action | Adventure | Fantasy) es el mas consistente en Trends cross-regionalmente (12-17 en los 5 países). JJK S2 (Action | Drama | Supernatural) ancla el grupo por popularidad aunque no tiene Fantasy.',
     tags:['Shounen','Action','Fantasy','Adventure','JJK','Frieren','Solo Leveling'],
     timeline:{
-      2023:[{title:'JUJUTSU KAISEN Season 2',sub:'Action · MAPPA',score:12},{title:"Frieren: Beyond Journey's End",sub:'Adventure · MADHOUSE',score:1}],
-      2024:[{title:'Solo Leveling',sub:'Action · A-1 Pictures',score:14},{title:'DAN DA DAN',sub:'Action · Science SARU',score:31}],
-      2025:[{title:'Gachiakuta',sub:'Action · Drama · Fantasy · bones',score:14},{title:'SAKAMOTO DAYS',sub:'Action · Comedy · TMS Entertainment',score:6}],
-      2026:[{title:'Witch Hat Atelier',sub:'Adventure · Drama · Fantasy · BUG FILMS',score:3},{title:'Sentenced to Be a Hero',sub:'Action · Drama · Fantasy · Studio KAI',score:2}]
+      2023:[{title:'JUJUTSU KAISEN Season 2',sub:'Action · MAPPA',score:12,img:''},{title:"Frieren: Beyond Journey's End",sub:'Adventure · MADHOUSE',score:1}],
+      2024:[{title:'Solo Leveling',sub:'Action · A-1 Pictures',score:14,img:''},{title:'DAN DA DAN',sub:'Action · Science SARU',score:31,img:''}],
+      2025:[{title:'Gachiakuta',sub:'Action · Drama · Fantasy · bones',score:14,img:''},{title:'SAKAMOTO DAYS',sub:'Action · Comedy · TMS Entertainment',score:6,img:''}],
+      2026:[{title:'Witch Hat Atelier',sub:'Adventure · Drama · Fantasy · BUG FILMS',score:3,img:''},{title:'Sentenced to Be a Hero',sub:'Action · Drama · Fantasy · Studio KAI',score:2,img:''}]
     }},
   drama:{color:'#5F5E5A',bg:'#F1EFE8',name:'Drama y suspenso psicologico',demo:'Seinen / Shounen',pct:'21%',nodos:'15',img:'img/vinland.jpg',
     body:'Oshi No Ko (Drama | Mystery | Psychological | Supernatural) lidera con score AniList 84 y 309,140 members. Kusuriya (Drama | Mystery, score 88) y Vinland Saga (Action | Adventure | Drama) completan el perfil: alto score AniList, audiencias Seinen comprometidas con menor tracción en Trends.',
     tags:['Seinen','Drama','Mystery','Psychological','Oshi No Ko','Kusuriya','Vinland Saga'],
     timeline:{
-      2023:[{title:'Oshi No Ko',sub:'Drama · Mystery · Doga Kobo',score:12},{title:'Vinland Saga Season 2',sub:'Action · Adventure · Drama · MAPPA',score:3}],
-      2024:[{title:'Delicious in Dungeon',sub:'Adventure · TRIGGER',score:16},{title:'Dungeon People',sub:'Adventure · Comedy · Fantasy · OLM',score:2}],
-      2025:[{title:'The Apothecary Diaries Season 2',sub:'Drama · TOHO Animation Studio',score:8},{title:'Medalist',sub:'Drama · Psychological · Sports · ENGI',score:4}],
-      2026:[{title:'Frieren Season 2',sub:'Adventure · MADHOUSE',score:0},{title:'Witch Hat Atelier',sub:'Adventure · Drama · Fantasy · BUG FILMS',score:3}]
+      2023:[{title:'Oshi No Ko',sub:'Drama · Mystery · Doga Kobo',score:12,img:''},{title:'Vinland Saga Season 2',sub:'Action · Adventure · Drama · MAPPA',score:3,img:''}],
+      2024:[{title:'Delicious in Dungeon',sub:'Adventure · TRIGGER',score:16,img:''},{title:'Dungeon People',sub:'Adventure · Comedy · Fantasy · OLM',score:2,img:''}],
+      2025:[{title:'The Apothecary Diaries Season 2',sub:'Drama · TOHO Animation Studio',score:8,img:''},{title:'Medalist',sub:'Drama · Psychological · Sports · ENGI',score:4,img:''}],
+      2026:[{title:'Frieren Season 2',sub:'Adventure · MADHOUSE',score:0,img:''},{title:'Witch Hat Atelier',sub:'Adventure · Drama · Fantasy · BUG FILMS',score:3,img:''}]
     }},
   shonen:{color:'#0F6E56',bg:'#E1F5EE',name:'Acción y sci-fi de gran consumo',demo:'Shounen · A-1, Science SARU',pct:'18%',nodos:'13',img:'img/dandadan.jpg',
     body:'DAN DA DAN es el fenomeno del período: scores mas altos en MX (39) y CO (43), superando a todos los demas titulos. Solo Leveling mantiene consistencia en los 5 países.',
     tags:['Shounen','Action','Sci-Fi','DAN DA DAN','Solo Leveling','Kaiju No. 8'],
     timeline:{
-      2023:[{title:'JUJUTSU KAISEN Season 2',sub:'Action · MAPPA',score:12},{title:"Hell's Paradise",sub:'Action · MAPPA',score:4}],
-      2024:[{title:'DAN DA DAN',sub:'Action · Science SARU',score:31},{title:'Kaiju No. 8',sub:'Action · Production I.G',score:11}],
-      2025:[{title:'Gachiakuta',sub:'Action · Drama · Fantasy · bones',score:14},{title:'SAKAMOTO DAYS',sub:'Action · Comedy · TMS Entertainment',score:6}],
-      2026:[{title:'Sentenced to Be a Hero',sub:'Action · Drama · Fantasy · Studio KAI',score:2},{title:"Hell's Paradise Season 2",sub:'Action · MAPPA',score:1}]
+      2023:[{title:'JUJUTSU KAISEN Season 2',sub:'Action · MAPPA',score:12,img:''},{title:"Hell's Paradise",sub:'Action · MAPPA',score:4}],
+      2024:[{title:'DAN DA DAN',sub:'Action · Science SARU',score:31,img:''},{title:'Kaiju No. 8',sub:'Action · Production I.G',score:11,img:''}],
+      2025:[{title:'Gachiakuta',sub:'Action · Drama · Fantasy · bones',score:14,img:''},{title:'SAKAMOTO DAYS',sub:'Action · Comedy · TMS Entertainment',score:6,img:''}],
+      2026:[{title:'Sentenced to Be a Hero',sub:'Action · Drama · Fantasy · Studio KAI',score:2,img:''},{title:"Hell's Paradise Season 2",sub:'Action · MAPPA',score:1}]
     }},
   horror:{color:'#854F0B',bg:'#FAEEDA',name:'Sobrenatural y horror moderno',demo:'Shounen / Seinen',pct:'8%',nodos:'6',img:'img/oshi.jpg',
     body:'DAN DA DAN redefine este cluster mezclando sobrenatural, comedia y acción. Sus scores (MX:39, CO:43) son los mas altos del dataset. El horror tradicional tiene nicho pequeno pero estable.',
     tags:['Sobrenatural','Horror','DAN DA DAN','Acción','Comedia','Sci-Fi'],
     timeline:{
-      2023:[{title:'Oshi No Ko',sub:'Drama · Mystery · Psychological · Supernatural · Doga Kobo',score:12},{title:"Hell's Paradise",sub:'Action · MAPPA',score:4}],
-      2024:[{title:'DAN DA DAN',sub:'Action · Science SARU',score:31},{title:'Kaiju No. 8',sub:'Action · Production I.G',score:11}],
-      2025:[{title:'DAN DA DAN Season 2',sub:'Action · Science SARU',score:4},{title:'Re:ZERO Season 3',sub:'Action · Drama · Fantasy · Psychological · WHITE FOX',score:3}],
-      2026:[{title:'Witch Hat Atelier',sub:'Adventure · Drama · Fantasy · BUG FILMS',score:3},{title:'Sentenced to Be a Hero',sub:'Action · Drama · Fantasy · Studio KAI',score:2}]
+      2023:[{title:'Oshi No Ko',sub:'Drama · Mystery · Psychological · Supernatural · Doga Kobo',score:12,img:''},{title:"Hell's Paradise",sub:'Action · MAPPA',score:4}],
+      2024:[{title:'DAN DA DAN',sub:'Action · Science SARU',score:31,img:''},{title:'Kaiju No. 8',sub:'Action · Production I.G',score:11,img:''}],
+      2025:[{title:'DAN DA DAN Season 2',sub:'Action · Science SARU',score:4,img:''},{title:'Re:ZERO Season 3',sub:'Action · Drama · Fantasy · Psychological · WHITE FOX',score:3,img:''}],
+      2026:[{title:'Witch Hat Atelier',sub:'Adventure · Drama · Fantasy · BUG FILMS',score:3,img:''},{title:'Sentenced to Be a Hero',sub:'Action · Drama · Fantasy · Studio KAI',score:2,img:''}]
     }}
 };
 
@@ -636,10 +638,10 @@ function renderRegionMap(l){
   var cfg=MAP_REGIONS[l];
   if(!cfg)return;
   var W=el.clientWidth||600;
-  var H=Math.round(W*0.78);
+  var H=Math.round(W*0.95);
   var svg=d3.select('#region-map').append('svg')
     .attr('viewBox','0 0 '+W+' '+H).attr('width','100%').style('background','#f5f3f0');
-  var proj=d3.geoMercator().center([-80,5]).scale(W*0.46).translate([W*0.5,H*0.5]);
+  var proj=d3.geoMercator().center([-88,18]).scale(W*0.38).translate([W*0.5,H*0.46]);
   var path=d3.geoPath(proj);
   var features=topojson.feature(MAP_GEO,MAP_GEO.objects.countries).features
     .filter(function(f){return AMERICAS.has(String(f.id).padStart(3,'0'));});
@@ -648,15 +650,28 @@ function renderRegionMap(l){
     .attr('fill',function(d){var id=String(d.id).padStart(3,'0');return cfg.active[id]?cfg.color:'#e8e4e0';})
     .attr('stroke','#ffffff').attr('stroke-width',0.5)
     .attr('opacity',function(d){return cfg.active[String(d.id).padStart(3,'0')]?1:0.75;});
-  svg.selectAll('text')
-    .data(features.filter(function(f){return cfg.active[String(f.id).padStart(3,'0')];}))
-    .join('text')
-    .attr('transform',function(d){var c=path.centroid(d);return 'translate('+c[0]+','+c[1]+')';})
-    .attr('text-anchor','middle').attr('dy','0.35em')
-    .attr('font-size',Math.max(9,W*0.02)).attr('font-weight','700').attr('fill','#ffffff')
-    .attr('stroke','rgba(0,0,0,0.25)').attr('stroke-width',3).attr('paint-order','stroke')
-    .attr('font-family','system-ui,sans-serif').attr('pointer-events','none')
-    .text(function(d){return cfg.active[String(d.id).padStart(3,'0')];});
+  // Etiquetas con coordenadas fijas por país (centroid geográfico fiable)
+  var LABEL_COORDS={
+    '484':[-102.5,23.5],
+    '170':[-74.3,4.7],
+    '076':[-51.9,-14.2],
+    '840':[-98.5,38.5],
+    '124':[-96.8,56.0]
+  };
+  Object.keys(cfg.active).forEach(function(id){
+    var coords=LABEL_COORDS[id];
+    if(!coords)return;
+    var pt=proj([coords[0],coords[1]]);
+    if(!pt||pt[0]<0||pt[0]>W||pt[1]<0||pt[1]>H)return;
+    svg.append('text')
+      .attr('transform','translate('+pt[0]+','+pt[1]+')')
+      .attr('text-anchor','middle').attr('dy','0.35em')
+      .attr('font-size',Math.max(10,W*0.022)).attr('font-weight','700')
+      .attr('fill','#ffffff')
+      .attr('stroke','rgba(0,0,0,0.3)').attr('stroke-width',3).attr('paint-order','stroke')
+      .attr('font-family','system-ui,sans-serif').attr('pointer-events','none')
+      .text(cfg.active[id]);
+  });
   document.getElementById('region-map-legend').innerHTML=
     '<div class="map-legend-item"><div class="map-legend-sw" style="background:'+cfg.color+'"></div><span>'+cfg.label+'</span></div>'+
     '<div class="map-legend-item"><div class="map-legend-sw" style="background:#e8e4e0;border:1px solid #ccc"></div><span>Resto de América</span></div>';
@@ -751,7 +766,10 @@ function buildResult(main){
   document.getElementById('r-timeline').innerHTML=YEARS.map(function(yr){
     var animes=c.timeline[yr]||[];
     var cards=animes.map(function(a){
-      return '<div class="anime-card"><div class="anime-card-title">'+a.title+'</div>'+
+      var imgEl=a.img
+        ?'<img class="anime-card-img" src="'+a.img+'" alt="'+a.title+'" loading="lazy" onerror="this.style.display=\'none\'">'
+        :'<div class="anime-card-img-ph"><i class="ti ti-photo" aria-hidden="true"></i></div>';
+      return '<div class="anime-card">'+imgEl+'<div class="anime-card-title">'+a.title+'</div>'+
         '<div class="anime-card-sub">'+a.sub+'</div>'+
         '<div class="anime-card-score"><div class="score-dot" style="background:'+c.color+'"></div>'+
         '<span style="font-size:.7rem;color:var(--c-muted)">Trends score: <strong style="color:var(--c-texto)">'+a.score+'</strong></span></div></div>';
