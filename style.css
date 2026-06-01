@@ -292,3 +292,11 @@ figcaption {
     max-width: 100%;
   }
 }
+* { cursor: none !important; }
+#rpg-cursor {
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 99999;
+  image-rendering: pixelated;
+}
